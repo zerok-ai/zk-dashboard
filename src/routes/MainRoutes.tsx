@@ -15,12 +15,12 @@ const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/comi
 // render - sample page
 const OverviewPage = Loadable(lazy(() => import('pages/overview/overview-page')));
 const ServicesPage = Loadable(lazy(() => import('pages/services/services-page')));
-const MapPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+const MapPage = Loadable(lazy(() => import('pages/map/map-page')));
+const TracesPage = Loadable(lazy(() => import('pages/traces/traces-page')));
 const WorkloadsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const IssuesPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const MetricsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const LogsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
-const TracesPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const AlertsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -49,6 +49,10 @@ const MainRoutes = {
           element: <MapPage />
         },
         {
+          path: 'traces',
+          element: <TracesPage />
+        },
+        {
           path: 'workloads',
           element: <WorkloadsPage />
         },
@@ -63,10 +67,6 @@ const MainRoutes = {
         {
           path: 'logs-and-events',
           element: <LogsPage />
-        },
-        {
-          path: 'traces',
-          element: <TracesPage />
         },
         {
           path: 'alerts',
