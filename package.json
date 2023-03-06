@@ -1,6 +1,6 @@
 {
-  "name": "mantis-react-ts",
-  "version": "1.2.0",
+  "name": "zk-dashboard",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@ant-design/colors": "^6.0.0",

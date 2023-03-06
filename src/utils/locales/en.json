@@ -127,5 +127,14 @@
   "user-list": "User List",
   "user-profile": "User Profile",
   "utils": "Utils",
-  "widgets": "Widgets"
+  "widgets": "Widgets",
+  "overview": "Overview",
+  "services": "Services",
+  "map": "Map",
+  "workloads": "Workloads",
+  "issues": "Issues",
+  "metrics": "Metrics",
+  "logs & events": "Logs & Events",
+  "traces": "Traces",
+  "alerts": "Alerts"
 }

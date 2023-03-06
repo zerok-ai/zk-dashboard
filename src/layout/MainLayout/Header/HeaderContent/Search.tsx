@@ -8,9 +8,8 @@ import { SearchOutlined } from '@ant-design/icons';
 
 const Search = () => (
   <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
-    <FormControl sx={{ width: { xs: '100%', md: 224 } }}>
+    <FormControl sx={{ width: { xs: '100%', mr: 2 } }}>
       <OutlinedInput
-        size="small"
         id="header-search"
         startAdornment={
           <InputAdornment position="start" sx={{ mr: -0.5 }}>

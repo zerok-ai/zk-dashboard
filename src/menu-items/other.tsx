@@ -2,7 +2,19 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { ChromeOutlined, QuestionOutlined, DeploymentUnitOutlined } from '@ant-design/icons';
+import {
+  ChromeOutlined,
+  QuestionOutlined,
+  DashboardOutlined,
+  AlertOutlined,
+  DeploymentUnitOutlined,
+  GoldOutlined,
+  BarChartOutlined,
+  MenuOutlined,
+  IssuesCloseOutlined,
+  BuildOutlined,
+  NodeIndexOutlined
+} from '@ant-design/icons';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -11,45 +23,86 @@ import { NavItemType } from 'types/menu';
 const icons = {
   ChromeOutlined,
   QuestionOutlined,
-  DeploymentUnitOutlined
+  DashboardOutlined,
+  AlertOutlined,
+  DeploymentUnitOutlined,
+  GoldOutlined,
+  BarChartOutlined,
+  MenuOutlined,
+  IssuesCloseOutlined,
+  BuildOutlined,
+  NodeIndexOutlined
 };
 
 // ==============================|| MENU ITEMS - SUPPORT ||============================== //
 
 const other: NavItemType = {
   id: 'other',
-  title: <FormattedMessage id="others" />,
   type: 'group',
   children: [
+    // {
+    //   id: 'overview',
+    //   breadcrumbs: false,
+    //   title: <FormattedMessage id="overview" />,
+    //   type: 'item',
+    //   url: '/overview',
+    //   icon: icons.DashboardOutlined
+    // },
     {
-      id: 'sample-page',
-      title: <FormattedMessage id="sample-page" />,
+      id: 'services',
+      title: <FormattedMessage id="services" />,
       type: 'item',
-      url: '/sample-page',
-      icon: icons.ChromeOutlined
+      url: '/services',
+      icon: icons.GoldOutlined
     },
     {
-      id: 'documentation',
-      title: <FormattedMessage id="documentation" />,
+      id: 'map',
+      title: <FormattedMessage id="map" />,
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis/',
-      icon: icons.QuestionOutlined,
-      external: true,
-      target: true,
-      chip: {
-        label: 'gitbook',
-        color: 'secondary',
-        size: 'small'
-      }
+      url: '/map',
+      icon: icons.DeploymentUnitOutlined
     },
     {
-      id: 'roadmap',
-      title: <FormattedMessage id="roadmap" />,
+      id: 'workloads',
+      title: <FormattedMessage id="workloads" />,
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis/roadmap',
-      icon: icons.DeploymentUnitOutlined,
-      external: true,
-      target: true
+      url: '/workloads',
+      icon: icons.BuildOutlined
+    },
+    {
+      id: 'issues',
+      title: <FormattedMessage id="issues" />,
+      type: 'item',
+      url: '/issues',
+      icon: icons.IssuesCloseOutlined
+    },
+    {
+      id: 'metrics',
+      title: <FormattedMessage id="metrics" />,
+      type: 'item',
+      url: '/metrics',
+      icon: icons.BarChartOutlined
+    },
+    {
+      id: 'logs & events',
+      title: <FormattedMessage id="logs & events" />,
+      type: 'item',
+      url: '/logs-and-events',
+      icon: icons.MenuOutlined
+    },
+    {
+      id: 'traces',
+      title: <FormattedMessage id="traces" />,
+      type: 'item',
+      url: '/traces',
+      icon: icons.NodeIndexOutlined
+    },
+    {
+      id: 'alerts',
+      title: <FormattedMessage id="alerts" />,
+      type: 'item',
+      url: '/alerts',
+      icon: icons.AlertOutlined
     }
   ]
 };

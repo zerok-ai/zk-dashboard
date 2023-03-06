@@ -6,6 +6,7 @@ import { Box, useMediaQuery } from '@mui/material';
 
 // project import
 import Search from './Search';
+import Clusters from './Clusters';
 import Message from './Message';
 import Profile from './Profile';
 import Notification from './Notification';
@@ -30,6 +31,7 @@ const HeaderContent = () => {
   return (
     <>
       {menuOrientation === LAYOUT_CONST.HORIZONTAL_LAYOUT && !downLG && <DrawerHeader open={true} />}
+      {!downLG && <Clusters />}
       {!downLG && <Search />}
       {!downLG && megaMenu}
       {downLG && <Box sx={{ width: '100%', ml: 1 }} />}
