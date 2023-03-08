@@ -7,7 +7,7 @@ import { useEffect, useState, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'store';
 
 import ServiceCard from 'components/cards/ServiceCard';
-import { Services as ServicesTypo, ServicesFilter } from 'types/services';
+import { Services as ServicesType, ServicesFilter } from 'types/services';
 import useConfig from 'hooks/useConfig';
 import { getServices, filterServices } from 'store/reducers/services';
 
@@ -53,7 +53,7 @@ const ServicesPage = () => {
   }, []);
 
   // product data
-  const [services, setServices] = useState<ServicesTypo[]>([]);
+  const [services, setServices] = useState<ServicesType[]>([]);
   const serviceState = useSelector((state) => state.service);
   const { container } = useConfig();
 
@@ -91,7 +91,7 @@ const ServicesPage = () => {
 
   let serviceResult: ReactElement | ReactElement[] = <></>;
   if (services && services.length > 0) {
-    serviceResult = services.map((service: ServicesTypo, index: number) => (
+    serviceResult = services.map((service: ServicesType, index: number) => (
       <Grid key={index} item xs={12} sm={6} md={4}>
         <ServiceCard id={service.id} name={service.name} />
       </Grid>
