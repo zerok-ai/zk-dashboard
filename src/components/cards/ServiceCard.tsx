@@ -10,7 +10,7 @@ import { ServiceCardProps } from 'types/services';
 // project import
 import MainCard from 'components/MainCard';
 
-import SkeletonProductPlaceholder from 'components/cards/skeleton/ProductPlaceholder';
+import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 
 // ==============================|| PRODUCT CARD ||============================== //
 
@@ -23,7 +23,7 @@ const ServiceCard = ({ id, name }: ServiceCardProps) => {
   return (
     <>
       {isLoading ? (
-        <SkeletonProductPlaceholder />
+        <SkeletonServicePlaceholder />
       ) : (
         <MainCard
           content={false}
