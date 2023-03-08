@@ -1,8 +1,5 @@
 // material-ui
 import { styled, Theme, useTheme, Grid, Box } from '@mui/material';
-//import { Box, Grid } from '@mui/material';
-
-// project import
 import { useEffect, useState, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'store';
 
@@ -52,7 +49,6 @@ const ServicesPage = () => {
     setLoading(false);
   }, []);
 
-  // product data
   const [services, setServices] = useState<ServicesType[]>([]);
   const serviceState = useSelector((state) => state.service);
   const { container } = useConfig();
@@ -93,7 +89,15 @@ const ServicesPage = () => {
   if (services && services.length > 0) {
     serviceResult = services.map((service: ServicesType, index: number) => (
       <Grid key={index} item xs={12} sm={6} md={4}>
-        <ServiceCard id={service.id} name={service.name} />
+        <ServiceCard
+          id={service.id}
+          name={service.name}
+          podCount={service.podCount}
+          httpReqThroughputIn={service.httpReqThroughputIn}
+          httpErrorRateIn={service.httpErrorRateIn}
+          inboundConns={service.inboundConns}
+          outboundConns={service.outboundConns}
+        />
       </Grid>
     ));
   } else {

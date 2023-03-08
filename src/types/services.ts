@@ -11,6 +11,12 @@ export type HttpLatencyIn = {
 export type Services = {
   id: string | number | undefined;
   name: string;
+  podCount: number;
+  httpLatencyIn: HttpLatencyIn;
+  httpReqThroughputIn: number;
+  httpErrorRateIn: number;
+  inboundConns: number;
+  outboundConns: number;
 };
 
 export type ServicesFilter = {

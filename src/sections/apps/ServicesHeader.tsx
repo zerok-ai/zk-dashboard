@@ -72,7 +72,7 @@ const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderPr
               )
             }}
             value={filter.search}
-            placeholder="Search Product"
+            placeholder="Search Service"
             size="medium"
             onChange={handleSearch}
           />

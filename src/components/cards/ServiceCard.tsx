@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 // material-ui
 import { CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
@@ -14,7 +13,7 @@ import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceho
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-const ServiceCard = ({ id, name }: ServiceCardProps) => {
+const ServiceCard = ({ id, name, podCount, httpReqThroughputIn, httpErrorRateIn, inboundConns, outboundConns }: ServiceCardProps) => {
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false);
@@ -45,16 +44,84 @@ const ServiceCard = ({ id, name }: ServiceCardProps) => {
           <CardContent sx={{ p: 2 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Stack>
-                  <Typography
-                    component={Link}
-                    to={`/apps/e-commerce/product-details/${id}`}
-                    color="textPrimary"
-                    variant="h5"
-                    sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                  >
-                    {name}
-                  </Typography>
+                <Stack spacing={1}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      Service Name
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {name}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      Pod Count
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {podCount}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      Http Throughput In
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {httpReqThroughputIn}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      Http Error Rate In
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {httpErrorRateIn}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      Inbound Conns
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {inboundConns}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      Outbound Conns
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {outboundConns}
+                    </Typography>
+                  </Stack>
                 </Stack>
               </Grid>
               <Grid item xs={12}>

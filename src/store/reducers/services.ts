@@ -5,6 +5,8 @@ import { dispatch } from '../index';
 
 import { DefaultRootStateProps, ServicesFilter } from 'types/services';
 
+import { services } from 'data/services';
+
 const initialState: DefaultRootStateProps['service'] = {
   error: null,
   services: [],
@@ -36,10 +38,10 @@ export default slice.reducer;
 export function getServices() {
   return async () => {
     try {
-      console.log('Get services method called.');
-      const response = await axios.get('/api/services/list');
-      console.log('Response for list of services is ', response);
-      dispatch(slice.actions.getServicesSuccess(response.data.services));
+      //   console.log('Get services method called.');
+      //   const response = await axios.get('/api/services/list');
+      //   console.log('Response for list of services is ', response);
+      dispatch(slice.actions.getServicesSuccess(services));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
