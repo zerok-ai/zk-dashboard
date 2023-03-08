@@ -16,19 +16,6 @@ import ServicesHeader from 'sections/apps/ServicesHeader';
 import ServiceEmpty from 'sections/apps/ServiceEmpty';
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 
-// ==============================|| SAMPLE PAGE ||============================== //
-
-// const Services = () => (
-//   <MainCard title="Sample Card">
-//     <Typography variant="body2">
-//       Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-//       minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-//       in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-//       descent molls anim id est labours.
-//     </Typography>
-//   </MainCard>
-// );
-
 const Main = styled('main', { shouldForwardProp: (prop: string) => prop !== 'open' && prop !== 'container' })(
   ({ theme, open, container }: { theme: Theme; open: boolean; container: any }) => ({
     flexGrow: 1,
@@ -102,15 +89,15 @@ const ServicesPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
-  let productResult: ReactElement | ReactElement[] = <></>;
+  let serviceResult: ReactElement | ReactElement[] = <></>;
   if (services && services.length > 0) {
-    productResult = services.map((product: ServicesTypo, index: number) => (
+    serviceResult = services.map((service: ServicesTypo, index: number) => (
       <Grid key={index} item xs={12} sm={6} md={4}>
-        <ServiceCard id={product.id} name={product.name} />
+        <ServiceCard id={service.id} name={service.name} />
       </Grid>
     ));
   } else {
-    productResult = (
+    serviceResult = (
       <Grid item xs={12} sx={{ mt: 3 }}>
         <ServiceEmpty handelFilter={() => setFilter(initialState)} />
       </Grid>
@@ -140,7 +127,7 @@ const ServicesPage = () => {
                       <SkeletonServicePlaceholder />
                     </Grid>
                   ))
-                : productResult}
+                : serviceResult}
             </Grid>
           </Grid>
         </Grid>

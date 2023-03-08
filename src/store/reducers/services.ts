@@ -12,7 +12,7 @@ const initialState: DefaultRootStateProps['service'] = {
 };
 
 const slice = createSlice({
-  name: 'product',
+  name: 'service',
   initialState,
   reducers: {
     // HAS ERROR
@@ -24,7 +24,7 @@ const slice = createSlice({
       state.services = action.payload;
     },
 
-    filterProductsSuccess(state, action) {
+    filterServicesSuccess(state, action) {
       state.services = action.payload;
     }
   }
@@ -36,8 +36,10 @@ export default slice.reducer;
 export function getServices() {
   return async () => {
     try {
+      console.log('Get services method called.');
       const response = await axios.get('/api/services/list');
-      dispatch(slice.actions.getServicesSuccess(response.data.products));
+      console.log('Response for list of services is ', response);
+      dispatch(slice.actions.getServicesSuccess(response.data.services));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -47,8 +49,8 @@ export function getServices() {
 export function filterServices(filter: ServicesFilter) {
   return async () => {
     try {
-      const response = await axios.post('/api/products/filter', { filter });
-      dispatch(slice.actions.filterProductsSuccess(response.data));
+      const response = await axios.post('/api/services/filter', { filter });
+      dispatch(slice.actions.filterServicesSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

@@ -2,7 +2,12 @@ export type KeyedObject = {
   [key: string]: string | number | KeyedObject | any;
 };
 
-// product shop list
+export type HttpLatencyIn = {
+  p50: number;
+  p90: number;
+  p99: number;
+};
+
 export type Services = {
   id: string | number | undefined;
   name: string;

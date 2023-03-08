@@ -10,11 +10,11 @@ import { RightOutlined } from '@ant-design/icons';
 
 // ==============================|| PRODUCT - NO/EMPTY FILTER ITEMS ||============================== //
 
-interface ProductEmptyProps {
+interface ServiceEmptyProps {
   handelFilter: () => void;
 }
 
-const ServiceEmpty = ({ handelFilter }: ProductEmptyProps) => {
+const ServiceEmpty = ({ handelFilter }: ServiceEmptyProps) => {
   const theme = useTheme();
   const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -30,7 +30,7 @@ const ServiceEmpty = ({ handelFilter }: ProductEmptyProps) => {
         <Grid item>
           <Stack spacing={0.5}>
             <Typography variant={matchDownMD ? 'h3' : 'h1'} color="inherit">
-              There is no Product
+              There is no Service
             </Typography>
             <Typography variant="h5" color="textSecondary">
               Try checking your spelling or use more general terms
