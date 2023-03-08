@@ -13,7 +13,16 @@ import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceho
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-const ServiceCard = ({ id, name, podCount, httpReqThroughputIn, httpErrorRateIn, inboundConns, outboundConns }: ServiceCardProps) => {
+const ServiceCard = ({
+  id,
+  name,
+  podCount,
+  httpReqThroughputIn,
+  httpErrorRateIn,
+  inboundConns,
+  outboundConns,
+  httpLatencyIn
+}: ServiceCardProps) => {
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false);
@@ -120,6 +129,45 @@ const ServiceCard = ({ id, name, podCount, httpReqThroughputIn, httpErrorRateIn,
                     </Typography>
                     <Typography color="textSecondary" variant="h6">
                       {outboundConns}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      p50 Latency
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {httpLatencyIn.p50}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      p90 Latency
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {httpLatencyIn.p90}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                    <Typography
+                      color="textPrimary"
+                      variant="h5"
+                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                    >
+                      p99 Latency
+                    </Typography>
+                    <Typography color="textSecondary" variant="h6">
+                      {httpLatencyIn.p99}
                     </Typography>
                   </Stack>
                 </Stack>

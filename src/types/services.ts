@@ -28,6 +28,12 @@ export type ServicesFilter = {
 export interface ServiceCardProps extends KeyedObject {
   id?: string | number;
   name: string;
+  podCount: number;
+  httpLatencyIn: HttpLatencyIn;
+  httpReqThroughputIn: number;
+  httpErrorRateIn: number;
+  inboundConns: number;
+  outboundConns: number;
 }
 
 export interface ServiceStateProps {

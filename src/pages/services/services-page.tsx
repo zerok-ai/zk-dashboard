@@ -97,6 +97,7 @@ const ServicesPage = () => {
           httpErrorRateIn={service.httpErrorRateIn}
           inboundConns={service.inboundConns}
           outboundConns={service.outboundConns}
+          httpLatencyIn={service.httpLatencyIn}
         />
       </Grid>
     ));
