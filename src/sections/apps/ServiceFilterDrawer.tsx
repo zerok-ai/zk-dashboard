@@ -31,8 +31,7 @@ function ServiceFilterDrawer({ filter, initialState, handleDrawerOpen, openFilte
   const matchLG = useMediaQuery(theme.breakpoints.only('lg'));
   const drawerBG = theme.palette.mode === 'dark' ? 'dark.main' : 'white';
 
-  const filterIsEqual = (a1: ServicesFilter, a2: ServicesFilter) =>
-    a1 === a2 || (a1.search === a2.search);
+  const filterIsEqual = (a1: ServicesFilter, a2: ServicesFilter) => a1 === a2 || a1.search === a2.search;
 
   const handelFilter = (type: string, params: string, rating?: number) => {
     setLoading(true);
