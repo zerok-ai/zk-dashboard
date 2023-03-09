@@ -54,7 +54,7 @@ const ServiceCard = ({
           <CardContent sx={{ p: 2 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Stack spacing={1}>
+                <Stack spacing={1.3}>
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
                       component={Link}
