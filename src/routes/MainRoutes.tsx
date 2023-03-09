@@ -14,7 +14,6 @@ const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/comi
 
 // render - sample page
 const OverviewPage = Loadable(lazy(() => import('pages/overview/overview-page')));
-const ServicesPage = Loadable(lazy(() => import('pages/services/services-page')));
 const MapPage = Loadable(lazy(() => import('pages/map/map-page')));
 const TracesPage = Loadable(lazy(() => import('pages/traces/traces-page')));
 const WorkloadsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
@@ -39,10 +38,6 @@ const MainRoutes = {
         {
           path: 'overview',
           element: <OverviewPage />
-        },
-        {
-          path: 'services',
-          element: <ServicesPage />
         },
         {
           path: 'map',

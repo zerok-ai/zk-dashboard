@@ -40,7 +40,7 @@ const Main = styled('main', { shouldForwardProp: (prop: string) => prop !== 'ope
   })
 );
 
-const ServicesPage = () => {
+const ServicesListPage = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -140,4 +140,4 @@ const ServicesPage = () => {
   );
 };
 
-export default ServicesPage;
+export default ServicesListPage;

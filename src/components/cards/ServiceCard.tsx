@@ -57,7 +57,7 @@ const ServiceCard = ({
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
                       component={Link}
-                      to={`/pages/services/service-details/${name}`}
+                      to={`/service-details`}
                       color="textPrimary"
                       variant="h4"
                       sx={{
