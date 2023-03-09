@@ -2,7 +2,7 @@ import { Services } from 'types/services';
 
 export const services: Services[] = [
   {
-    name: 'Service 1',
+    name: 'Service-1',
     podCount: 3,
     httpLatencyIn: {
       p50: 11,
@@ -15,7 +15,7 @@ export const services: Services[] = [
     outboundConns: 20
   },
   {
-    name: 'Service 2',
+    name: 'Service-2',
     podCount: 4,
     httpLatencyIn: {
       p50: 12,
@@ -28,7 +28,7 @@ export const services: Services[] = [
     outboundConns: 21
   },
   {
-    name: 'Service 3',
+    name: 'Service-3',
     podCount: 5,
     httpLatencyIn: {
       p50: 13,
@@ -41,7 +41,7 @@ export const services: Services[] = [
     outboundConns: 20
   },
   {
-    name: 'Service 4',
+    name: 'Service-4',
     podCount: 1,
     httpLatencyIn: {
       p50: 17,

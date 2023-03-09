@@ -19,9 +19,7 @@ export type Services = {
 };
 
 export type ServicesFilter = {
-  length?: number;
   search: string;
-  sort: string;
 };
 
 export interface ServiceCardProps extends KeyedObject {

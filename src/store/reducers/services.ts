@@ -1,4 +1,4 @@
-import axios from 'utils/axios';
+//import axios from 'utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { dispatch } from '../index';
@@ -6,6 +6,8 @@ import { dispatch } from '../index';
 import { DefaultRootStateProps, ServicesFilter } from 'types/services';
 
 import { services } from 'data/services';
+
+import { KeyedObject } from 'types/services';
 
 //import { Services as ServiceType } from 'types/services';
 
@@ -73,10 +75,25 @@ export function getServices() {
 export function filterServices(filter: ServicesFilter) {
   return async () => {
     try {
-      const response = await axios.post('/api/services/filter', { filter });
-      dispatch(slice.actions.filterServicesSuccess(response.data));
-    } catch (error) {
-      dispatch(slice.actions.hasError(error));
+      const results = services.filter((service: KeyedObject) => {
+        let searchMatches = true;
+        if (filter.search) {
+          const properties = ['name'];
+          let containsQuery = false;
+          properties.forEach((property) => {
+            if (service[property] && service[property].toString().toLowerCase().includes(filter.search.toString().toLowerCase())) {
+              containsQuery = true;
+            }
+          });
+          if (!containsQuery) {
+            searchMatches = false;
+          }
+        }
+        return searchMatches;
+      });
+      dispatch(slice.actions.filterServicesSuccess(results));
+    } catch (err) {
+      dispatch(slice.actions.hasError(err));
     }
   };
 }

@@ -54,6 +54,7 @@ const ServicesListPage = () => {
   const { container } = useConfig();
 
   useEffect(() => {
+    console.log('setServices useEffect called.');
     setServices(serviceState.services);
   }, [serviceState]);
 
@@ -70,8 +71,7 @@ const ServicesListPage = () => {
 
   // filter
   const initialState: ServicesFilter = {
-    search: '',
-    sort: 'low'
+    search: ''
   };
   const [filter, setFilter] = useState(initialState);
 
@@ -81,6 +81,7 @@ const ServicesListPage = () => {
   };
 
   useEffect(() => {
+    console.log('filterData useEffect called.');
     filterData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);

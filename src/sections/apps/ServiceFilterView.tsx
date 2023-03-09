@@ -55,34 +55,6 @@ const ServiceFilterView = ({ filter, filterIsEqual, handelFilter, initialState }
               </Stack>
             </Grid>
           )}
-          {!(initialState.sort === filter.sort) && (
-            <Grid item>
-              <Stack>
-                <Typography variant="subtitle1">Sort</Typography>
-                <Stack direction="row" alignItems="center" sx={{ ml: '-10px' }}>
-                  <Chip
-                    size={matchDownMD ? 'small' : undefined}
-                    label={filter.sort}
-                    sx={{
-                      borderRadius: '4px',
-                      textTransform: 'capitalize',
-                      color: `grey.500`,
-                      bgcolor: 'inherit',
-                      '& .MuiSvgIcon-root': { color: `grey` }
-                    }}
-                  />
-                  <IconButton
-                    color="secondary"
-                    size="small"
-                    sx={{ '&:hover': { bgcolor: 'transparent' }, ml: -1.5 }}
-                    onClick={() => handelFilter('sort', initialState.sort)}
-                  >
-                    <CloseOutlined />
-                  </IconButton>
-                </Stack>
-              </Stack>
-            </Grid>
-          )}
           <Grid item>
             <Button variant="text" color="primary" sx={{ ml: '-10px' }} onClick={() => handelFilter('reset', '')}>
               Reset all filters
