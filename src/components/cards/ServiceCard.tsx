@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 // material-ui
 import { CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 // types
 import { ServiceCardProps } from 'types/services';
@@ -54,15 +55,20 @@ const ServiceCard = ({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                  <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
+                      component={Link}
+                      to={`/pages/services/service-details/${id}`}
                       color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
+                      variant="h4"
+                      sx={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        display: 'block',
+                        textDecoration: 'underline'
+                      }}
                     >
-                      Service Name
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
                       {name}
                     </Typography>
                   </Stack>
