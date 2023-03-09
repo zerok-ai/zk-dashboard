@@ -63,7 +63,7 @@ const ServicesPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [openFilterDrawer, setOpenFilterDrawer] = useState(true);
+  const [openFilterDrawer, setOpenFilterDrawer] = useState(false);
   const handleDrawerOpen = () => {
     setOpenFilterDrawer((prevState) => !prevState);
   };
