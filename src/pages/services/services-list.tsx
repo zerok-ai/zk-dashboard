@@ -76,7 +76,7 @@ const ServicesListPage = () => {
   const [filter, setFilter] = useState(initialState);
 
   const filterData = async () => {
-    await dispatch(filterServices(filter));
+    dispatch(filterServices(filter));
     setLoading(false);
   };
 
