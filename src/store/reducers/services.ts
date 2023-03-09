@@ -91,7 +91,6 @@ export function filterServices(filter: ServicesFilter) {
         }
         return searchMatches;
       });
-      console.log(results);
       dispatch(slice.actions.filterServicesSuccess(results));
     } catch (err) {
       dispatch(slice.actions.hasError(err));

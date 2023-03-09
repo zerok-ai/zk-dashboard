@@ -54,7 +54,6 @@ const ServicesListPage = () => {
   const { container } = useConfig();
 
   useEffect(() => {
-    console.log('setServices useEffect called.');
     setServices(serviceState.services);
   }, [serviceState]);
 
@@ -81,7 +80,6 @@ const ServicesListPage = () => {
   };
 
   useEffect(() => {
-    console.log('filterData useEffect called.');
     filterData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
