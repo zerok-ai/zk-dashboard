@@ -32,6 +32,8 @@ const slice = createSlice({
   }
 });
 
+const zkCloudEndpoint = 'http://test.com';
+
 // Reducer
 export default slice.reducer;
 
@@ -39,7 +41,12 @@ export function getServices() {
   return async () => {
     try {
       //   console.log('Get services method called.');
-      //   const response = await axios.get('/api/services/list');
+      const response = await axios.get(zkCloudEndpoint + 'services/list');
+      const servicesArr = response.data.services;
+      for (var i = 0; i < servicesArr.length; i++) {
+        var obj = servicesArr[i];
+        console.log(obj);
+      }
       //   console.log('Response for list of services is ', response);
       dispatch(slice.actions.getServicesSuccess(services));
     } catch (error) {
