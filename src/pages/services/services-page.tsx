@@ -90,7 +90,6 @@ const ServicesPage = () => {
     serviceResult = services.map((service: ServicesType, index: number) => (
       <Grid key={index} item xs={12} sm={6} md={4}>
         <ServiceCard
-          id={service.id}
           name={service.name}
           podCount={service.podCount}
           httpReqThroughputIn={service.httpReqThroughputIn}

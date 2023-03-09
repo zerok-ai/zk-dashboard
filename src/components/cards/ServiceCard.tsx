@@ -15,7 +15,6 @@ import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceho
 // ==============================|| PRODUCT CARD ||============================== //
 
 const ServiceCard = ({
-  id,
   name,
   podCount,
   httpReqThroughputIn,
@@ -58,7 +57,7 @@ const ServiceCard = ({
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
                       component={Link}
-                      to={`/pages/services/service-details/${id}`}
+                      to={`/pages/services/service-details/${name}`}
                       color="textPrimary"
                       variant="h4"
                       sx={{
