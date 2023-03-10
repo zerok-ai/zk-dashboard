@@ -36,7 +36,7 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = 'http://localhost:8080/v1/cluster/1/default/';
+const zkCloudEndpoint = '/v1/cluster/1/default/';
 
 // Reducer
 export default slice.reducer;
