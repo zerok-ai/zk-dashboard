@@ -92,13 +92,13 @@ const ServiceCard = ({
                     </Typography>
                   </Stack>
 
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                  <Grid container direction="row" justifyContent="center" alignItems="center" spacing={1}>
                     <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                       <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
                         {httpLatencyIn.p50}
                       </MainCard>
                       <Typography
-                        color="textPrimary"
+                        color="textSecondary"
                         variant="subtitle1"
                         sx={{
                           overflow: 'hidden',
@@ -116,7 +116,7 @@ const ServiceCard = ({
                         {httpLatencyIn.p90}
                       </MainCard>
                       <Typography
-                        color="textPrimary"
+                        color="textSecondary"
                         variant="subtitle1"
                         sx={{
                           overflow: 'hidden',
@@ -134,7 +134,7 @@ const ServiceCard = ({
                         {httpLatencyIn.p99}
                       </MainCard>
                       <Typography
-                        color="textPrimary"
+                        color="textSecondary"
                         variant="subtitle1"
                         sx={{
                           overflow: 'hidden',
@@ -147,7 +147,7 @@ const ServiceCard = ({
                         p99
                       </Typography>
                     </Stack>
-                  </Stack>
+                  </Grid>
 
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
@@ -159,13 +159,13 @@ const ServiceCard = ({
                     </Typography>
                   </Stack>
 
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                  <Grid container direction="row" justifyContent="center" alignItems="center">
                     <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                       <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
                         {httpReqThroughputIn}
                       </MainCard>
                       <Typography
-                        color="textPrimary"
+                        color="textSecondary"
                         variant="subtitle1"
                         sx={{
                           overflow: 'hidden',
@@ -183,7 +183,7 @@ const ServiceCard = ({
                         {httpErrorRateIn}
                       </MainCard>
                       <Typography
-                        color="textPrimary"
+                        color="textSecondary"
                         variant="subtitle1"
                         sx={{
                           overflow: 'hidden',
@@ -196,7 +196,7 @@ const ServiceCard = ({
                         Error Rate
                       </Typography>
                     </Stack>
-                  </Stack>
+                  </Grid>
                 </Stack>
               </Grid>
               <Grid item xs={12}>
