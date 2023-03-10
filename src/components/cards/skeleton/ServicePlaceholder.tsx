@@ -6,7 +6,7 @@ import MainCard from 'components/MainCard';
 
 // ===========================|| SKELETON TOTAL GROWTH BAR CHART ||=========================== //
 
-const ProductPlaceholder = () => (
+const ServicePlaceholder = () => (
   <MainCard content={false} boxShadow>
     <Skeleton variant="rectangular" height={220} />
     <CardContent sx={{ p: 2 }}>
@@ -41,4 +41,4 @@ const ProductPlaceholder = () => (
   </MainCard>
 );
 
-export default ProductPlaceholder;
+export default ServicePlaceholder;
