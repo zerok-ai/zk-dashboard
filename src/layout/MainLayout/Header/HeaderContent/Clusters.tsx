@@ -1,25 +1,34 @@
 // material-ui
-import { CheckCircleOutlined } from '@ant-design/icons';
-import { Box, FormControl, ListItemIcon, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { CheckCircleOutlined, FolderAddOutlined } from '@ant-design/icons';
+import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider, Box } from '@mui/material';
 
 import { ClusterContext } from 'contexts/ClusterContext';
 
 // assets
 import { useState } from 'react';
+import ClusterInstructionsModal from './ClusterInstructionsModal';
 
 // ==============================|| HEADER CONTENT - SEARCH ||============================== //
 
 const Clusters = () => {
   const [cluster, setCluster] = useState('');
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
+      <ClusterInstructionsModal open={open} handleClose={handleClose} />
       <ClusterContext.Consumer>
         {({ getSelectedCluster, onSetSelectedCluster }: any) => {
           const selectedDomain = getSelectedCluster().domain;
 
           function handleClusterChange(e: SelectChangeEvent<string>) {
-            onSetSelectedCluster(1);
+            if (e.target.value === 'add') {
+              handleOpen();
+              return;
+            }
+            onSetSelectedCluster(0);
             setCluster(e.target.value);
           }
 
@@ -46,6 +55,13 @@ const Clusters = () => {
                     <CheckCircleOutlined />
                   </ListItemIcon>
                   miltonGreen.getanton.com
+                </MenuItem>
+                <Divider light />
+                <MenuItem value={'add'}>
+                  <ListItemIcon color="info">
+                    <FolderAddOutlined />
+                  </ListItemIcon>
+                  Add another cluster
                 </MenuItem>
               </Select>
             </FormControl>
