@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'store';
 import ServiceCard from 'components/cards/ServiceCard';
 import { Services as ServicesType, ServicesFilter } from 'types/services';
 import useConfig from 'hooks/useConfig';
-import { getServices, filterServices } from 'store/reducers/services';
+import { getServices } from 'store/reducers/services';
 
 import ServiceFilterDrawer from 'sections/apps/ServiceFilterDrawer';
 import ServicesHeader from 'sections/apps/ServicesHeader';
@@ -45,9 +45,6 @@ const ServicesListPage = () => {
   const dispatch = useDispatch();
 
   const [isLoading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(false);
-  }, []);
 
   const [services, setServices] = useState<ServicesType[]>([]);
   const serviceState = useSelector((state) => state.service);
@@ -75,31 +72,36 @@ const ServicesListPage = () => {
   };
   const [filter, setFilter] = useState(initialState);
 
-  const filterData = async () => {
-    dispatch(filterServices(filter));
-    setLoading(false);
-  };
+  // const filterData = async (services: ServicesType[]) => {
+  //   dispatch(filterServices(filter, servicesApiResonse));
+  // };
 
-  useEffect(() => {
-    filterData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  // useEffect(() => {
+  //   if (services && services.length > 0) {
+  //     filterData(servicesApiResonse);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filter]);
 
   let serviceResult: ReactElement | ReactElement[] = <></>;
   if (services && services.length > 0) {
-    serviceResult = services.map((service: ServicesType, index: number) => (
-      <Grid key={index} item xs={12} sm={6} md={4}>
-        <ServiceCard
-          name={service.name}
-          podCount={service.podCount}
-          httpReqThroughputIn={service.httpReqThroughputIn}
-          httpErrorRateIn={service.httpErrorRateIn}
-          inboundConns={service.inboundConns}
-          outboundConns={service.outboundConns}
-          httpLatencyIn={service.httpLatencyIn}
-        />
-      </Grid>
-    ));
+    serviceResult = services
+      .filter((service: ServicesType) => {
+        return service['name'] && service['name'].toString().toLowerCase().includes(filter.search.toString().toLowerCase());
+      })
+      .map((service: ServicesType, index: number) => (
+        <Grid key={index} item xs={12} sm={6} md={4}>
+          <ServiceCard
+            name={service.name}
+            podCount={service.podCount}
+            httpReqThroughputIn={service.httpReqThroughputIn}
+            httpErrorRateIn={service.httpErrorRateIn}
+            inboundConns={service.inboundConns}
+            outboundConns={service.outboundConns}
+            httpLatencyIn={service.httpLatencyIn}
+          />
+        </Grid>
+      ));
   } else {
     serviceResult = (
       <Grid item xs={12} sx={{ mt: 3 }}>

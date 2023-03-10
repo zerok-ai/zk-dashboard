@@ -3,11 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { dispatch } from '../index';
 
-import { DefaultRootStateProps, ServicesFilter } from 'types/services';
-
-import { services } from 'data/services';
-
-import { KeyedObject } from 'types/services';
+import { DefaultRootStateProps } from 'types/services';
 
 import { Services as ServiceType } from 'types/services';
 
@@ -36,7 +32,7 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = '/v1/cluster/1/default/';
+const zkCloudEndpoint = 'http://localhost:8080/v1/cluster/1/default/';
 
 // Reducer
 export default slice.reducer;
@@ -70,34 +66,6 @@ export function getServices() {
       dispatch(slice.actions.getServicesSuccess(results));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
-    }
-  };
-}
-
-export function filterServices(filter: ServicesFilter) {
-  return async () => {
-    try {
-      console.log('filterServices method called.');
-      const results = services.filter((service: KeyedObject) => {
-        let searchMatches = true;
-        if (filter.search) {
-          const properties = ['name'];
-          let containsQuery = false;
-          properties.forEach((property) => {
-            if (service[property] && service[property].toString().toLowerCase().includes(filter.search.toString().toLowerCase())) {
-              containsQuery = true;
-            }
-          });
-          if (!containsQuery) {
-            searchMatches = false;
-          }
-        }
-        return searchMatches;
-      });
-      console.log('Returning list of filtered values.');
-      dispatch(slice.actions.filterServicesSuccess(results));
-    } catch (err) {
-      dispatch(slice.actions.hasError(err));
     }
   };
 }
