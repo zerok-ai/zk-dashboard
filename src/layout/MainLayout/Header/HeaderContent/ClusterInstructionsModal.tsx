@@ -1,5 +1,6 @@
-import { Box, Button, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
+import { Box, Button, LinearProgress, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
 import { useState } from 'react';
+import { CopyBlock, monokai } from 'react-code-blocks';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -18,23 +19,63 @@ type ClusterInstructionsModalProps = {
   handleClose: () => void;
 };
 
+const installCommand = {
+  code: 'sh -c "$(curl -fsSL https://zerok.ai/install.sh)"',
+  language: 'sh',
+  showLineNumbers: false,
+  theme: monokai
+};
+
+const setupCommand = {
+  code: 'zkctl install',
+  language: 'sh',
+  showLineNumbers: false,
+  theme: monokai
+};
+
 const steps = [
   {
-    label: 'Install ZeroK CLI',
-    description: `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.`
+    label: <Typography variant="h5">Install ZeroK CLI</Typography>,
+    description: (
+      <>
+        For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and
+        geographical locations you want your ads to show on, and more.
+        <CopyBlock
+          text={installCommand.code}
+          language={installCommand.language}
+          showLineNumbers={installCommand.showLineNumbers}
+          theme={installCommand.theme}
+          wrapLines
+          codeBlock
+        />
+      </>
+    )
   },
   {
-    label: 'Install ZeroK Operator on Cluster',
-    description: 'An ad group contains one or more ads which target a shared set of keywords.'
+    label: <Typography variant="h5">Setup ZeroK Operator on Cluster</Typography>,
+    description: (
+      <>
+        An ad group contains one or more ads which target a shared set of keywords.
+        <CopyBlock
+          text={setupCommand.code}
+          language={setupCommand.language}
+          showLineNumbers={setupCommand.showLineNumbers}
+          theme={setupCommand.theme}
+          wrapLines
+          codeBlock
+        />
+      </>
+    )
   },
   {
-    label: 'Installation',
-    description: `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`
+    label: <Typography variant="h5">Installation</Typography>,
+    description: (
+      <>
+        <LinearProgress />
+        Try out different ad text to see what brings in the most customers, and learn how to enhance your ads using features like ad
+        extensions. If you run into any problems with your ads, find out how to tell if they're running and how to resolve approval issues.
+      </>
+    )
   }
 ];
 
@@ -58,9 +99,14 @@ const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Box sx={{ maxWidth: '100%' }}>
+          <Typography variant="h4" sx={{ mb: 2 }}>
+            Add new Cluster
+          </Typography>
+        </Box>
+        <Box sx={{ maxWidth: '100%' }}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
-              <Step key={step.label}>
+              <Step key={step.label.key}>
                 <StepLabel optional={index === 2 ? <Typography variant="caption">Last step</Typography> : null}>{step.label}</StepLabel>
                 <StepContent>
                   <Typography>{step.description}</Typography>
