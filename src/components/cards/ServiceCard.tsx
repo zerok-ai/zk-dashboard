@@ -19,8 +19,13 @@ import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceho
 
 function convertNanoToMilliSeconds(value: number) {
   if (value != null) {
-    let millis = value / 1000000;
-    return parseFloat(millis.toFixed(2));
+    let millis = parseFloat((value / 1000000).toFixed(2));
+    return (
+      <>
+        {millis}
+        <Typography variant="caption">ms</Typography>
+      </>
+    );
   }
   return 'NA';
 }
@@ -52,6 +57,27 @@ const ServiceCard = ({
     isHealthy = false;
   }
 
+  const stripNS = (nameStr: string) => {
+    return nameStr.split('/')[1];
+  };
+
+  const getFormattedServiceName = (nameStr: string) => {
+    try {
+      let namesObj = JSON.parse(nameStr);
+      nameStr = namesObj.map((itemName: string) => stripNS(itemName)).join(', ');
+      return nameStr;
+    } catch (err) {}
+    return stripNS(nameStr);
+  };
+
+  const getNamespace = (nameStr: string) => {
+    try {
+      let namesObj = JSON.parse(nameStr);
+      nameStr = namesObj[0];
+    } catch (err) {}
+    return nameStr.split('/')[0];
+  };
+
   return (
     <>
       {isLoading ? (
@@ -72,7 +98,10 @@ const ServiceCard = ({
               <Grid item xs={12}>
                 <Stack spacing={1.3}>
                   <Grid container direction="row" justifyContent="left" alignItems="center">
-                    <Grid item xs={11}>
+                    <Grid item xs={11} sx={{ pr: 2 }}>
+                      <Typography variant="caption" color="GrayText">
+                        {getNamespace(name)}/
+                      </Typography>
                       <Typography
                         component={Link}
                         to={`/service-details`}
@@ -86,30 +115,21 @@ const ServiceCard = ({
                           textDecoration: 'none'
                         }}
                       >
-                        {name}
+                        {getFormattedServiceName(name)}
+                      </Typography>
+                      <Typography color="textPrimary" variant="caption">
+                        {podCount} pods
                       </Typography>
                     </Grid>
                     <Grid item xs={1}>
-                      <Box>{isHealthy ? <WbSunnyIcon fontSize="large" /> : <ThunderstormIcon fontSize="large" />}</Box>
+                      <Box>
+                        {isHealthy ? <WbSunnyIcon fontSize="large" color="warning" /> : <ThunderstormIcon fontSize="large" color="error" />}
+                      </Box>
                     </Grid>
                   </Grid>
 
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Typography
-                      color="textPrimary"
-                      variant="subtitle1"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      Pods - {podCount}
-                    </Typography>
-                  </Stack>
-
                   <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
+                    <Typography color="textPrimary" variant="h5">
                       Latency
                     </Typography>
                   </Stack>
@@ -120,17 +140,7 @@ const ServiceCard = ({
                         <Typography color="textPrimary" variant="h5">
                           {convertNanoToMilliSeconds(httpLatencyIn.p50)}
                         </Typography>
-                        <Typography
-                          color="textSecondary"
-                          variant="subtitle1"
-                          sx={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            display: 'block',
-                            textDecoration: 'none'
-                          }}
-                        >
+                        <Typography color="textSecondary" variant="subtitle1">
                           p50
                         </Typography>
                       </Stack>
@@ -140,17 +150,7 @@ const ServiceCard = ({
                         <Typography color="textPrimary" variant="h5">
                           {convertNanoToMilliSeconds(httpLatencyIn.p90)}
                         </Typography>
-                        <Typography
-                          color="textSecondary"
-                          variant="subtitle1"
-                          sx={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            display: 'block',
-                            textDecoration: 'none'
-                          }}
-                        >
+                        <Typography color="textSecondary" variant="subtitle1">
                           p90
                         </Typography>
                       </Stack>
@@ -160,35 +160,22 @@ const ServiceCard = ({
                         <Typography color="textPrimary" variant="h5">
                           {convertNanoToMilliSeconds(httpLatencyIn.p99)}
                         </Typography>
-                        <Typography
-                          color="textSecondary"
-                          variant="subtitle1"
-                          sx={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            display: 'block',
-                            textDecoration: 'none'
-                          }}
-                        >
+                        <Typography color="textSecondary" variant="subtitle1">
                           p99
                         </Typography>
                       </Stack>
                     </Grid>
                   </Grid>
 
-                  <Divider light variant="middle" sx={{ p: 1 }} />
-                  <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      Http In
-                    </Typography>
-                  </Stack>
-
                   <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                    <Grid item xs={12}>
+                      <Divider light variant="middle" />
+                      <Stack direction="row" justifyContent="center" alignItems="center" sx={{ pt: 2 }}>
+                        <Typography color="textPrimary" variant="h5">
+                          Http In
+                        </Typography>
+                      </Stack>
+                    </Grid>
                     <Grid item xs={6}>
                       <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                         <Typography color="textPrimary" variant="h5">
@@ -230,13 +217,6 @@ const ServiceCard = ({
                       </Stack>
                     </Grid>
                   </Grid>
-                </Stack>
-              </Grid>
-              <Grid item xs={12}>
-                <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                  <Stack>
-                    <Stack direction="row" spacing={1} alignItems="center"></Stack>
-                  </Stack>
                 </Stack>
               </Grid>
             </Grid>

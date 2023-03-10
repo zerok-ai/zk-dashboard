@@ -8,7 +8,6 @@ import { Services as ServicesType, ServicesFilter } from 'types/services';
 import useConfig from 'hooks/useConfig';
 import { getServices } from 'store/reducers/services';
 
-import ServiceFilterDrawer from 'sections/apps/ServiceFilterDrawer';
 import ServicesHeader from 'sections/apps/ServicesHeader';
 import ServiceEmpty from 'sections/apps/ServiceEmpty';
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
@@ -19,12 +18,6 @@ const Main = styled('main', { shouldForwardProp: (prop: string) => prop !== 'ope
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.shorter
-    }),
-    marginLeft: -320,
-    ...(container && {
-      [theme.breakpoints.only('lg')]: {
-        marginLeft: !open ? -240 : 0
-      }
     }),
     [theme.breakpoints.down('lg')]: {
       paddingLeft: 0,
@@ -72,17 +65,6 @@ const ServicesListPage = () => {
   };
   const [filter, setFilter] = useState(initialState);
 
-  // const filterData = async (services: ServicesType[]) => {
-  //   dispatch(filterServices(filter, servicesApiResonse));
-  // };
-
-  // useEffect(() => {
-  //   if (services && services.length > 0) {
-  //     filterData(servicesApiResonse);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [filter]);
-
   let serviceResult: ReactElement | ReactElement[] = <></>;
   if (services && services.length > 0) {
     serviceResult = services
@@ -111,15 +93,7 @@ const ServicesListPage = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <ServiceFilterDrawer
-        filter={filter}
-        setFilter={setFilter}
-        openFilterDrawer={openFilterDrawer}
-        handleDrawerOpen={handleDrawerOpen}
-        setLoading={setLoading}
-        initialState={initialState}
-      />
+    <Box sx={{ display: 'block' }}>
       <Main theme={theme} open={openFilterDrawer} container={container}>
         <Grid container spacing={2.5}>
           <Grid item xs={12}>
