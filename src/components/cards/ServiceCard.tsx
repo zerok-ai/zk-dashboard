@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Box, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 // types
@@ -9,6 +9,9 @@ import { ServiceCardProps } from 'types/services';
 
 // project import
 import MainCard from 'components/MainCard';
+
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 
@@ -43,6 +46,12 @@ const ServiceCard = ({
     setLoading(false);
   }, []);
 
+  let isHealthy = true;
+
+  if (httpErrorRateIn && httpErrorRateIn > 0) {
+    isHealthy = false;
+  }
+
   return (
     <>
       {isLoading ? (
@@ -62,23 +71,28 @@ const ServiceCard = ({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Stack spacing={1.3}>
-                  <Stack direction="row" justifyContent="left" alignItems="center">
-                    <Typography
-                      component={Link}
-                      to={`/service-details`}
-                      color="textPrimary"
-                      variant="h4"
-                      sx={{
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        display: 'block',
-                        textDecoration: 'none'
-                      }}
-                    >
-                      {name}
-                    </Typography>
-                  </Stack>
+                  <Grid container direction="row" justifyContent="left" alignItems="center">
+                    <Grid item xs={11}>
+                      <Typography
+                        component={Link}
+                        to={`/service-details`}
+                        color="textPrimary"
+                        variant="h4"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          display: 'block',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        {name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <Box>{isHealthy ? <WbSunnyIcon fontSize="large" /> : <ThunderstormIcon fontSize="large" />}</Box>
+                    </Grid>
+                  </Grid>
 
                   <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
                     <Typography
