@@ -58,8 +58,9 @@ const ServicesListPage = () => {
   }, [serviceState]);
 
   useEffect(() => {
-    dispatch(getServices());
-
+    dispatch(getServices()).then(() => {
+      setLoading(false);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
