@@ -40,7 +40,6 @@ export default slice.reducer;
 export function getServices() {
   return async () => {
     try {
-      console.log('Get services method called.');
       const response = await axios.get(zkCloudEndpoint + 'service/list');
       const servicesArr = response.data.results;
       let results: ServiceType[] = [];
@@ -61,8 +60,6 @@ export function getServices() {
         };
         results.push(service);
       }
-      console.log(results);
-      //console.log('Response for list of services is ', response);
       dispatch(slice.actions.getServicesSuccess(results));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
