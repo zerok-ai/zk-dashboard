@@ -82,95 +82,120 @@ const ServiceCard = ({
                     </Typography>
                   </Stack>
 
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                  <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
                       color="textPrimary"
                       variant="h5"
                       sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
                     >
-                      Http Throughput In
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {httpReqThroughputIn}
+                      Latency
                     </Typography>
                   </Stack>
 
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
+                        {httpLatencyIn.p50}
+                      </MainCard>
+                      <Typography
+                        color="textPrimary"
+                        variant="subtitle1"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          display: 'block',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        p50
+                      </Typography>
+                    </Stack>
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
+                        {httpLatencyIn.p90}
+                      </MainCard>
+                      <Typography
+                        color="textPrimary"
+                        variant="subtitle1"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          display: 'block',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        p90
+                      </Typography>
+                    </Stack>
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
+                        {httpLatencyIn.p99}
+                      </MainCard>
+                      <Typography
+                        color="textPrimary"
+                        variant="subtitle1"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          display: 'block',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        p99
+                      </Typography>
+                    </Stack>
+                  </Stack>
+
+                  <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
                       color="textPrimary"
                       variant="h5"
                       sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
                     >
-                      Http Error Rate In
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {httpErrorRateIn}
+                      Http In
                     </Typography>
                   </Stack>
 
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      Inbound Conns
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {inboundConns}
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      Outbound Conns
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {outboundConns}
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      p50 Latency
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {httpLatencyIn.p50}
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      p90 Latency
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {httpLatencyIn.p90}
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Typography
-                      color="textPrimary"
-                      variant="h5"
-                      sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
-                    >
-                      p99 Latency
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {httpLatencyIn.p99}
-                    </Typography>
+                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
+                        {httpReqThroughputIn}
+                      </MainCard>
+                      <Typography
+                        color="textPrimary"
+                        variant="subtitle1"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          display: 'block',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        Throughput
+                      </Typography>
+                    </Stack>
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
+                        {httpErrorRateIn}
+                      </MainCard>
+                      <Typography
+                        color="textPrimary"
+                        variant="subtitle1"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          display: 'block',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        Error Rate
+                      </Typography>
+                    </Stack>
                   </Stack>
                 </Stack>
               </Grid>
