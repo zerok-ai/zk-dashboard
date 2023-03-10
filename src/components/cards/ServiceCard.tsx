@@ -12,7 +12,22 @@ import MainCard from 'components/MainCard';
 
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 
-// ==============================|| PRODUCT CARD ||============================== //
+// ==============================|| SERVICE CARD ||============================== //
+
+function convertNanoToMilliSeconds(value: number) {
+  if (value != null) {
+    let millis = value / 1000000;
+    return parseFloat(millis.toFixed(2));
+  }
+  return 'NA';
+}
+
+function roundToTwoDecimals(value: number) {
+  if (value != null) {
+    return parseFloat(value.toFixed(2));
+  }
+  return 'NA';
+}
 
 const ServiceCard = ({
   name,
@@ -43,13 +58,6 @@ const ServiceCard = ({
             }
           }}
         >
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ width: '100%', position: 'absolute', top: 0, pt: 1.75, pl: 2, pr: 1 }}
-          ></Stack>
-          <Divider />
           <CardContent sx={{ p: 2 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -92,63 +100,70 @@ const ServiceCard = ({
                     </Typography>
                   </Stack>
 
-                  <Grid container direction="row" justifyContent="center" alignItems="center" spacing={1}>
-                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
-                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
-                        {httpLatencyIn.p50}
-                      </MainCard>
-                      <Typography
-                        color="textSecondary"
-                        variant="subtitle1"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          display: 'block',
-                          textDecoration: 'none'
-                        }}
-                      >
-                        p50
-                      </Typography>
-                    </Stack>
-                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
-                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
-                        {httpLatencyIn.p90}
-                      </MainCard>
-                      <Typography
-                        color="textSecondary"
-                        variant="subtitle1"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          display: 'block',
-                          textDecoration: 'none'
-                        }}
-                      >
-                        p90
-                      </Typography>
-                    </Stack>
-                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
-                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
-                        {httpLatencyIn.p99}
-                      </MainCard>
-                      <Typography
-                        color="textSecondary"
-                        variant="subtitle1"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          display: 'block',
-                          textDecoration: 'none'
-                        }}
-                      >
-                        p99
-                      </Typography>
-                    </Stack>
+                  <Grid container direction="row" justifyContent="center">
+                    <Grid item xs={4}>
+                      <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                        <Typography color="textPrimary" variant="h5">
+                          {convertNanoToMilliSeconds(httpLatencyIn.p50)}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="subtitle1"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            display: 'block',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          p50
+                        </Typography>
+                      </Stack>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                        <Typography color="textPrimary" variant="h5">
+                          {convertNanoToMilliSeconds(httpLatencyIn.p90)}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="subtitle1"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            display: 'block',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          p90
+                        </Typography>
+                      </Stack>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                        <Typography color="textPrimary" variant="h5">
+                          {convertNanoToMilliSeconds(httpLatencyIn.p99)}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="subtitle1"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            display: 'block',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          p99
+                        </Typography>
+                      </Stack>
+                    </Grid>
                   </Grid>
 
+                  <Divider light variant="middle" sx={{ p: 1 }} />
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Typography
                       color="textPrimary"
@@ -159,43 +174,47 @@ const ServiceCard = ({
                     </Typography>
                   </Stack>
 
-                  <Grid container direction="row" justifyContent="center" alignItems="center">
-                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
-                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
-                        {httpReqThroughputIn}
-                      </MainCard>
-                      <Typography
-                        color="textSecondary"
-                        variant="subtitle1"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          display: 'block',
-                          textDecoration: 'none'
-                        }}
-                      >
-                        Throughput
-                      </Typography>
-                    </Stack>
-                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
-                      <MainCard border={true} sx={{ bgcolor: 'transparent' }}>
-                        {httpErrorRateIn}
-                      </MainCard>
-                      <Typography
-                        color="textSecondary"
-                        variant="subtitle1"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          display: 'block',
-                          textDecoration: 'none'
-                        }}
-                      >
-                        Error Rate
-                      </Typography>
-                    </Stack>
+                  <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                    <Grid item xs={6}>
+                      <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                        <Typography color="textPrimary" variant="h5">
+                          {roundToTwoDecimals(httpReqThroughputIn)}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="subtitle1"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            display: 'block',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          Throughput
+                        </Typography>
+                      </Stack>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
+                        <Typography color="textPrimary" variant="h5">
+                          {roundToTwoDecimals(httpErrorRateIn)}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="subtitle1"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            display: 'block',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          Error Rate
+                        </Typography>
+                      </Stack>
+                    </Grid>
                   </Grid>
                 </Stack>
               </Grid>

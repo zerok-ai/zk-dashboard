@@ -90,7 +90,7 @@ const ServicesListPage = () => {
         return service['name'] && service['name'].toString().toLowerCase().includes(filter.search.toString().toLowerCase());
       })
       .map((service: ServicesType, index: number) => (
-        <Grid key={index} item xs={12} sm={6} md={4}>
+        <Grid key={service.name} item xs={12} sm={6} md={4} lg={4}>
           <ServiceCard
             name={service.name}
             podCount={service.podCount}
