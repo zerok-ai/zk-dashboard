@@ -1,3 +1,5 @@
+import ClusterInfo from './models/ClusterInfo';
+
 export type ThemeDirection = 'ltr' | 'rtl';
 export type ThemeMode = 'light' | 'dark';
 export type MenuOrientation = 'vertical' | 'horizontal';
@@ -113,4 +115,12 @@ export type CustomizationProps = {
   onChangeMiniDrawer: (miniDrawer: boolean) => void;
   onChangeMenuOrientation: (menuOrientation: MenuOrientation) => void;
   onChangeFontFamily: (fontFamily: FontFamily) => void;
+};
+
+export type ClusterContextProps = {
+  clusterList: ClusterInfo[];
+  clusterListLoaded: boolean;
+  selectedCluster: ClusterInfo | null;
+  getSelectedCluster: () => ClusterInfo | null;
+  onSetSelectedCluster: (clusterIdx: number) => void;
 };
