@@ -77,6 +77,7 @@ export function getServices() {
 export function filterServices(filter: ServicesFilter) {
   return async () => {
     try {
+      console.log('filterServices method called.');
       const results = services.filter((service: KeyedObject) => {
         let searchMatches = true;
         if (filter.search) {
@@ -93,6 +94,7 @@ export function filterServices(filter: ServicesFilter) {
         }
         return searchMatches;
       });
+      console.log('Returning list of filtered values.');
       dispatch(slice.actions.filterServicesSuccess(results));
     } catch (err) {
       dispatch(slice.actions.hasError(err));
