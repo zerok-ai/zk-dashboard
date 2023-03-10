@@ -54,7 +54,7 @@ const ServiceCard = ({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Stack spacing={1.3}>
-                  <Stack direction="row" justifyContent="center" alignItems="center">
+                  <Stack direction="row" justifyContent="left" alignItems="center">
                     <Typography
                       component={Link}
                       to={`/service-details`}
@@ -65,7 +65,7 @@ const ServiceCard = ({
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
                         display: 'block',
-                        textDecoration: 'underline'
+                        textDecoration: 'none'
                       }}
                     >
                       {name}
@@ -75,13 +75,10 @@ const ServiceCard = ({
                   <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
                     <Typography
                       color="textPrimary"
-                      variant="h5"
+                      variant="subtitle1"
                       sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
                     >
-                      Pod Count
-                    </Typography>
-                    <Typography color="textSecondary" variant="h6">
-                      {podCount}
+                      Pods - {podCount}
                     </Typography>
                   </Stack>
 
