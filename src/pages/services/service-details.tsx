@@ -29,6 +29,8 @@ const ServiceDetailsPage = () => {
     }
   ]);
 
+  const [timeStamps, setTimeStamps] = useState([] as string[]);
+
   useEffect(() => {
     const data = getServiceDetails(ns, name);
     data.then((value) => {
@@ -36,6 +38,7 @@ const ServiceDetailsPage = () => {
         setLatencyData(value.latency);
         setHttpData(value.http);
         setConnsData(value.conns);
+        setTimeStamps(value.time);
         console.log(value);
       }
     });
@@ -50,7 +53,7 @@ const ServiceDetailsPage = () => {
         <Grid item xs={12}>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart series={latencyData} />
+              <IncomeAreaChart series={latencyData} timeStamps={timeStamps} />
             </Box>
           </MainCard>
         </Grid>
@@ -62,7 +65,7 @@ const ServiceDetailsPage = () => {
         <Grid item xs={12}>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart series={httpData} />
+              <IncomeAreaChart series={httpData} timeStamps={timeStamps} />
             </Box>
           </MainCard>
         </Grid>
@@ -74,7 +77,7 @@ const ServiceDetailsPage = () => {
         <Grid item xs={12}>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart series={connsData} />
+              <IncomeAreaChart series={connsData} timeStamps={timeStamps} />
             </Box>
           </MainCard>
         </Grid>

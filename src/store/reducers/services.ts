@@ -105,6 +105,7 @@ export async function getServiceDetails(namespace: string | undefined, serviceNa
           data: []
         }
       ];
+      var timeStamps = [] as string[];
       detailsMapSorted.forEach((value, key) => {
         latencyValues[0].data.push(convertNanoToMilliSecondsNumber(value.latency_p50));
         latencyValues[1].data.push(convertNanoToMilliSecondsNumber(value.latency_p90));
@@ -113,8 +114,9 @@ export async function getServiceDetails(namespace: string | undefined, serviceNa
         connsValues[1].data.push(value.outbound_throughput);
         httpValues[0].data.push(value.request_throughput);
         httpValues[1].data.push(value.error_rate);
+        timeStamps.push(value.time);
       });
-      return { latency: latencyValues, conns: connsValues, http: httpValues };
+      return { latency: latencyValues, conns: connsValues, http: httpValues, time: timeStamps };
     }
   } catch (error) {
     return null;

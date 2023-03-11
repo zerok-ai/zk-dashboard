@@ -37,9 +37,10 @@ interface Props {
     name: string;
     data: number[];
   }[];
+  timeStamps: string[];
 }
 
-const IncomeAreaChart = ({ series }: Props) => {
+const IncomeAreaChart = ({ series, timeStamps }: Props) => {
   const theme = useTheme();
   const { mode } = useConfig();
 
@@ -65,6 +66,7 @@ const IncomeAreaChart = ({ series }: Props) => {
         }
       },
       xaxis: {
+        categories: timeStamps,
         labels: {
           show: false
         },
@@ -89,7 +91,7 @@ const IncomeAreaChart = ({ series }: Props) => {
         theme: mode === 'dark' ? 'dark' : 'light'
       }
     }));
-  }, [mode, primary, secondary, line, theme, series]);
+  }, [mode, primary, secondary, line, theme, series, timeStamps]);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };
