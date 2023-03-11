@@ -132,7 +132,7 @@ export async function getServiceDetails(namespace: string | undefined, serviceNa
 export function getServices() {
   return async () => {
     try {
-      const response = await axios.get(zkCloudEndpoint + 'service/list', {
+      const response = await axios.get(zkCloudEndpoint + 'default/service/list', {
         params: {
           st: '-5m'
         }
