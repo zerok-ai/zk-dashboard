@@ -7,6 +7,8 @@ import { DefaultRootStateProps } from 'types/services';
 
 import { Services as ServiceType } from 'types/services';
 
+import { convertNanoToMilliSecondsNumber } from 'utils/math';
+
 const initialState: DefaultRootStateProps['service'] = {
   error: null,
   services: [],
@@ -37,15 +39,12 @@ const zkCloudEndpoint = '/v1/cluster/1/';
 // Reducer
 export default slice.reducer;
 
-// function compare(a: string, b: string) {
-
-// }
-
 export async function getServiceDetails(namespace: string | undefined, serviceName: string | undefined) {
   try {
     if (serviceName && namespace) {
       const response = await axios.get(zkCloudEndpoint + '/service/graph?name=' + serviceName + '&ns=' + namespace + '&st=-5m');
       const detailsArr = response.data.results;
+      console.log(detailsArr);
       const detailsMap = new Map();
       for (var i = 0; i < detailsArr.length; i++) {
         var obj = detailsArr[i];
@@ -62,7 +61,30 @@ export async function getServiceDetails(namespace: string | undefined, serviceNa
           return 0;
         })
       );
-      console.log(detailsMapSorted);
+
+      var latencyValues: {
+        name: string;
+        data: number[];
+      }[] = [
+        {
+          name: 'p50',
+          data: []
+        },
+        {
+          name: 'p90',
+          data: []
+        },
+        {
+          name: 'p99',
+          data: []
+        }
+      ];
+      detailsMapSorted.forEach((value, key) => {
+        latencyValues[0].data.push(convertNanoToMilliSecondsNumber(value.latency_p50));
+        latencyValues[1].data.push(convertNanoToMilliSecondsNumber(value.latency_p90));
+        latencyValues[2].data.push(convertNanoToMilliSecondsNumber(value.latency_p99));
+      });
+      return latencyValues;
     }
   } catch (error) {
     return null;

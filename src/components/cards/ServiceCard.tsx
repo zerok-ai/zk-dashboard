@@ -15,24 +15,18 @@ import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 
+import { convertNanoToMilliSeconds, roundToTwoDecimals } from 'utils/math';
+
 // ==============================|| SERVICE CARD ||============================== //
 
-function convertNanoToMilliSeconds(value: number) {
-  if (value != null) {
-    let millis = parseFloat((value / 1000000).toFixed(2));
+function addMillisTypography(millis: number | string) {
+  if (millis != null) {
     return (
       <>
         {millis}
         <Typography variant="caption">ms</Typography>
       </>
     );
-  }
-  return 'NA';
-}
-
-function roundToTwoDecimals(value: number) {
-  if (value != null) {
-    return parseFloat(value.toFixed(2));
   }
   return 'NA';
 }
@@ -138,7 +132,7 @@ const ServiceCard = ({
                     <Grid item xs={4}>
                       <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                         <Typography color="textPrimary" variant="h5">
-                          {convertNanoToMilliSeconds(httpLatencyIn.p50)}
+                          {addMillisTypography(convertNanoToMilliSeconds(httpLatencyIn.p50))}
                         </Typography>
                         <Typography color="textSecondary" variant="subtitle1">
                           p50
@@ -148,7 +142,7 @@ const ServiceCard = ({
                     <Grid item xs={4}>
                       <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                         <Typography color="textPrimary" variant="h5">
-                          {convertNanoToMilliSeconds(httpLatencyIn.p90)}
+                          {addMillisTypography(convertNanoToMilliSeconds(httpLatencyIn.p90))}
                         </Typography>
                         <Typography color="textSecondary" variant="subtitle1">
                           p90
@@ -158,7 +152,7 @@ const ServiceCard = ({
                     <Grid item xs={4}>
                       <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                         <Typography color="textPrimary" variant="h5">
-                          {convertNanoToMilliSeconds(httpLatencyIn.p99)}
+                          {addMillisTypography(convertNanoToMilliSeconds(httpLatencyIn.p99))}
                         </Typography>
                         <Typography color="textSecondary" variant="subtitle1">
                           p99
