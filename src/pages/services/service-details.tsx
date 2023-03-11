@@ -3,8 +3,11 @@ import { Grid, Box, Typography } from '@mui/material';
 import IncomeAreaChart from 'sections/charts/IncomeAreaChart';
 import MainCard from 'components/MainCard';
 import { useState, useEffect } from 'react';
+import { getServiceDetails } from 'store/reducers/services';
+import { useParams } from 'react-router-dom';
 
 const ServiceDetailsPage = () => {
+  const { ns, name } = useParams();
   const [seriesData, setSeriesData] = useState([
     {
       name: '',
@@ -23,6 +26,11 @@ const ServiceDetailsPage = () => {
       }
     ]);
   }, []);
+
+  useEffect(() => {
+    console.log(name);
+    getServiceDetails(ns, name);
+  }, [name, ns]);
 
   return (
     <Grid container rowSpacing={1} columnSpacing={3}>

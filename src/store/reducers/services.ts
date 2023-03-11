@@ -32,15 +32,47 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = '/v1/cluster/1/default/';
+const zkCloudEndpoint = '/v1/cluster/1/';
 
 // Reducer
 export default slice.reducer;
 
+// function compare(a: string, b: string) {
+
+// }
+
+export async function getServiceDetails(namespace: string | undefined, serviceName: string | undefined) {
+  try {
+    if (serviceName && namespace) {
+      const response = await axios.get(zkCloudEndpoint + '/service/graph?name=' + serviceName + '&ns=' + namespace + '&st=-5m');
+      const detailsArr = response.data.results;
+      const detailsMap = new Map();
+      for (var i = 0; i < detailsArr.length; i++) {
+        var obj = detailsArr[i];
+        detailsMap.set(obj.time, obj);
+      }
+      const detailsMapSorted = new Map(
+        [...detailsMap].sort((a, b) => {
+          if (new Date(String(a[0])) < new Date(String(b[0]))) {
+            return -1;
+          }
+          if (new Date(String(a[0])) > new Date(String(b[0]))) {
+            return 1;
+          }
+          return 0;
+        })
+      );
+      console.log(detailsMapSorted);
+    }
+  } catch (error) {
+    return null;
+  }
+}
+
 export function getServices() {
   return async () => {
     try {
-      const response = await axios.get(zkCloudEndpoint + 'service/list');
+      const response = await axios.get(zkCloudEndpoint + 'default/service/list');
       const servicesArr = response.data.results;
       let results: ServiceType[] = [];
       for (var i = 0; i < servicesArr.length; i++) {

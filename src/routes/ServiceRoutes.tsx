@@ -26,7 +26,7 @@ const ServiceRoutes = {
           element: <ServicesListPage />
         },
         {
-          path: 'service-details',
+          path: 'service-details/:ns/:name',
           element: <ServiceDetailsPage />
         }
       ]

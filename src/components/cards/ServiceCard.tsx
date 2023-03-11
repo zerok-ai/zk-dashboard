@@ -104,7 +104,7 @@ const ServiceCard = ({
                       </Typography>
                       <Typography
                         component={Link}
-                        to={`/service-details`}
+                        to={`/service-details/${getNamespace(name)}/${getFormattedServiceName(name)}`}
                         color="textPrimary"
                         variant="h4"
                         sx={{
