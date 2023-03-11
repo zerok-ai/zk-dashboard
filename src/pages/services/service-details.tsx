@@ -11,21 +11,21 @@ const ServiceDetailsPage = () => {
   const [latencyData, setLatencyData] = useState([
     {
       name: '',
-      data: [0]
+      data: [] as number[]
     }
   ]);
 
   const [httpData, setHttpData] = useState([
     {
       name: '',
-      data: [0]
+      data: [] as number[]
     }
   ]);
 
   const [connsData, setConnsData] = useState([
     {
       name: '',
-      data: [0]
+      data: [] as number[]
     }
   ]);
 

@@ -52,6 +52,18 @@ const IncomeAreaChart = ({ series }: Props) => {
     setOptions((prevState) => ({
       ...prevState,
       colors: [theme.palette.primary.main, theme.palette.primary[700]],
+      noData: {
+        text: 'Loading...',
+        align: 'center',
+        verticalAlign: 'middle',
+        offsetX: 0,
+        offsetY: 0,
+        style: {
+          color: mode === 'dark' ? '#FFFFFF' : '#000000',
+          fontSize: '14px',
+          fontFamily: 'Helvetica'
+        }
+      },
       xaxis: {
         labels: {
           show: false
