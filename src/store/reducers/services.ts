@@ -34,7 +34,7 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = '/v1/cluster/1/';
+const zkCloudEndpoint = '/v1/cluster/1';
 
 // Reducer
 export default slice.reducer;
@@ -132,7 +132,7 @@ export async function getServiceDetails(namespace: string | undefined, serviceNa
 export function getServices() {
   return async () => {
     try {
-      const response = await axios.get(zkCloudEndpoint + 'default/service/list', {
+      const response = await axios.get(zkCloudEndpoint + '/default/service/list', {
         params: {
           st: '-5m'
         }
