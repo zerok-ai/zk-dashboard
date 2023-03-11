@@ -39,10 +39,10 @@ const zkCloudEndpoint = '/v1/cluster/1/';
 // Reducer
 export default slice.reducer;
 
-export async function getServiceDetails(namespace: string | undefined, serviceName: string | undefined) {
+export async function getServiceDetails(namespace: string | undefined, serviceName: string | undefined, interval: string) {
   try {
     if (serviceName && namespace) {
-      const response = await axios.get(zkCloudEndpoint + '/service/graph?name=' + serviceName + '&ns=' + namespace + '&st=-5m');
+      const response = await axios.get(zkCloudEndpoint + '/service/graph?name=' + serviceName + '&ns=' + namespace + '&st=' + interval);
       const detailsArr = response.data.results;
       console.log(detailsArr);
       const detailsMap = new Map();
