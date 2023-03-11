@@ -1,0 +1,1608 @@
+{
+  "results": [
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 914564,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-1883356e6432fe38-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "11/03/2023 08:56:32" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "1883356e6432fe38",
+      "time_": "2023-03-11 08:56:32.926300698 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=f19c271afe64fee5",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service3-deployment-5bcc6cf47-7knb8", "start_time": "-20s" },
+        "label": "default/service3-deployment-5bcc6cf47-7knb8",
+        "script": "px/pod"
+      },
+      "latency": 1255272,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service3.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-cc390d7faf3c7b53-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc3" }, "json": { "time": "11/03/2023 08:56:32" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "cc390d7faf3c7b53",
+      "time_": "2023-03-11 08:56:32.928591255 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=e7c4c2484872b95a",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "mysql/mysql-766cc96c89-bl7jr", "start_time": "-20s" },
+        "label": "mysql/mysql-766cc96c89-bl7jr",
+        "script": "px/pod"
+      },
+      "latency": 59440,
+      "otel_flag": 0,
+      "req_body": "/* traceparent:00-81e5723063f342e18091702d1bbcdfca-32af1698f22f44aa-00,tracestate:zerok=fe2f06438026bb3b */ /* traceparent:00-81e5723063f342e18091702d1bbcdfca-32af1698f22f44aa-00,tracestate:zerok=fe2f06438026bb3b */ SELECT CURDATE();",
+      "req_headers": "",
+      "req_method": "",
+      "req_path": "",
+      "resp_body": "Resultset rows = 1",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "32af1698f22f44aa",
+      "time_": "2023-03-11 08:56:32.933726228 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=fe2f06438026bb3b",
+      "type": "MYSQL"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 5221870,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-c635e011bc797c70-01"
+      },
+      "req_method": "GET",
+      "req_path": "/dbtime",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "2023-03-11" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "c635e011bc797c70",
+      "time_": "2023-03-11 08:56:32.934502527 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=d7c4c5097429b804",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 162963,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-0d7163e8061b9f27-01",
+        "tracestate": "zerok=4fadd502132447bd"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "0d7163e8061b9f27",
+      "time_": "2023-03-11 08:56:32.945128326 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=4fadd502132447bd",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 388915,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-df81e14b3428d14f-01",
+        "tracestate": "zerok=4fadd502132447bd"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "df81e14b3428d14f",
+      "time_": "2023-03-11 08:56:32.948766082 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=4fadd502132447bd",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 284543,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:564), java.base/java.net.Socket.connect(Socket.java:633), java.base/java.net.Socket.connect(Socket.java:583), java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:183), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:498), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:603), java.base/sun.net.www.http.HttpClient.\u003cinit\u003e(HttpClient.java:246), java.base/sun.net.www.http.HttpClient.New(HttpClien... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "6679",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-3e25daadb33457d2-01",
+        "tracestate": "zerok=4fadd502132447bd"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "3e25daadb33457d2",
+      "time_": "2023-03-11 08:56:32.950015235 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=4fadd502132447bd",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 104552,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-4f6d0540037d8760-01",
+        "tracestate": "zerok=4fadd502132447bd"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "4f6d0540037d8760",
+      "time_": "2023-03-11 08:56:32.95076104 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=4fadd502132447bd",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 17259450,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-4fadd502132447bd-01"
+      },
+      "req_method": "GET",
+      "req_path": "/failpoint",
+      "resp_body": { "error": "Internal Server Error", "path": "/failpoint", "status": 500, "timestamp": "2023-03-11T08:56:32.952+00:00" },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "4fadd502132447bd",
+      "time_": "2023-03-11 08:56:32.952570062 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=dd1b709177b88ef4",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 114368,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-5a2bd516c5a79632-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "5a2bd516c5a79632",
+      "time_": "2023-03-11 08:56:32.954199416 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 106789,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-3e984f0816941477-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "3e984f0816941477",
+      "time_": "2023-03-11 08:56:32.958087715 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 107808,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-81e5723063f342e18091702d1bbcdfca-abaf381cc7783511-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "abaf381cc7783511",
+      "time_": "2023-03-11 08:56:32.958878529 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "latency": 36732139,
+      "otel_flag": 0,
+      "req_body": "",
+      "req_headers": { "Accept": "*/*", "Host": "service1.default.svc.cluster.local", "User-Agent": "curl/7.80.0" },
+      "req_method": "GET",
+      "req_path": "/times",
+      "resp_body": { "error": "Internal Server Error", "path": "/times", "status": 500, "timestamp": "2023-03-11T08:56:32.960+00:00" },
+      "source": {
+        "args": { "pod": "external/loadrun-deployment-8dd48f7dc-gswrd", "start_time": "-20s" },
+        "label": "external/loadrun-deployment-8dd48f7dc-gswrd",
+        "script": "px/pod"
+      },
+      "span_id": "f2eca0a39651d38e",
+      "time_": "2023-03-11 08:56:32.960797357 +0000 UTC",
+      "trace_id": "81e5723063f342e18091702d1bbcdfca",
+      "tracestate": "zerok=f2eca0a39651d38e",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 828021,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-54ff08a392eaf24d-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "11/03/2023 08:56:37" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "54ff08a392eaf24d",
+      "time_": "2023-03-11 08:56:37.983960954 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=09cb50720d3339dd",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service3-deployment-5bcc6cf47-7knb8", "start_time": "-20s" },
+        "label": "default/service3-deployment-5bcc6cf47-7knb8",
+        "script": "px/pod"
+      },
+      "latency": 1271728,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service3.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-ced8a1ed0277133e-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc3" }, "json": { "time": "11/03/2023 08:56:37" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "ced8a1ed0277133e",
+      "time_": "2023-03-11 08:56:37.98614867 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=e68b1f943f766b05",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "mysql/mysql-766cc96c89-bl7jr", "start_time": "-20s" },
+        "label": "mysql/mysql-766cc96c89-bl7jr",
+        "script": "px/pod"
+      },
+      "latency": 64390,
+      "otel_flag": 0,
+      "req_body": "/* traceparent:00-f43fd347f1ba7e0b041158bfd93de208-50eb0684b7f67eb4-00,tracestate:zerok=37a2f44379a1a569 */ /* traceparent:00-f43fd347f1ba7e0b041158bfd93de208-50eb0684b7f67eb4-00,tracestate:zerok=37a2f44379a1a569 */ SELECT CURDATE();",
+      "req_headers": "",
+      "req_method": "",
+      "req_path": "",
+      "resp_body": "Resultset rows = 1",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "50eb0684b7f67eb4",
+      "time_": "2023-03-11 08:56:37.991232411 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=37a2f44379a1a569",
+      "type": "MYSQL"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 5148616,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-d86e8e2185baae99-01"
+      },
+      "req_method": "GET",
+      "req_path": "/dbtime",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "2023-03-11" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "d86e8e2185baae99",
+      "time_": "2023-03-11 08:56:37.991965145 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=dc5a2f128227956f",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 117665,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-581189a3ee994bdb-01",
+        "tracestate": "zerok=de8c9bad8a651115"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "581189a3ee994bdb",
+      "time_": "2023-03-11 08:56:38.005334766 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=de8c9bad8a651115",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 80602,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-5fc6f32be2f63ae6-01",
+        "tracestate": "zerok=de8c9bad8a651115"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "5fc6f32be2f63ae6",
+      "time_": "2023-03-11 08:56:38.008706867 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=de8c9bad8a651115",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 72881,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:564), java.base/java.net.Socket.connect(Socket.java:633), java.base/java.net.Socket.connect(Socket.java:583), java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:183), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:498), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:603), java.base/sun.net.www.http.HttpClient.\u003cinit\u003e(HttpClient.java:246), java.base/sun.net.www.http.HttpClient.New(HttpClien... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "6679",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-9054f11d1b443131-01",
+        "tracestate": "zerok=de8c9bad8a651115"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "9054f11d1b443131",
+      "time_": "2023-03-11 08:56:38.009661123 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=de8c9bad8a651115",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 86532,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-83074567598d4a79-01",
+        "tracestate": "zerok=de8c9bad8a651115"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "83074567598d4a79",
+      "time_": "2023-03-11 08:56:38.01051803 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=de8c9bad8a651115",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 19801407,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-de8c9bad8a651115-01"
+      },
+      "req_method": "GET",
+      "req_path": "/failpoint",
+      "resp_body": { "error": "Internal Server Error", "path": "/failpoint", "status": 500, "timestamp": "2023-03-11T08:56:38.012+00:00" },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "de8c9bad8a651115",
+      "time_": "2023-03-11 08:56:38.012490977 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=aac5f2bb53e48295",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 73062,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-da4839807488f058-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "da4839807488f058",
+      "time_": "2023-03-11 08:56:38.014012501 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 68300,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-72be116391e27a81-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "72be116391e27a81",
+      "time_": "2023-03-11 08:56:38.017007637 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 91592,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-f43fd347f1ba7e0b041158bfd93de208-02d5a495b4afea2b-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "02d5a495b4afea2b",
+      "time_": "2023-03-11 08:56:38.017719708 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "latency": 37806288,
+      "otel_flag": 0,
+      "req_body": "",
+      "req_headers": { "Accept": "*/*", "Host": "service1.default.svc.cluster.local", "User-Agent": "curl/7.80.0" },
+      "req_method": "GET",
+      "req_path": "/times",
+      "resp_body": { "error": "Internal Server Error", "path": "/times", "status": 500, "timestamp": "2023-03-11T08:56:38.019+00:00" },
+      "source": {
+        "args": { "pod": "external/loadrun-deployment-8dd48f7dc-gswrd", "start_time": "-20s" },
+        "label": "external/loadrun-deployment-8dd48f7dc-gswrd",
+        "script": "px/pod"
+      },
+      "span_id": "983c054ddb90ecd6",
+      "time_": "2023-03-11 08:56:38.019444763 +0000 UTC",
+      "trace_id": "f43fd347f1ba7e0b041158bfd93de208",
+      "tracestate": "zerok=983c054ddb90ecd6",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 1105949,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-e1a3a2a664da282a-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "11/03/2023 08:56:43" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "e1a3a2a664da282a",
+      "time_": "2023-03-11 08:56:43.039807348 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=453a8aa528354708",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service3-deployment-5bcc6cf47-7knb8", "start_time": "-20s" },
+        "label": "default/service3-deployment-5bcc6cf47-7knb8",
+        "script": "px/pod"
+      },
+      "latency": 1197996,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service3.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-567a65026a71e0cc-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc3" }, "json": { "time": "11/03/2023 08:56:43" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "567a65026a71e0cc",
+      "time_": "2023-03-11 08:56:43.041887322 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=5eeb04c78aa2d3b1",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "mysql/mysql-766cc96c89-bl7jr", "start_time": "-20s" },
+        "label": "mysql/mysql-766cc96c89-bl7jr",
+        "script": "px/pod"
+      },
+      "latency": 111830,
+      "otel_flag": 0,
+      "req_body": "/* traceparent:00-4d9896c9f9eedfcaa576cd99173b45a2-3074c81c055f0cfe-00,tracestate:zerok=e1ba82810b89f47b */ /* traceparent:00-4d9896c9f9eedfcaa576cd99173b45a2-3074c81c055f0cfe-00,tracestate:zerok=e1ba82810b89f47b */ SELECT CURDATE();",
+      "req_headers": "",
+      "req_method": "",
+      "req_path": "",
+      "resp_body": "Resultset rows = 1",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "3074c81c055f0cfe",
+      "time_": "2023-03-11 08:56:43.046961245 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=e1ba82810b89f47b",
+      "type": "MYSQL"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 4906059,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-cc3654de4facbcfa-01"
+      },
+      "req_method": "GET",
+      "req_path": "/dbtime",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "2023-03-11" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "cc3654de4facbcfa",
+      "time_": "2023-03-11 08:56:43.047672917 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=ae14f6a78cf1ca63",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 306613,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-6f1d9da1e1503e1c-01",
+        "tracestate": "zerok=3e7be2308dea33b8"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "6f1d9da1e1503e1c",
+      "time_": "2023-03-11 08:56:43.050573201 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=3e7be2308dea33b8",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 76289,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-0343cf3c2f0c624a-01",
+        "tracestate": "zerok=3e7be2308dea33b8"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "0343cf3c2f0c624a",
+      "time_": "2023-03-11 08:56:43.05356098 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=3e7be2308dea33b8",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 66819,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:564), java.base/java.net.Socket.connect(Socket.java:633), java.base/java.net.Socket.connect(Socket.java:583), java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:183), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:498), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:603), java.base/sun.net.www.http.HttpClient.\u003cinit\u003e(HttpClient.java:246), java.base/sun.net.www.http.HttpClient.New(HttpClien... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "6679",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-d401f53dc521a3e9-01",
+        "tracestate": "zerok=3e7be2308dea33b8"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "d401f53dc521a3e9",
+      "time_": "2023-03-11 08:56:43.054374468 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=3e7be2308dea33b8",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 246642,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-8ebfcd08a2af26f5-01",
+        "tracestate": "zerok=3e7be2308dea33b8"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "8ebfcd08a2af26f5",
+      "time_": "2023-03-11 08:56:43.05531712 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=3e7be2308dea33b8",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 8672949,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-3e7be2308dea33b8-01"
+      },
+      "req_method": "GET",
+      "req_path": "/failpoint",
+      "resp_body": { "error": "Internal Server Error", "path": "/failpoint", "status": 500, "timestamp": "2023-03-11T08:56:43.056+00:00" },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "3e7be2308dea33b8",
+      "time_": "2023-03-11 08:56:43.057088159 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=7a76661becf1047a",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 77766,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-bd32c900bdddaa99-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "bd32c900bdddaa99",
+      "time_": "2023-03-11 08:56:43.05837384 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 720950,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-8815af54471c6f26-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "8815af54471c6f26",
+      "time_": "2023-03-11 08:56:43.061783972 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 65743,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-4d9896c9f9eedfcaa576cd99173b45a2-6f0f524c168b1e21-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "6f0f524c168b1e21",
+      "time_": "2023-03-11 08:56:43.062029848 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "latency": 28406481,
+      "otel_flag": 0,
+      "req_body": "",
+      "req_headers": { "Accept": "*/*", "Host": "service1.default.svc.cluster.local", "User-Agent": "curl/7.80.0" },
+      "req_method": "GET",
+      "req_path": "/times",
+      "resp_body": { "error": "Internal Server Error", "path": "/times", "status": 500, "timestamp": "2023-03-11T08:56:43.064+00:00" },
+      "source": {
+        "args": { "pod": "external/loadrun-deployment-8dd48f7dc-gswrd", "start_time": "-20s" },
+        "label": "external/loadrun-deployment-8dd48f7dc-gswrd",
+        "script": "px/pod"
+      },
+      "span_id": "51623b653694c543",
+      "time_": "2023-03-11 08:56:43.064337846 +0000 UTC",
+      "trace_id": "4d9896c9f9eedfcaa576cd99173b45a2",
+      "tracestate": "zerok=51623b653694c543",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 731437,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-1168df694eb15e62-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "11/03/2023 08:56:48" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "1168df694eb15e62",
+      "time_": "2023-03-11 08:56:48.093190074 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=214b984e142d19b8",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service3-deployment-5bcc6cf47-7knb8", "start_time": "-20s" },
+        "label": "default/service3-deployment-5bcc6cf47-7knb8",
+        "script": "px/pod"
+      },
+      "latency": 1277052,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service3.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-ee5d2c909be7deeb-01"
+      },
+      "req_method": "GET",
+      "req_path": "/time",
+      "resp_body": { "headers": { "from": "svc3" }, "json": { "time": "11/03/2023 08:56:48" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "ee5d2c909be7deeb",
+      "time_": "2023-03-11 08:56:48.095968883 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=0a9bf98e1e263f3d",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "mysql/mysql-766cc96c89-bl7jr", "start_time": "-20s" },
+        "label": "mysql/mysql-766cc96c89-bl7jr",
+        "script": "px/pod"
+      },
+      "latency": 53450,
+      "otel_flag": 0,
+      "req_body": "/* traceparent:00-eea2386e0f76411f11033427e5c4449c-d675c0d8ee4aa651-00,tracestate:zerok=28c87ae469cb8c0f */ /* traceparent:00-eea2386e0f76411f11033427e5c4449c-d675c0d8ee4aa651-00,tracestate:zerok=28c87ae469cb8c0f */ SELECT CURDATE();",
+      "req_headers": "",
+      "req_method": "",
+      "req_path": "",
+      "resp_body": "Resultset rows = 1",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "d675c0d8ee4aa651",
+      "time_": "2023-03-11 08:56:48.109243529 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=28c87ae469cb8c0f",
+      "type": "MYSQL"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 13302391,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-713591bcf7cfd7d5-01"
+      },
+      "req_method": "GET",
+      "req_path": "/dbtime",
+      "resp_body": { "headers": { "from": "svc2" }, "json": { "time": "2023-03-11" }, "status": 200 },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "713591bcf7cfd7d5",
+      "time_": "2023-03-11 08:56:48.110076039 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=2a9aefa0fdcd08b6",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 69011,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-fe22c0600fefccd9-01",
+        "tracestate": "zerok=8a29e7f99955337e"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "fe22c0600fefccd9",
+      "time_": "2023-03-11 08:56:48.125852397 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=8a29e7f99955337e",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 81669,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-41f7db1043e63bc4-01",
+        "tracestate": "zerok=8a29e7f99955337e"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "41f7db1043e63bc4",
+      "time_": "2023-03-11 08:56:48.129133391 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=8a29e7f99955337e",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 202786,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:564), java.base/java.net.Socket.connect(Socket.java:633), java.base/java.net.Socket.connect(Socket.java:583), java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:183), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:498), java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:603), java.base/sun.net.www.http.HttpClient.\u003cinit\u003e(HttpClient.java:246), java.base/sun.net.www.http.HttpClient.New(HttpClien... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "6679",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-8e325180505b0fcb-01",
+        "tracestate": "zerok=8a29e7f99955337e"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "8e325180505b0fcb",
+      "time_": "2023-03-11 08:56:48.130287176 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=8a29e7f99955337e",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 262571,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:888), org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:868), org.springframework.web.client.RestTemplate.execute(RestTemplate.java:764), org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:378), ai.zerok.echorelayapp.processor.DependentProcessorApi.process(DependentProcessorApi.java:23), ai.zerok.echorelayapp.parser.EndpointSpec.process(EndpointSpec.java:66),... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5503",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-c3ba6c3527d78e02-01",
+        "tracestate": "zerok=8a29e7f99955337e"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "span_id": "c3ba6c3527d78e02",
+      "time_": "2023-03-11 08:56:48.131429704 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=8a29e7f99955337e",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service2-deployment-5747dd45d8-xt5zr", "start_time": "-20s" },
+        "label": "default/service2-deployment-5747dd45d8-xt5zr",
+        "script": "px/pod"
+      },
+      "latency": 21848351,
+      "otel_flag": 1,
+      "req_body": "",
+      "req_headers": {
+        "Accept": "application/json, application/*+json",
+        "Connection": "keep-alive",
+        "Host": "service2.default.svc.cluster.local",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-8a29e7f99955337e-01"
+      },
+      "req_method": "GET",
+      "req_path": "/failpoint",
+      "resp_body": { "error": "Internal Server Error", "path": "/failpoint", "status": 500, "timestamp": "2023-03-11T08:56:48.132+00:00" },
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "8a29e7f99955337e",
+      "time_": "2023-03-11 08:56:48.133268975 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=48e84350bc824d9f",
+      "type": "HTTP"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 253900,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-d32046233c5281d1-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "d32046233c5281d1",
+      "time_": "2023-03-11 08:56:48.143558794 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 86084,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-43511d514a0e0959-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "43511d514a0e0959",
+      "time_": "2023-03-11 08:56:48.146994257 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt", "start_time": "-20s" },
+        "label": "zerok-operator-system/zerok-operator-controller-manager-59bcf7fb4c-nbpxt",
+        "script": "px/pod"
+      },
+      "latency": 375399,
+      "otel_flag": 1,
+      "req_body": "{stacktrace=[org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:103), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186), org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137), org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63), org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:915), or... [TRUNCATED]",
+      "req_headers": {
+        "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2",
+        "Connection": "keep-alive",
+        "Content-Length": "5972",
+        "Content-type": "application/json",
+        "Host": "zerok-operator-service.zerok-operator-system.svc.cluster.local:8127",
+        "User-Agent": "Java/18-ea",
+        "traceparent": "00-eea2386e0f76411f11033427e5c4449c-8d2a971cd8d66df9-01",
+        "tracestate": "zerok=0000000000000000"
+      },
+      "req_method": "POST",
+      "req_path": "/exception",
+      "resp_body": "Done",
+      "source": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "span_id": "8d2a971cd8d66df9",
+      "time_": "2023-03-11 08:56:48.148279907 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=0000000000000000",
+      "type": "EXCEPTION"
+    },
+    {
+      "destination": {
+        "args": { "pod": "default/service1-deployment-5467c8cd65-db2zz", "start_time": "-20s" },
+        "label": "default/service1-deployment-5467c8cd65-db2zz",
+        "script": "px/pod"
+      },
+      "latency": 72649465,
+      "otel_flag": 0,
+      "req_body": "",
+      "req_headers": { "Accept": "*/*", "Host": "service1.default.svc.cluster.local", "User-Agent": "curl/7.80.0" },
+      "req_method": "GET",
+      "req_path": "/times",
+      "resp_body": { "error": "Internal Server Error", "path": "/times", "status": 500, "timestamp": "2023-03-11T08:56:48.154+00:00" },
+      "source": {
+        "args": { "pod": "external/loadrun-deployment-8dd48f7dc-gswrd", "start_time": "-20s" },
+        "label": "external/loadrun-deployment-8dd48f7dc-gswrd",
+        "script": "px/pod"
+      },
+      "span_id": "2785b9c9dab8c844",
+      "time_": "2023-03-11 08:56:48.154677486 +0000 UTC",
+      "trace_id": "eea2386e0f76411f11033427e5c4449c",
+      "tracestate": "zerok=2785b9c9dab8c844",
+      "type": "HTTP"
+    }
+  ],
+  "stats": {
+    "AcceptedBytes": 56208,
+    "TotalBytes": 56208,
+    "ExecutionTime": 18731000,
+    "CompilationTime": 38911539,
+    "BytesProcessed": 156919,
+    "RecordsProcessed": 290
+  }
+}

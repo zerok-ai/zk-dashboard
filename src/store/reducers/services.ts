@@ -40,7 +40,11 @@ export default slice.reducer;
 export function getServices() {
   return async () => {
     try {
-      const response = await axios.get(zkCloudEndpoint + 'service/list');
+      const response = await axios.get(zkCloudEndpoint + 'service/list', {
+        params: {
+          st: '-5m'
+        }
+      });
       const servicesArr = response.data.results;
       let results: ServiceType[] = [];
       for (var i = 0; i < servicesArr.length; i++) {
