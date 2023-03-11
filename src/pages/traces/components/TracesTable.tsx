@@ -50,7 +50,7 @@ const TracesTable = ({ data }: { data: any[] }) => {
   const renderRowSubComponent = useCallback(({ row: { id } }: { row: Row<{}> }) => <TraceDetails data={data[Number(id)].traces} />, [data]);
 
   return (
-    <MainCard title="Expanding User Details" content={false}>
+    <MainCard title="Distributed Traces" content={false}>
       <ScrollX>
         <ReactTable columns={columns} data={data} renderRowSubComponent={renderRowSubComponent} />
       </ScrollX>

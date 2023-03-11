@@ -1,10 +1,12 @@
 // material-ui
-import { alpha, useTheme } from '@mui/material/styles';
-import { Chip, Grid, TableCell, TableRow } from '@mui/material';
-import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
 import { useMemo } from 'react';
-import ReactTable from './ReactTable';
+
+import { alpha, useTheme } from '@mui/material/styles';
 import { TableBody } from '@mui/material';
+import { Chip, Grid, TableCell, TableRow } from '@mui/material';
+
+import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
+import ReactTable from './ReactTable';
 
 // ==============================|| EXPANDING TABLE - USER DETAILS ||============================== //
 

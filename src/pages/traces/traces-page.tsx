@@ -1,10 +1,11 @@
-import { Grid, Box } from '@mui/material';
-import { useState } from 'react';
+import { Grid, Box, LinearProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
 import ServicesHeader from 'sections/apps/ServicesHeader';
 import { ServicesFilter } from 'types/services';
-import TracesTable from './TracesTable';
+import TracesTable from './components/TracesTable';
 
-import nwData from './nwData.json';
+import { getTraceDetails } from './controllers/TracesAPIController';
+import { traceDataResponse, traceItem } from './models/traceDataResponse';
 
 const Traces = () => {
   const initialState: ServicesFilter = {
@@ -16,54 +17,51 @@ const Traces = () => {
   const handleDrawerOpen = () => {
     setOpenFilterDrawer((prevState) => !prevState);
     console.log(openFilterDrawer);
-    console.log(nwData);
   };
 
-  var nwDataMap: Map<string, any> = new Map();
-  var maxLatency = 0;
-  nwData.results.forEach((data, idx) => {
-    maxLatency = data.latency > maxLatency ? data.latency : maxLatency;
-  });
-  nwData.results.forEach((data, idx) => {
-    let newData = nwData.results[idx];
-    const existing = nwDataMap.get(data.trace_id) || [];
-    if (existing) {
-      newData = existing.push(newData);
-      nwDataMap.set(data.trace_id, existing);
-    } else {
-      nwDataMap.set(data.trace_id, [newData]);
-    }
-  });
+  const [loading, setLoading] = useState(true);
+  const [traceData, setTraceData] = useState<traceItem[]>([]);
 
-  console.log(nwDataMap);
-  const data: any[] = [];
-  const sorter = (x: any, y: any) => x.time_ > y.time_;
-
-  nwDataMap.forEach((traces, traceId) => {
-    data.push({
-      trace_id: traceId,
-      traces: nwDataMap.get(traceId).sort(sorter),
-      count: nwDataMap.get(traceId).length
+  useEffect(() => {
+    getTraceDetails().then((traceData: traceDataResponse) => {
+      setTraceData(traceData.results);
+      setLoading(false);
+      console.log(loading);
     });
   });
 
-  console.log(data);
+  const getTraceData = (results: any[]) => {
+    var nwDataMap: Map<string, any> = new Map();
+    var maxLatency = 0;
+    results.forEach((data, idx) => {
+      maxLatency = data.latency > maxLatency ? data.latency : maxLatency;
+    });
+    results.forEach((data, idx) => {
+      let newData = results[idx];
+      const existing = nwDataMap.get(data.trace_id) || [];
+      if (existing) {
+        newData = existing.push(newData);
+        nwDataMap.set(data.trace_id, existing);
+      } else {
+        nwDataMap.set(data.trace_id, [newData]);
+      }
+    });
 
-  // const dataItems = nwData.results.map((traceObj) => {
-  //   return {
-  //     trace_id: (
-  //       <Box>
-  //         <Typography variant="caption">{traceObj.trace_id}</Typography>
-  //         <Typography variant="body2">Spans: {nwDataMap.get(traceObj.trace_id).length}</Typography>
-  //       </Box>
-  //     ),
-  //     span: traceObj.span_id,
-  //     latency: traceObj.latency / 10000,
-  //     type: traceObj.type
-  //   };
-  // });
+    console.log(nwDataMap);
+    const data: any[] = [];
+    const sorter = (x: any, y: any) => x.time_ > y.time_;
 
-  console.log(data);
+    nwDataMap.forEach((traces, traceId) => {
+      data.push({
+        trace_id: traceId,
+        traces: nwDataMap.get(traceId).sort(sorter),
+        count: nwDataMap.get(traceId).length
+      });
+    });
+
+    console.log(data);
+    return data;
+  };
 
   return (
     <Box sx={{ display: 'block' }}>
@@ -72,7 +70,13 @@ const Traces = () => {
           <ServicesHeader filter={filter} handleDrawerOpen={handleDrawerOpen} setFilter={setFilter} />
         </Grid>
         <Grid item xs={12}>
-          <TracesTable data={data}></TracesTable>
+          {loading ? (
+            <Box sx={{ mt: -3 }}>
+              <LinearProgress />
+            </Box>
+          ) : (
+            <TracesTable data={getTraceData(traceData)}></TracesTable>
+          )}
         </Grid>
       </Grid>
     </Box>
