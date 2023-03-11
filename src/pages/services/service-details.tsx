@@ -15,11 +15,27 @@ const ServiceDetailsPage = () => {
     }
   ]);
 
+  const [httpData, setHttpData] = useState([
+    {
+      name: '',
+      data: [0]
+    }
+  ]);
+
+  const [connsData, setConnsData] = useState([
+    {
+      name: '',
+      data: [0]
+    }
+  ]);
+
   useEffect(() => {
     const data = getServiceDetails(ns, name);
     data.then((value) => {
       if (value) {
-        setLatencyData(value);
+        setLatencyData(value.latency);
+        setHttpData(value.http);
+        setConnsData(value.conns);
         console.log(value);
       }
     });
@@ -41,12 +57,24 @@ const ServiceDetailsPage = () => {
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
         <Grid item>
-          <Typography variant="h5">Other Example Data</Typography>
+          <Typography variant="h5">Http data</Typography>
         </Grid>
         <Grid item xs={12}>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart series={latencyData} />
+              <IncomeAreaChart series={httpData} />
+            </Box>
+          </MainCard>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <Grid item>
+          <Typography variant="h5">Conns data</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <MainCard content={false} sx={{ mt: 1.5 }}>
+            <Box sx={{ pt: 1, pr: 2 }}>
+              <IncomeAreaChart series={connsData} />
             </Box>
           </MainCard>
         </Grid>
