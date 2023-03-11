@@ -33,14 +33,14 @@ const areaChartOptions = {
 // ==============================|| INCOME AREA CHART ||============================== //
 
 interface Props {
-  slot: string;
   series: {
     name: string;
     data: number[];
   }[];
+  timeStamps: string[];
 }
 
-const IncomeAreaChart = ({ slot, series }: Props) => {
+const IncomeAreaChart = ({ series, timeStamps }: Props) => {
   const theme = useTheme();
   const { mode } = useConfig();
 
@@ -53,34 +53,29 @@ const IncomeAreaChart = ({ slot, series }: Props) => {
     setOptions((prevState) => ({
       ...prevState,
       colors: [theme.palette.primary.main, theme.palette.primary[700]],
+      noData: {
+        text: 'Loading...',
+        align: 'center',
+        verticalAlign: 'middle',
+        offsetX: 0,
+        offsetY: 0,
+        style: {
+          color: mode === 'dark' ? '#FFFFFF' : '#000000',
+          fontSize: '14px',
+          fontFamily: 'Helvetica'
+        }
+      },
       xaxis: {
-        categories:
-          slot === 'month'
-            ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        categories: timeStamps,
         labels: {
-          style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary
-            ]
-          }
+          show: false
         },
         axisBorder: {
-          show: true,
-          color: line
+          show: false
         },
-        tickAmount: slot === 'month' ? 11 : 7
+        axisTicks: {
+          show: false
+        }
       },
       yaxis: {
         labels: {
@@ -96,7 +91,7 @@ const IncomeAreaChart = ({ slot, series }: Props) => {
         theme: mode === 'dark' ? 'dark' : 'light'
       }
     }));
-  }, [mode, primary, secondary, line, theme, slot]);
+  }, [mode, primary, secondary, line, theme, series, timeStamps]);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };
