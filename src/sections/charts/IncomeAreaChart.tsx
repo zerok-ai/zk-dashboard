@@ -33,14 +33,13 @@ const areaChartOptions = {
 // ==============================|| INCOME AREA CHART ||============================== //
 
 interface Props {
-  slot: string;
   series: {
     name: string;
     data: number[];
   }[];
 }
 
-const IncomeAreaChart = ({ slot, series }: Props) => {
+const IncomeAreaChart = ({ series }: Props) => {
   const theme = useTheme();
   const { mode } = useConfig();
 
@@ -54,33 +53,15 @@ const IncomeAreaChart = ({ slot, series }: Props) => {
       ...prevState,
       colors: [theme.palette.primary.main, theme.palette.primary[700]],
       xaxis: {
-        categories:
-          slot === 'month'
-            ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         labels: {
-          style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary
-            ]
-          }
+          show: false
         },
         axisBorder: {
-          show: true,
-          color: line
+          show: false
         },
-        tickAmount: slot === 'month' ? 11 : 7
+        axisTicks: {
+          show: false
+        }
       },
       yaxis: {
         labels: {
@@ -96,7 +77,7 @@ const IncomeAreaChart = ({ slot, series }: Props) => {
         theme: mode === 'dark' ? 'dark' : 'light'
       }
     }));
-  }, [mode, primary, secondary, line, theme, slot]);
+  }, [mode, primary, secondary, line, theme, series]);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };

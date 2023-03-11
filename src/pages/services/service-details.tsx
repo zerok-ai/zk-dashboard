@@ -41,7 +41,7 @@ const ServiceDetailsPage = () => {
         <Grid item xs={12}>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart slot="week" series={seriesData} />
+              <IncomeAreaChart series={seriesData} />
             </Box>
           </MainCard>
         </Grid>
@@ -53,7 +53,7 @@ const ServiceDetailsPage = () => {
         <Grid item xs={12}>
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart slot="week" series={seriesData} />
+              <IncomeAreaChart series={seriesData} />
             </Box>
           </MainCard>
         </Grid>
