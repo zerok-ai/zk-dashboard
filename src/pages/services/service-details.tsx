@@ -14,7 +14,6 @@ const ServiceDetailsPage = () => {
   function handleIntervalChange(e: SelectChangeEvent<string>) {
     setLatencyData([]);
     setHttpData([]);
-    setConnsData([]);
     setInterval(e.target.value);
   }
 
@@ -32,13 +31,6 @@ const ServiceDetailsPage = () => {
     }
   ]);
 
-  const [connsData, setConnsData] = useState([
-    {
-      name: '',
-      data: [] as number[]
-    }
-  ]);
-
   const [timeStamps, setTimeStamps] = useState([] as string[]);
 
   useEffect(() => {
@@ -47,7 +39,6 @@ const ServiceDetailsPage = () => {
       if (value) {
         setLatencyData(value.latency);
         setHttpData(value.http);
-        setConnsData(value.conns);
         setTimeStamps(value.time);
         console.log(value);
       }
@@ -123,18 +114,6 @@ const ServiceDetailsPage = () => {
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
               <IncomeAreaChart series={httpData} timeStamps={timeStamps} />
-            </Box>
-          </MainCard>
-        </Grid>
-      </Grid>
-      <Grid item xs={12} md={6} lg={6}>
-        <Grid item>
-          <Typography variant="h5">Conns data</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart series={connsData} timeStamps={timeStamps} />
             </Box>
           </MainCard>
         </Grid>
