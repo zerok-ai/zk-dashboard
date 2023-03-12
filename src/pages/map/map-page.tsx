@@ -1,53 +1,78 @@
-import MainCard from 'components/MainCard';
-import { useState } from 'react';
-import mapdata from './mapdata.json';
+import { useEffect, useState } from 'react';
 import { Canvas, hasLink, NodeData, EdgeData, Node, Edge, Port, MarkerArrow, Label, CanvasPosition } from 'reaflow';
 import { FileOutlined } from '@ant-design/icons';
+import { ServiceMapEdge } from './models/ServiceMapResponse';
 
-let initialNodes: NodeData[] = [];
-let initialEdges: EdgeData[] = [];
-let serviceNames: string[] = [];
+import MainCard from 'components/MainCard';
+import { getServiceMap } from './controllers/ServiceMapAPIController';
+import { Box, LinearProgress } from '@mui/material';
 
-var nodeList = new Map<string, Array<string>>();
-mapdata.results
-  .filter((service: any) => service.requester_service !== '')
-  .forEach((service: any) => {
-    const prevArr = nodeList.get(service.requester_service) || [];
-    try {
-      service.responder_service = JSON.parse(service.responder_service);
-    } catch (err) {}
-    if (typeof service.responder_service === 'object') {
-      nodeList.set(service.requester_service, [...prevArr, ...service.responder_service]);
-    } else if (typeof service.responder_service === 'string') {
-      nodeList.set(service.requester_service, [...prevArr, ...[service.responder_service]]);
-    }
+const prepareMap = (mapdata: ServiceMapEdge[]) => {
+  let _nodes: NodeData[] = [];
+  let _edges: EdgeData[] = [];
+  let serviceNames: string[] = [];
+  let edgeIDList = new Set();
 
-    serviceNames = [...serviceNames, ...[service.requester_service]];
-    serviceNames = [...serviceNames, ...(nodeList.get(service.requester_service) || [])];
-  });
+  var nodeList = new Map<string, Array<string>>();
+  mapdata
+    .filter((service: any) => service.requester_service !== '')
+    .forEach((service: any) => {
+      const prevArr = nodeList.get(service.requester_service) || [];
+      try {
+        service.responder_service = JSON.parse(service.responder_service);
+      } catch (err) {}
+      if (typeof service.responder_service === 'object') {
+        nodeList.set(service.requester_service, [...prevArr, ...service.responder_service]);
+      } else if (typeof service.responder_service === 'string') {
+        nodeList.set(service.requester_service, [...prevArr, ...[service.responder_service]]);
+      }
 
-serviceNames = Array.from(new Set(serviceNames));
-serviceNames.forEach((serviceName) => {
-  initialNodes.push({
-    id: serviceName,
-    text: serviceName,
-    data: { title: serviceName, subline: 'api.ts' }
-  });
-});
-serviceNames.forEach((serviceName) => {
-  let targets = nodeList.get(serviceName) || [];
-  targets.forEach((target) => {
-    initialEdges.push({
-      id: serviceName + '->' + target,
-      from: serviceName,
-      to: target
+      serviceNames = [...serviceNames, ...[service.requester_service]];
+      serviceNames = [...serviceNames, ...(nodeList.get(service.requester_service) || [])];
+    });
+
+  serviceNames = Array.from(new Set(serviceNames));
+  serviceNames.forEach((serviceName) => {
+    _nodes.push({
+      id: serviceName,
+      text: serviceName,
+      data: { title: serviceName, subline: 'api.ts' }
     });
   });
-});
+  serviceNames.forEach((serviceName) => {
+    let targets = nodeList.get(serviceName) || [];
+    targets.forEach((target) => {
+      const edgeId = serviceName + '->' + target;
+      if (edgeIDList.has(edgeId)) return;
+      _edges.push({
+        id: edgeId,
+        from: serviceName,
+        to: target
+      });
+      edgeIDList.add(edgeId);
+    });
+  });
 
-const ReflowMap = () => {
-  const [nodes] = useState<NodeData[]>(initialNodes);
-  const [edges, setEdges] = useState<EdgeData[]>(initialEdges);
+  return {
+    _nodes,
+    _edges
+  };
+};
+
+const ServiceMap = () => {
+  const [loading, setLoading] = useState(true);
+  const [nodes, setNodes] = useState<NodeData[]>([]);
+  const [edges, setEdges] = useState<EdgeData[]>([]);
+
+  useEffect(() => {
+    if (loading === false) return;
+    getServiceMap().then((mapData) => {
+      const { _nodes, _edges } = prepareMap(mapData.results);
+      setNodes(_nodes);
+      setEdges(_edges);
+      setLoading(false);
+    });
+  }, [loading, nodes, edges]);
 
   return (
     <MainCard title="Service Map">
@@ -68,42 +93,47 @@ const ReflowMap = () => {
             }
         `}
         </style>
-
-        <Canvas
-          pannable={false}
-          nodes={nodes}
-          edges={edges}
-          defaultPosition={CanvasPosition.TOP}
-          direction="RIGHT"
-          onNodeLinkCheck={(_event, from: NodeData, to: NodeData) => {
-            return !hasLink(edges, from, to);
-          }}
-          node={
-            <Node
-              style={{ strokeWidth: 1, maxWidth: 'auto' }}
-              icon={<FileOutlined />}
-              draggable={false}
-              label={<Label style={{ fill: 'white', fontSize: '0.85em' }} />}
-              port={<Port style={{ fill: 'blue', stroke: 'white' }} rx={20} ry={20} />}
-            />
-          }
-          arrow={<MarkerArrow style={{ fill: '#b1b1b7' }} />}
-          edge={<Edge className="edge" />}
-          onNodeLink={(_event, from, to) => {
-            const id = `${from.id}-${to.id}`;
-            setEdges([
-              ...edges,
-              {
-                id,
-                from: from.id,
-                to: to.id
-              }
-            ]);
-          }}
-        />
+        {loading ? (
+          <Box sx={{ m: -3 }}>
+            <LinearProgress />
+          </Box>
+        ) : (
+          <Canvas
+            pannable={false}
+            nodes={nodes}
+            edges={edges}
+            defaultPosition={CanvasPosition.TOP}
+            direction="RIGHT"
+            onNodeLinkCheck={(_event, from: NodeData, to: NodeData) => {
+              return !hasLink(edges, from, to);
+            }}
+            node={
+              <Node
+                style={{ strokeWidth: 1, maxWidth: 'auto' }}
+                icon={<FileOutlined />}
+                draggable={false}
+                label={<Label style={{ fill: 'white', fontSize: '0.85em' }} />}
+                port={<Port style={{ fill: 'blue', stroke: 'white' }} rx={20} ry={20} />}
+              />
+            }
+            arrow={<MarkerArrow style={{ fill: '#b1b1b7' }} />}
+            edge={<Edge className="edge" />}
+            onNodeLink={(_event, from, to) => {
+              const id = `${from.id}-${to.id}`;
+              setEdges([
+                ...edges,
+                {
+                  id,
+                  from: from.id,
+                  to: to.id
+                }
+              ]);
+            }}
+          />
+        )}
       </div>
     </MainCard>
   );
 };
 
-export default ReflowMap;
+export default ServiceMap;
