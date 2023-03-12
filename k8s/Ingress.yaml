@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    # nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+  name: zerok-dashboard
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.getanton.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: api-server
+            port:
+              number: 80
+        path: /v1
+        pathType: Prefix
+      - backend:
+          service:
+            name: react-app
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
