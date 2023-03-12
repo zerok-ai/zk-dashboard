@@ -23,6 +23,7 @@ const Traces = () => {
   const [traceData, setTraceData] = useState<traceItem[]>([]);
 
   useEffect(() => {
+    if (!loading) return;
     getTraceDetails().then((traceData: traceDataResponse) => {
       setTraceData(traceData.results);
       setLoading(false);
