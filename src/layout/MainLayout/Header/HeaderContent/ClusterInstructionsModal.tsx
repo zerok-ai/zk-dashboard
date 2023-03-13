@@ -119,7 +119,7 @@ const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
         <Box sx={{ maxWidth: '100%' }}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
-              <Step key={step.label.key}>
+              <Step key={index}>
                 <StepLabel optional={index === 2 ? <Typography variant="caption">Last step</Typography> : null}>{step.label}</StepLabel>
                 <StepContent>
                   <Typography>{step.description}</Typography>
