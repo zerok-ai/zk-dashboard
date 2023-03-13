@@ -1,11 +1,35 @@
 // material-ui
-import { Grid, Box, Typography, FormControl, Select, MenuItem, ListItemIcon, SelectChangeEvent } from '@mui/material';
+import { Grid, Box, Typography, FormControl, Select, MenuItem, ListItemIcon, SelectChangeEvent, Tab, Tabs } from '@mui/material';
 import IncomeAreaChart from 'sections/charts/IncomeAreaChart';
 import MainCard from 'components/MainCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { getServiceDetails } from 'store/reducers/services';
 import { useParams } from 'react-router-dom';
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined } from '@ant-design/icons';
+
+interface TabPanelProps {
+  children?: ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+      {value === index && <Box sx={{ pt: 2 }}>{children}</Box>}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  };
+}
 
 const ServiceDetailsPage = () => {
   const { ns, name } = useParams();
@@ -44,6 +68,12 @@ const ServiceDetailsPage = () => {
       }
     });
   }, [name, ns, interval]);
+
+  const [tabValue, setTabValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+  };
 
   return (
     <Grid container rowSpacing={1} columnSpacing={3}>
@@ -117,6 +147,26 @@ const ServiceDetailsPage = () => {
             </Box>
           </MainCard>
         </Grid>
+      </Grid>
+      <Grid item xs={12} md={12} lg={12} sx={{ mt: 4 }}>
+        <Box sx={{ width: '100%' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={tabValue} onChange={handleChange} aria-label="basic tabs example" variant="fullWidth">
+              <Tab label="Traces" icon={<NodeIndexOutlined />} iconPosition="start" {...a11yProps(0)} />
+              <Tab label="Issues" icon={<IssuesCloseOutlined />} iconPosition="start" {...a11yProps(1)} />
+              <Tab label="Metrics" icon={<BarChartOutlined />} iconPosition="start" {...a11yProps(2)} />
+            </Tabs>
+          </Box>
+          <TabPanel value={tabValue} index={0}>
+            <Typography variant="h6">Traces data to be shown here.</Typography>
+          </TabPanel>
+          <TabPanel value={tabValue} index={1}>
+            <Typography variant="h6">Issues to be shown here.</Typography>
+          </TabPanel>
+          <TabPanel value={tabValue} index={2}>
+            <Typography variant="h6">Metrics to be shown here.</Typography>
+          </TabPanel>
+        </Box>
       </Grid>
     </Grid>
   );
