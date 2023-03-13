@@ -1,4 +1,4 @@
-import { ClusterConfProvider } from './ClusterContext';
+import { ClusterConfProvider } from './Cluster/ClusterContext';
 import { ConfigProvider } from './ConfigContext';
 
 import { combineComponents } from 'utils/combineComponents';

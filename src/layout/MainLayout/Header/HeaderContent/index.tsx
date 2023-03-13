@@ -6,7 +6,7 @@ import { Box, useMediaQuery } from '@mui/material';
 
 // project import
 import Search from './Search';
-import Clusters from './Clusters';
+import Clusters from './Clusters/Clusters';
 import Message from './Message';
 import Profile from './Profile';
 import Notification from './Notification';
