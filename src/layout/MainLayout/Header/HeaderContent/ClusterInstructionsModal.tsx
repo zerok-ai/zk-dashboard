@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
+import { Grid, Box, Button, LinearProgress, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
 import { useState } from 'react';
 import { CopyBlock, monokai } from 'react-code-blocks';
 
@@ -104,11 +104,18 @@ const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
-        <Box sx={{ maxWidth: '100%' }}>
-          <Typography variant="h4" sx={{ mb: 2 }}>
-            Add new Cluster
-          </Typography>
-        </Box>
+        <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
+          <Grid item xs={10} sx={{ pr: 2 }}>
+            <Typography variant="h4" sx={{ mb: 2 }}>
+              Add new Cluster
+            </Typography>
+          </Grid>
+          <Grid item xs={2} sx={{ pr: 2 }}>
+            <Button variant="contained" sx={{ mt: 1, mr: 1 }}>
+              Installation
+            </Button>
+          </Grid>
+        </Grid>
         <Box sx={{ maxWidth: '100%' }}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
