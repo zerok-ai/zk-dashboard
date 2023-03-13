@@ -1,9 +1,8 @@
 type ClusterInfo = {
-  nickname: string;
-  domain: string;
-  api_key: string;
   cluster_id: string;
-  id: string;
+  cluster_name: string;
+  nickname: string;
+  status: string;
 };
 
 export default ClusterInfo;

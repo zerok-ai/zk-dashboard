@@ -22,11 +22,11 @@ const Clusters = () => {
   const getDropdownItems = (clusterList: ClusterInfo[]) => {
     if (clusterList && clusterList.length > 0) {
       return clusterList.map((cluster: ClusterInfo, index: number) => (
-        <MenuItem value={cluster.id} key={cluster.id}>
+        <MenuItem value={cluster.cluster_id} key={cluster.cluster_id}>
           <ListItemIcon color="success">
             <CheckCircleOutlined />
           </ListItemIcon>
-          {cluster.domain}
+          {cluster.cluster_name}
         </MenuItem>
       ));
     }
@@ -36,18 +36,15 @@ const Clusters = () => {
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
       <ClusterInstructionsModal open={open} handleClose={handleClose} />
       <ClusterContext.Consumer>
-        {({ onSetSelectedCluster, updateClusterList, onChange }: any) => {
-          onChange = () => {
-            console.log('it changed');
-          };
+        {({ onSetSelectedCluster, updateClusterList }: any) => {
           updateClusterList().then((clusterListParam: ClusterInfo[]) => {
             if (!loading) return;
             console.log(clusterListParam);
             setClusterList(clusterListParam);
             setLoading(false);
             if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
-              setSelectedCluster(clusterListParam[0].id);
-              onSetSelectedCluster(clusterListParam[0].id);
+              setSelectedCluster(clusterListParam[0].cluster_id);
+              onSetSelectedCluster(clusterListParam[0].cluster_id);
             }
           });
 

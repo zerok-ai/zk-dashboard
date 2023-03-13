@@ -39,7 +39,7 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
 
   const onSetSelectedCluster = (clusterId: string) => {
     const filteredList = clusterList.filter((cluster: ClusterInfo) => {
-      return cluster.id && cluster.id === clusterId;
+      return cluster.cluster_id && cluster.cluster_id === clusterId;
     });
     if (filteredList && filteredList.length === 1) {
       selectedCluster = filteredList[0];
