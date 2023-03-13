@@ -34,7 +34,7 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = '/v1/cluster/1';
+const zkCloudEndpoint = '/v1/cluster/bc57b23a-04a9-4dc7-914b-49d6af5b05b3';
 
 // Reducer
 export default slice.reducer;
@@ -42,7 +42,7 @@ export default slice.reducer;
 export async function getServiceDetails(namespace: string | undefined, serviceName: string | undefined, interval: string) {
   try {
     if (serviceName && namespace) {
-      const response = await axios.get(zkCloudEndpoint + '/service/graph', {
+      const response = await axios.get(zkCloudEndpoint + '/service/details', {
         params: {
           name: serviceName,
           ns: namespace,
@@ -132,7 +132,7 @@ export async function getServiceDetails(namespace: string | undefined, serviceNa
 export function getServices() {
   return async () => {
     try {
-      const response = await axios.get(zkCloudEndpoint + '/default/service/list', {
+      const response = await axios.get(zkCloudEndpoint + '/service/list', {
         params: {
           st: '-5m'
         }
