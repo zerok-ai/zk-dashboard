@@ -1,11 +1,10 @@
 // material-ui
-import { Grid, Box, Typography, FormControl, Select, MenuItem, ListItemIcon, SelectChangeEvent, Tab, Tabs } from '@mui/material';
+import { Grid, Box, Typography, FormControl, Select, MenuItem, SelectChangeEvent, Tab, Tabs } from '@mui/material';
 import IncomeAreaChart from 'sections/charts/IncomeAreaChart';
 import MainCard from 'components/MainCard';
 import { useState, useEffect, ReactNode } from 'react';
 import { getServiceDetails } from 'store/reducers/services';
 import { useParams } from 'react-router-dom';
-import { CheckCircleOutlined } from '@ant-design/icons';
 import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined } from '@ant-design/icons';
 
 interface TabPanelProps {
@@ -102,24 +101,9 @@ const ServiceDetailsPage = () => {
               <MenuItem value="" disabled>
                 Select Interval
               </MenuItem>
-              <MenuItem value={'-5m'}>
-                <ListItemIcon color="success">
-                  <CheckCircleOutlined />
-                </ListItemIcon>
-                -5m
-              </MenuItem>
-              <MenuItem value={'-10m'}>
-                <ListItemIcon color="success">
-                  <CheckCircleOutlined />
-                </ListItemIcon>
-                -10m
-              </MenuItem>
-              <MenuItem value={'-15m'}>
-                <ListItemIcon color="success">
-                  <CheckCircleOutlined />
-                </ListItemIcon>
-                -15m
-              </MenuItem>
+              {['-5m', '-10m', '-15m'].map((time) => {
+                return <MenuItem value={time}>{time}</MenuItem>;
+              })}
             </Select>
           </FormControl>
         </Grid>
