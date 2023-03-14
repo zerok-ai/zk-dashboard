@@ -14,7 +14,7 @@ import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
 // assets
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ClusterInfo from 'types/models/ClusterInfo';
 import ClusterInstructionsModal from '../ClusterInstructionsModal';
 import { ClusterHealthStatus } from './models';
@@ -27,13 +27,9 @@ const Clusters = () => {
   const [clusterList, setClusterList] = useState([] as ClusterInfo[]);
   const [loading, setLoading] = useState(true);
   const [clusterInstructionsOpen, setClusterInstructionsOpen] = useState(false);
-  const [blockingOpen, setBlockingOpen] = useState(true);
   const [fetchingClusterList, setFetchingClusterList] = useState(true);
   const handleClusterInstructionOpen = () => setClusterInstructionsOpen(true);
   const handleClusterInstructionClose = () => setClusterInstructionsOpen(false);
-
-  const handleBlockingOpen = () => setBlockingOpen(false);
-  const handleBlockingClose = () => setBlockingOpen(false);
 
   const getClusterIcon = (healthStatus: string) => {
     switch (healthStatus) {
@@ -75,17 +71,14 @@ const Clusters = () => {
     }
   };
 
-  useEffect(() => {
-    handleBlockingOpen();
-  }, [blockingOpen]);
-
   return (
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
       <ClusterInstructionsModal open={clusterInstructionsOpen} handleClose={handleClusterInstructionClose} />
-      <BlockingModal open={blockingOpen} handleClose={handleBlockingClose} isFetching={fetchingClusterList} />
+      <BlockingModal open={loading} handleClose={() => {}} isFetching={fetchingClusterList} />
       <ClusterContext.Consumer>
         {({ onSetSelectedCluster, updateClusterList }: any) => {
           const handleRefreshClusterList = () => {
+            setLoading(true);
             updateClusterList().then((clusterListParam: ClusterInfo[]) => {
               if (!loading) return;
               clusterListParam = clusterListParam.filter((cluster) => {
@@ -93,8 +86,8 @@ const Clusters = () => {
               });
               console.log(clusterListParam);
               if (clusterListParam) {
-                setClusterList(clusterListParam);
                 setLoading(false);
+                setClusterList(clusterListParam);
                 if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
                   setSelectedCluster(clusterListParam[0].cluster_id);
                   onSetSelectedCluster(clusterListParam[0].cluster_id);
