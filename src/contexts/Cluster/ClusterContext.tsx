@@ -13,7 +13,8 @@ const initialState: ClusterContextProps = {
   onSetSelectedCluster: (clusterId: string) => {},
   updateClusterList: () => {
     return Promise.resolve([]);
-  }
+  },
+  registerChangeListener: (listener: (cluster: ClusterInfo) => void) => {}
 };
 
 type ClusterProviderProps = {
@@ -26,6 +27,7 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
   let selectedCluster = null as ClusterInfo | null;
   let clusterList = [] as ClusterInfo[];
   let clusterListLoaded = false;
+  let changeListener: (cluster: ClusterInfo) => void = () => {};
 
   const updateClusterList = () => {
     return fetchClusterList().then((clusterListParam: ClusterInfo[]) => {
@@ -38,17 +40,23 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
   updateClusterList();
 
   const onSetSelectedCluster = (clusterId: string) => {
+    console.log('Clustet id in context ' + clusterId);
     const filteredList = clusterList.filter((cluster: ClusterInfo) => {
       return cluster.cluster_id && cluster.cluster_id === clusterId;
     });
     if (filteredList && filteredList.length === 1) {
       selectedCluster = filteredList[0];
+      changeListener(selectedCluster);
     }
   };
 
   const getSelectedCluster = (): ClusterInfo | null => {
     console.log('reading some value');
     return selectedCluster;
+  };
+
+  const registerChangeListener = (listener: (cluster: ClusterInfo) => void) => {
+    changeListener = listener;
   };
 
   return (
@@ -59,7 +67,8 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
         selectedCluster,
         getSelectedCluster,
         onSetSelectedCluster,
-        updateClusterList
+        updateClusterList,
+        registerChangeListener
       }}
     >
       {children}

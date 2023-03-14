@@ -32,6 +32,7 @@ function addMillisTypography(millis: number | string) {
 }
 
 const ServiceCard = ({
+  clusterId,
   name,
   podCount,
   httpReqThroughputIn,
@@ -98,7 +99,7 @@ const ServiceCard = ({
                       </Typography>
                       <Typography
                         component={Link}
-                        to={`/service-details/${getNamespace(name)}/${getFormattedServiceName(name)}`}
+                        to={`/service-details/${clusterId}/${getNamespace(name)}/${getFormattedServiceName(name)}`}
                         color="textPrimary"
                         variant="h4"
                         sx={{

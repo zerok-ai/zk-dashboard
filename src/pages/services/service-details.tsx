@@ -31,7 +31,7 @@ function a11yProps(index: number) {
 }
 
 const ServiceDetailsPage = () => {
-  const { ns, name } = useParams();
+  const { clusterId, ns, name } = useParams();
   const [interval, setInterval] = useState('-5m');
 
   function handleIntervalChange(e: SelectChangeEvent<string>) {
@@ -57,7 +57,7 @@ const ServiceDetailsPage = () => {
   const [timeStamps, setTimeStamps] = useState([] as string[]);
 
   useEffect(() => {
-    const data = getServiceDetails(ns, name, interval);
+    const data = getServiceDetails(clusterId, ns, name, interval);
     data.then((value) => {
       if (value) {
         setLatencyData(value.latency);
@@ -66,7 +66,7 @@ const ServiceDetailsPage = () => {
         console.log(value);
       }
     });
-  }, [name, ns, interval]);
+  }, [name, ns, interval, clusterId]);
 
   const [tabValue, setTabValue] = useState(0);
 

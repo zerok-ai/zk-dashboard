@@ -53,6 +53,7 @@ const Clusters = () => {
           };
 
           function handleClusterChange(e: SelectChangeEvent<string>) {
+            console.log('handleClusterChange method invoked ' + e.target.value);
             if (e.target.value === 'add') {
               handleClusterInstructionOpen();
               return;

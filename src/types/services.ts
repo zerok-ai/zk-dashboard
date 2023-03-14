@@ -23,6 +23,7 @@ export type ServicesFilter = {
 };
 
 export interface ServiceCardProps extends KeyedObject {
+  clusterId: string;
   id?: string | number;
   name: string;
   podCount: number;
