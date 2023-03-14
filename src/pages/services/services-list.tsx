@@ -116,8 +116,9 @@ const ServicesListPage = () => {
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
         let selectedCluster = getSelectedCluster();
-        if (selectedCluster) {
+        if (selectedCluster && selectedCluster.cluster_id !== selectedClusterId) {
           setSelectedClusterId(selectedCluster.cluster_id);
+          updateServices(selectedCluster.cluster_id);
         }
         registerChangeListener(changeListener);
         return (

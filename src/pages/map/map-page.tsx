@@ -68,8 +68,8 @@ const ServiceMap = () => {
   const [selectedClusterId, setSelectedClusterId] = useState('');
 
   function updateServiceMap(clusterId: string) {
-    if (!clusterId) return;
-    getServiceMap(selectedClusterId).then((mapData) => {
+    if (!clusterId || clusterId === '') return;
+    getServiceMap(clusterId).then((mapData) => {
       const { _nodes, _edges } = prepareMap(mapData.results);
       setNodes(_nodes);
       setEdges(_edges);
@@ -95,8 +95,9 @@ const ServiceMap = () => {
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
         let selectedCluster = getSelectedCluster();
-        if (selectedCluster) {
+        if (selectedCluster && selectedCluster.cluster_id !== selectedClusterId) {
           setSelectedClusterId(selectedCluster.cluster_id);
+          updateServiceMap(selectedCluster.cluster_id);
         }
         registerChangeListener(changeListener);
         return (
