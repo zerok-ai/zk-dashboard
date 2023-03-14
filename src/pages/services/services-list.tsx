@@ -47,6 +47,7 @@ const ServicesListPage = () => {
     if (!isLoading) return;
     console.log('useEffect called.');
     updateServices(selectedClusterId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function updateServices(clusterId: string) {
@@ -110,9 +111,14 @@ const ServicesListPage = () => {
       updateServices(cluster.cluster_id);
     }
   }
+
   return (
     <ClusterContext.Consumer>
-      {({ registerChangeListener }: any) => {
+      {({ registerChangeListener, getSelectedCluster }: any) => {
+        let selectedCluster = getSelectedCluster();
+        if (selectedCluster) {
+          setSelectedClusterId(selectedCluster.cluster_id);
+        }
         registerChangeListener(changeListener);
         return (
           <Box sx={{ display: 'block' }}>

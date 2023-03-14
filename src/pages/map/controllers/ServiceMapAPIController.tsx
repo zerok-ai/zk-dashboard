@@ -1,9 +1,9 @@
 import axios from 'utils/axios';
 
-const zkCloudEndpoint = '/v1/cluster/cedf2a6b-2fd9-4783-8fa7-cd8d3973251d';
+const zkCloudEndpoint = '/v1/cluster/';
 
-export async function getServiceMap() {
-  const response = await axios.get(zkCloudEndpoint + '/service/map', {
+export async function getServiceMap(clusterId: string) {
+  const response = await axios.get(zkCloudEndpoint + clusterId + '/service/map', {
     params: {
       st: '-5m'
     }
