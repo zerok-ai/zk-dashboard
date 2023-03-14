@@ -1,4 +1,4 @@
-import { Grid, Box, Button, LinearProgress, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
+import { Grid, Box, Button, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
 import { useState } from 'react';
 import { CopyBlock, monokai } from 'react-code-blocks';
 
@@ -20,14 +20,21 @@ type ClusterInstructionsModalProps = {
 };
 
 const installCommand = {
-  code: 'sh -c "$(curl -fsSL https://zerok.ai/install.sh)"',
+  code: 'zkctl install ',
   language: 'sh',
   showLineNumbers: false,
   theme: monokai
 };
 
-const setupCommand = {
-  code: 'zkctl install',
+const activateCommand = {
+  code: 'zkctl activate -n <namespace>',
+  language: 'sh',
+  showLineNumbers: false,
+  theme: monokai
+};
+
+const activateAndRestartCommand = {
+  code: 'zkctl activate -n <namespace> -r',
   language: 'sh',
   showLineNumbers: false,
   theme: monokai
@@ -35,11 +42,10 @@ const setupCommand = {
 
 const steps = [
   {
-    label: <Typography variant="h5">Install ZeroK CLI</Typography>,
+    label: <Typography variant="h5">Install ZeroK CLI on Cluster</Typography>,
     description: (
       <>
-        For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and
-        geographical locations you want your ads to show on, and more.
+        Run the following command to install zerok on the current cluster context:
         <Box sx={{ my: 2 }}>
           <CopyBlock
             text={installCommand.code}
@@ -54,32 +60,32 @@ const steps = [
     )
   },
   {
-    label: <Typography variant="h5">Setup ZeroK Operator on Cluster</Typography>,
+    label: <Typography variant="h5">Activate zerok and do rolling restart.</Typography>,
     description: (
       <>
-        An ad group contains one or more ads which target a shared set of keywords.
+        Each namespace in the cluster has to be marked for ZeroK. Once marked, all the new pods will get activated for zerok. I can be done
+        using the following command:
         <Box sx={{ my: 2 }}>
           <CopyBlock
-            text={setupCommand.code}
-            language={setupCommand.language}
-            showLineNumbers={setupCommand.showLineNumbers}
-            theme={setupCommand.theme}
+            text={activateCommand.code}
+            language={activateCommand.language}
+            showLineNumbers={activateCommand.showLineNumbers}
+            theme={activateCommand.theme}
             wrapLines
             codeBlock
           />
         </Box>
-      </>
-    )
-  },
-  {
-    label: <Typography variant="h5">Installation</Typography>,
-    description: (
-      <>
+        You have to restart the old pods. You can do both activation and restart using the following command:
         <Box sx={{ my: 2 }}>
-          <LinearProgress />
+          <CopyBlock
+            text={activateAndRestartCommand.code}
+            language={activateAndRestartCommand.language}
+            showLineNumbers={activateAndRestartCommand.showLineNumbers}
+            theme={activateAndRestartCommand.theme}
+            wrapLines
+            codeBlock
+          />
         </Box>
-        Try out different ad text to see what brings in the most customers, and learn how to enhance your ads using features like ad
-        extensions. If you run into any problems with your ads, find out how to tell if they're running and how to resolve approval issues.
       </>
     )
   }
@@ -101,18 +107,28 @@ const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
     setActiveStep(0);
   };
 
+  const backButton = (index: number) => {
+    if (index !== 0) {
+      return (
+        <Button onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
+          Back
+        </Button>
+      );
+    }
+  };
+
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
-          <Grid item xs={10} sx={{ pr: 2 }}>
-            <Typography variant="h4" sx={{ mb: 2 }}>
+          <Grid item xs={9.5} sx={{ pr: 1 }}>
+            <Typography variant="h4" sx={{ mb: 1 }}>
               Add new Cluster
             </Typography>
           </Grid>
-          <Grid item xs={2} sx={{ pr: 2 }}>
-            <Button variant="contained" sx={{ mt: 1, mr: 1 }}>
-              Installation
+          <Grid item xs={2.5} sx={{ pr: 1 }}>
+            <Button variant="contained" sx={{ mt: 1 }}>
+              Download CLI
             </Button>
           </Grid>
         </Grid>
@@ -128,9 +144,7 @@ const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
                       <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                       </Button>
-                      <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-                        Back
-                      </Button>
+                      {backButton(index)}
                     </div>
                   </Box>
                 </StepContent>
