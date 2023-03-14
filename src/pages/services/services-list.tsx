@@ -51,7 +51,7 @@ const ServicesListPage = () => {
   }, []);
 
   function updateServices(clusterId: string) {
-    if (!clusterId) return;
+    if (!clusterId || clusterId === '') return;
     setLoading(true);
     getServices(clusterId).then((results) => {
       console.log('Results ', results);

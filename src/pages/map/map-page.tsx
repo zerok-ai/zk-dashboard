@@ -68,11 +68,11 @@ const ServiceMap = () => {
   const [selectedClusterId, setSelectedClusterId] = useState('');
 
   function updateServiceMap(clusterId: string) {
-    if (!clusterId) {
+    if (!clusterId || clusterId === '') {
       console.log('cluster ID was null');
       return;
     }
-    getServiceMap(selectedClusterId).then((mapData) => {
+    getServiceMap(clusterId).then((mapData) => {
       const { _nodes, _edges } = prepareMap(mapData.results);
       setNodes(_nodes);
       setEdges(_edges);

@@ -26,7 +26,7 @@ const Traces = () => {
   const [selectedClusterId, setSelectedClusterId] = useState('');
 
   function updateTraceData(clusterId: string) {
-    if (!clusterId) return;
+    if (!clusterId || clusterId === '') return;
     getTraceDetails(clusterId).then((traceData: traceDataResponse) => {
       setTraceData(traceData.results || []);
       setLoading(false);

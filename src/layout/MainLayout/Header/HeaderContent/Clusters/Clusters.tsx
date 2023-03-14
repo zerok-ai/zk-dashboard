@@ -25,7 +25,7 @@ import BlockingModal from '../BlockingModal';
 const Clusters = () => {
   const [selectedCluster, setSelectedCluster] = useState('');
   const [clusterList, setClusterList] = useState([] as ClusterInfo[]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [clusterInstructionsOpen, setClusterInstructionsOpen] = useState(false);
   const [fetchingClusterListFailed, setFetchingClusterListFailed] = useState(false);
   const handleClusterInstructionOpen = () => setClusterInstructionsOpen(true);
@@ -82,6 +82,7 @@ const Clusters = () => {
             handleRefreshClusterList();
           };
           const handleRefreshClusterList = () => {
+            console.log("refresh");
             updateClusterList().then((clusterListParam: ClusterInfo[]) => {
               if (!loading) return;
               if (clusterListParam) {
