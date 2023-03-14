@@ -1,6 +1,6 @@
 // material-ui
 import { styled, Theme, useTheme, Grid, Box } from '@mui/material';
-import { useState, ReactElement } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 
 import ServiceCard from 'components/cards/ServiceCard';
 import { Services as ServicesType, ServicesFilter } from 'types/services';
@@ -43,9 +43,11 @@ const ServicesListPage = () => {
   const [services, setServices] = useState<ServicesType[]>([]);
   const { container } = useConfig();
 
-  // useEffect(() => {
-  //   updateServices(selectedClusterId);
-  // }, [services, isLoading, selectedClusterId]);
+  useEffect(() => {
+    if (!isLoading) return;
+    console.log('useEffect called.');
+    updateServices(selectedClusterId);
+  }, []);
 
   function updateServices(clusterId: string) {
     if (!clusterId) return;
