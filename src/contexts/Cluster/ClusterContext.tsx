@@ -31,9 +31,13 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
 
   const updateClusterList = () => {
     return fetchClusterList().then((clusterListParam: ClusterInfo[]) => {
-      clusterList = clusterListParam;
-      clusterListLoaded = true;
-      return clusterList;
+      if (clusterListParam) {
+        clusterList = clusterListParam;
+        clusterListLoaded = true;
+        return clusterList;
+      } else {
+        return null;
+      }
     });
   };
 

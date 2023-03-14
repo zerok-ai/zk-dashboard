@@ -15,22 +15,22 @@ const style = {
 type BlockingModalProps = {
   open: boolean;
   handleClose: () => void;
-  isFetching: boolean;
+  hasFetchingFailed: boolean;
 };
 
 const BlockingModal = (props: BlockingModalProps) => {
-  const { open, handleClose, isFetching } = props;
+  const { open, handleClose, hasFetchingFailed } = props;
 
   return (
     <Modal open={open} onClose={handleClose} disableEscapeKeyDown={true} disableAutoFocus={true}>
       <Box sx={style}>
         <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
           <Grid item sx={{ pr: 2 }}>
-            <CircularProgress />
+            {hasFetchingFailed ? <></> : <CircularProgress />}
           </Grid>
           <Grid item xs={2} sx={{ pr: 2 }}>
             <Typography variant="h4" sx={{ mb: 2 }}>
-              {isFetching ? 'Fetching cluster list' : 'Failed to fetch cluster list'}
+              {hasFetchingFailed ? 'Failed to fetch cluster list. Refresh page to try again.' : 'Fetching cluster list'}
             </Typography>
           </Grid>
         </Grid>

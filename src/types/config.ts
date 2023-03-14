@@ -123,6 +123,6 @@ export type ClusterContextProps = {
   selectedCluster: ClusterInfo | null;
   getSelectedCluster: () => ClusterInfo | null;
   onSetSelectedCluster: (clusterIdx: string) => void;
-  updateClusterList: () => Promise<ClusterInfo[]>;
+  updateClusterList: () => Promise<ClusterInfo[] | null>;
   registerChangeListener: (listener: (cluster: ClusterInfo) => void) => void;
 };

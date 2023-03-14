@@ -27,7 +27,7 @@ const Clusters = () => {
   const [clusterList, setClusterList] = useState([] as ClusterInfo[]);
   const [loading, setLoading] = useState(true);
   const [clusterInstructionsOpen, setClusterInstructionsOpen] = useState(false);
-  const [fetchingClusterList, setFetchingClusterList] = useState(true);
+  const [fetchingClusterListFailed, setFetchingClusterListFailed] = useState(false);
   const handleClusterInstructionOpen = () => setClusterInstructionsOpen(true);
   const handleClusterInstructionClose = () => setClusterInstructionsOpen(false);
 
@@ -74,18 +74,20 @@ const Clusters = () => {
   return (
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
       <ClusterInstructionsModal open={clusterInstructionsOpen} handleClose={handleClusterInstructionClose} />
-      <BlockingModal open={loading} handleClose={() => {}} isFetching={fetchingClusterList} />
+      <BlockingModal open={loading} handleClose={() => {}} hasFetchingFailed={fetchingClusterListFailed} />
       <ClusterContext.Consumer>
         {({ onSetSelectedCluster, updateClusterList }: any) => {
-          const handleRefreshClusterList = () => {
+          const handleRefreshButtonClick = () => {
             setLoading(true);
+            handleRefreshClusterList();
+          };
+          const handleRefreshClusterList = () => {
             updateClusterList().then((clusterListParam: ClusterInfo[]) => {
               if (!loading) return;
-              clusterListParam = clusterListParam.filter((cluster) => {
-                return blockedClusterStatus.indexOf(cluster.status) < 0;
-              });
-              console.log(clusterListParam);
               if (clusterListParam) {
+                clusterListParam = clusterListParam.filter((cluster) => {
+                  return blockedClusterStatus.indexOf(cluster.status) < 0;
+                });
                 setLoading(false);
                 setClusterList(clusterListParam);
                 if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
@@ -93,7 +95,7 @@ const Clusters = () => {
                   onSetSelectedCluster(clusterListParam[0].cluster_id);
                 }
               } else {
-                setFetchingClusterList(false);
+                setFetchingClusterListFailed(true);
               }
             });
           };
@@ -135,7 +137,7 @@ const Clusters = () => {
                     variant={'outlined'}
                     color={'secondary'}
                     size={'large'}
-                    onClick={handleRefreshClusterList}
+                    onClick={handleRefreshButtonClick}
                     sx={{ ml: -1, p: 1.4 }}
                   >
                     <ReloadOutlined />
