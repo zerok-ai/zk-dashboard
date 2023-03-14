@@ -102,7 +102,11 @@ const ServiceDetailsPage = () => {
                 Select Interval
               </MenuItem>
               {['-5m', '-10m', '-15m'].map((time) => {
-                return <MenuItem value={time}>{time}</MenuItem>;
+                return (
+                  <MenuItem value={time} key={time}>
+                    {time}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>
