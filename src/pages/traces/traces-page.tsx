@@ -6,6 +6,8 @@ import TracesTable from './components/TracesTable';
 
 import { getTraceDetails } from './controllers/TracesAPIController';
 import { traceDataResponse, traceItem } from './models/traceDataResponse';
+import { ClusterContext } from 'contexts/Cluster/ClusterContext';
+import ClusterInfo from 'types/models/ClusterInfo';
 
 const Traces = () => {
   const initialState: ServicesFilter = {
@@ -21,14 +23,19 @@ const Traces = () => {
 
   const [loading, setLoading] = useState(true);
   const [traceData, setTraceData] = useState<traceItem[]>([]);
+  const [selectedClusterId, setSelectedClusterId] = useState('');
 
-  useEffect(() => {
-    if (!loading) return;
-    getTraceDetails().then((traceData: traceDataResponse) => {
+  function updateTraceData(clusterId: string) {
+    getTraceDetails(clusterId).then((traceData: traceDataResponse) => {
       setTraceData(traceData.results || []);
       setLoading(false);
       console.log(loading);
     });
+  }
+
+  useEffect(() => {
+    if (!loading) return;
+    updateTraceData(selectedClusterId);
   });
 
   const getTraceData = (results: any[]) => {
@@ -64,23 +71,43 @@ const Traces = () => {
     return data;
   };
 
+  function changeListener(cluster: ClusterInfo) {
+    if (cluster.cluster_id !== selectedClusterId) {
+      console.log('Updating cluster ' + cluster.cluster_name + ',' + cluster.cluster_id);
+      setSelectedClusterId(cluster.cluster_id);
+      updateTraceData(cluster.cluster_id);
+    }
+  }
+
   return (
-    <Box sx={{ display: 'block' }}>
-      <Grid container spacing={2.5}>
-        <Grid item xs={12}>
-          <ServicesHeader filter={filter} handleDrawerOpen={handleDrawerOpen} setFilter={setFilter} />
-        </Grid>
-        <Grid item xs={12}>
-          {loading ? (
-            <Box sx={{ mt: -3 }}>
-              <LinearProgress />
-            </Box>
-          ) : (
-            <TracesTable data={getTraceData(traceData)}></TracesTable>
-          )}
-        </Grid>
-      </Grid>
-    </Box>
+    <ClusterContext.Consumer>
+      {({ registerChangeListener, getSelectedCluster }: any) => {
+        let selectedCluster = getSelectedCluster();
+        if (selectedCluster) {
+          setSelectedClusterId(selectedCluster.cluster_id);
+        }
+        registerChangeListener(changeListener);
+
+        return (
+          <Box sx={{ display: 'block' }}>
+            <Grid container spacing={2.5}>
+              <Grid item xs={12}>
+                <ServicesHeader filter={filter} handleDrawerOpen={handleDrawerOpen} setFilter={setFilter} />
+              </Grid>
+              <Grid item xs={12}>
+                {loading ? (
+                  <Box sx={{ mt: -3 }}>
+                    <LinearProgress />
+                  </Box>
+                ) : (
+                  <TracesTable data={getTraceData(traceData)}></TracesTable>
+                )}
+              </Grid>
+            </Grid>
+          </Box>
+        );
+      }}
+    </ClusterContext.Consumer>
   );
 };
 
