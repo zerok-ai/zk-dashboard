@@ -5,7 +5,7 @@ import MainCard from 'components/MainCard';
 import { useState, useEffect, ReactNode } from 'react';
 import { getServiceDetails } from 'store/reducers/services';
 import { useParams } from 'react-router-dom';
-import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined } from '@ant-design/icons';
+import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined, AlertOutlined, MenuOutlined } from '@ant-design/icons';
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -143,6 +143,8 @@ const ServiceDetailsPage = () => {
               <Tab label="Traces" icon={<NodeIndexOutlined />} iconPosition="start" {...a11yProps(0)} />
               <Tab label="Issues" icon={<IssuesCloseOutlined />} iconPosition="start" {...a11yProps(1)} />
               <Tab label="Metrics" icon={<BarChartOutlined />} iconPosition="start" {...a11yProps(2)} />
+              <Tab label="Logs & Events" icon={<MenuOutlined />} iconPosition="start" {...a11yProps(3)} />
+              <Tab label="Alers" icon={<AlertOutlined />} iconPosition="start" {...a11yProps(4)} />
             </Tabs>
           </Box>
           <TabPanel value={tabValue} index={0}>
@@ -153,6 +155,12 @@ const ServiceDetailsPage = () => {
           </TabPanel>
           <TabPanel value={tabValue} index={2}>
             <Typography variant="h6">Metrics to be shown here.</Typography>
+          </TabPanel>
+          <TabPanel value={tabValue} index={3}>
+            <Typography variant="h6">Logs & Events to be shown here.</Typography>
+          </TabPanel>
+          <TabPanel value={tabValue} index={4}>
+            <Typography variant="h6">Alerts to be shown here.</Typography>
           </TabPanel>
         </Box>
       </Grid>
