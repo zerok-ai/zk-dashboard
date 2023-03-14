@@ -5,9 +5,10 @@ import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
 // assets
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ClusterInfo from 'types/models/ClusterInfo';
 import ClusterInstructionsModal from '../ClusterInstructionsModal';
+import BlockingModal from '../BlockingModal';
 
 // ==============================|| HEADER CONTENT - SEARCH ||============================== //
 
@@ -15,9 +16,14 @@ const Clusters = () => {
   const [selectedCluster, setSelectedCluster] = useState('');
   const [clusterList, setClusterList] = useState([] as ClusterInfo[]);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [clusterInstructionsOpen, setClusterInstructionsOpen] = useState(false);
+  const [blockingOpen, setBlockingOpen] = useState(true);
+  const [fetchingClusterList, setFetchingClusterList] = useState(true);
+  const handleClusterInstructionOpen = () => setClusterInstructionsOpen(true);
+  const handleClusterInstructionClose = () => setClusterInstructionsOpen(false);
+
+  const handleBlockingOpen = () => setBlockingOpen(true);
+  const handleBlockingClose = () => setBlockingOpen(false);
 
   const getDropdownItems = (clusterList: ClusterInfo[]) => {
     if (clusterList && clusterList.length > 0) {
@@ -32,25 +38,34 @@ const Clusters = () => {
     }
   };
 
+  useEffect(() => {
+    handleBlockingOpen();
+  }, [blockingOpen]);
+
   return (
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
-      <ClusterInstructionsModal open={open} handleClose={handleClose} />
+      <ClusterInstructionsModal open={clusterInstructionsOpen} handleClose={handleClusterInstructionClose} />
+      <BlockingModal open={blockingOpen} handleClose={handleBlockingClose} isFetching={fetchingClusterList} />
       <ClusterContext.Consumer>
         {({ onSetSelectedCluster, updateClusterList }: any) => {
           updateClusterList().then((clusterListParam: ClusterInfo[]) => {
             if (!loading) return;
             console.log(clusterListParam);
-            setClusterList(clusterListParam);
-            setLoading(false);
-            if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
-              setSelectedCluster(clusterListParam[0].cluster_id);
-              onSetSelectedCluster(clusterListParam[0].cluster_id);
+            if (clusterListParam) {
+              setClusterList(clusterListParam);
+              setLoading(false);
+              if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
+                setSelectedCluster(clusterListParam[0].cluster_id);
+                onSetSelectedCluster(clusterListParam[0].cluster_id);
+              }
+            } else {
+              setFetchingClusterList(false);
             }
           });
 
           function handleClusterChange(e: SelectChangeEvent<string>) {
             if (e.target.value === 'add') {
-              handleOpen();
+              handleClusterInstructionOpen();
               return;
             }
             onSetSelectedCluster(e.target.value);
