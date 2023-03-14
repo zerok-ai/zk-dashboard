@@ -85,33 +85,12 @@ const Clusters = () => {
       <BlockingModal open={blockingOpen} handleClose={handleBlockingClose} isFetching={fetchingClusterList} />
       <ClusterContext.Consumer>
         {({ onSetSelectedCluster, updateClusterList }: any) => {
-          updateClusterList().then((clusterListParam: ClusterInfo[]) => {
-            if (!loading) return;
-            clusterListParam = clusterListParam.filter((cluster) => {
-              return blockedClusterStatus.indexOf(cluster.status) < 0;
-            });
-            console.log(clusterListParam);
-            setClusterList(clusterListParam);
-            setLoading(false);
-            if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
-              setSelectedCluster(clusterListParam[0].cluster_id);
-              onSetSelectedCluster(clusterListParam[0].cluster_id);
-            }
-          });
-
-          function handleClusterChange(e: SelectChangeEvent<string>) {
-            console.log('handleClusterChange method invoked ' + e.target.value);
-            if (e.target.value === 'add') {
-              handleClusterInstructionOpen();
-              return;
-            }
-            onSetSelectedCluster(e.target.value);
-            setSelectedCluster(e.target.value);
-          }
-
           const handleRefreshClusterList = () => {
             updateClusterList().then((clusterListParam: ClusterInfo[]) => {
               if (!loading) return;
+              clusterListParam = clusterListParam.filter((cluster) => {
+                return blockedClusterStatus.indexOf(cluster.status) < 0;
+              });
               console.log(clusterListParam);
               if (clusterListParam) {
                 setClusterList(clusterListParam);
@@ -125,6 +104,16 @@ const Clusters = () => {
               }
             });
           };
+
+          function handleClusterChange(e: SelectChangeEvent<string>) {
+            console.log('handleClusterChange method invoked ' + e.target.value);
+            if (e.target.value === 'add') {
+              handleClusterInstructionOpen();
+              return;
+            }
+            onSetSelectedCluster(e.target.value);
+            setSelectedCluster(e.target.value);
+          }
 
           handleRefreshClusterList();
 
