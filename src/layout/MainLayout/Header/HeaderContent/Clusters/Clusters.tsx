@@ -1,5 +1,5 @@
 // material-ui
-import { CheckCircleOutlined, FolderAddOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, FolderAddOutlined, ReloadOutlined } from '@ant-design/icons';
 import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider, Box, Grid, Button } from '@mui/material';
 
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
@@ -81,7 +81,7 @@ const Clusters = () => {
           handleRefreshClusterList();
 
           return (
-            <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
+            <Grid container direction="row" justifyContent="left" alignItems="center" sx={{}}>
               <Grid item>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                   <Select value={selectedCluster} onChange={handleClusterChange} displayEmpty>
@@ -100,9 +100,17 @@ const Clusters = () => {
                 </FormControl>
               </Grid>
               <Grid item>
-                <Button onClick={handleRefreshClusterList} sx={{ mt: 1, mr: 1 }}>
-                  Refresh
-                </Button>
+                <FormControl>
+                  <Button
+                    variant={'outlined'}
+                    color={'secondary'}
+                    size={'large'}
+                    onClick={handleRefreshClusterList}
+                    sx={{ ml: -1, p: 1.4 }}
+                  >
+                    <ReloadOutlined />
+                  </Button>
+                </FormControl>
               </Grid>
             </Grid>
           );
