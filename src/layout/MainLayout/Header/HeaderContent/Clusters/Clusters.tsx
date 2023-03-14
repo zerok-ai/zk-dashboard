@@ -1,6 +1,6 @@
 // material-ui
 import { CheckCircleOutlined, FolderAddOutlined } from '@ant-design/icons';
-import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider, Box } from '@mui/material';
+import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider, Box, Grid, Button } from '@mui/material';
 
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
@@ -22,7 +22,7 @@ const Clusters = () => {
   const handleClusterInstructionOpen = () => setClusterInstructionsOpen(true);
   const handleClusterInstructionClose = () => setClusterInstructionsOpen(false);
 
-  const handleBlockingOpen = () => setBlockingOpen(true);
+  const handleBlockingOpen = () => setBlockingOpen(false);
   const handleBlockingClose = () => setBlockingOpen(false);
 
   const getDropdownItems = (clusterList: ClusterInfo[]) => {
@@ -47,21 +47,10 @@ const Clusters = () => {
       <ClusterInstructionsModal open={clusterInstructionsOpen} handleClose={handleClusterInstructionClose} />
       <BlockingModal open={blockingOpen} handleClose={handleBlockingClose} isFetching={fetchingClusterList} />
       <ClusterContext.Consumer>
-        {({ onSetSelectedCluster, updateClusterList }: any) => {
-          updateClusterList().then((clusterListParam: ClusterInfo[]) => {
-            if (!loading) return;
-            console.log(clusterListParam);
-            if (clusterListParam) {
-              setClusterList(clusterListParam);
-              setLoading(false);
-              if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
-                setSelectedCluster(clusterListParam[0].cluster_id);
-                onSetSelectedCluster(clusterListParam[0].cluster_id);
-              }
-            } else {
-              setFetchingClusterList(false);
-            }
-          });
+        {({ onSetSelectedCluster, updateClusterList, onChange }: any) => {
+          onChange = () => {
+            console.log('it changed');
+          };
 
           function handleClusterChange(e: SelectChangeEvent<string>) {
             if (e.target.value === 'add') {
@@ -72,22 +61,50 @@ const Clusters = () => {
             setSelectedCluster(e.target.value);
           }
 
+          const handleRefresh = () => {
+            updateClusterList().then((clusterListParam: ClusterInfo[]) => {
+              if (!loading) return;
+              console.log(clusterListParam);
+              if (clusterListParam) {
+                setClusterList(clusterListParam);
+                setLoading(false);
+                if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
+                  setSelectedCluster(clusterListParam[0].cluster_id);
+                  onSetSelectedCluster(clusterListParam[0].cluster_id);
+                }
+              } else {
+                setFetchingClusterList(false);
+              }
+            });
+          };
+
+          handleRefresh();
+
           return (
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <Select value={selectedCluster} onChange={handleClusterChange} displayEmpty>
-                <MenuItem value="" disabled>
-                  Target Cluster
-                </MenuItem>
-                {getDropdownItems(clusterList)}
-                <Divider light />
-                <MenuItem value={'add'}>
-                  <ListItemIcon color="info">
-                    <FolderAddOutlined />
-                  </ListItemIcon>
-                  Add another cluster
-                </MenuItem>
-              </Select>
-            </FormControl>
+            <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
+              <Grid item>
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select value={selectedCluster} onChange={handleClusterChange} displayEmpty>
+                    <MenuItem value="" disabled>
+                      Target Cluster
+                    </MenuItem>
+                    {getDropdownItems(clusterList)}
+                    <Divider light />
+                    <MenuItem value={'add'}>
+                      <ListItemIcon color="info">
+                        <FolderAddOutlined />
+                      </ListItemIcon>
+                      Add another cluster
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <Button onClick={handleRefresh} sx={{ mt: 1, mr: 1 }}>
+                  Refresh
+                </Button>
+              </Grid>
+            </Grid>
           );
         }}
       </ClusterContext.Consumer>
