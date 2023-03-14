@@ -6,8 +6,8 @@ export function getTraceDetails() {
   return axios
     .get(zkCloudEndpoint + '/px', {
       params: {
-        st: '-5m',
-        cluster_id: 'bc57b23a-04a9-4dc7-914b-49d6af5b05b3'
+        st: '-15m',
+        cluster_id: 'cedf2a6b-2fd9-4783-8fa7-cd8d3973251d'
       }
     })
     .then((response) => {

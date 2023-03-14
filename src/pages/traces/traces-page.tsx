@@ -25,7 +25,7 @@ const Traces = () => {
   useEffect(() => {
     if (!loading) return;
     getTraceDetails().then((traceData: traceDataResponse) => {
-      setTraceData(traceData.results);
+      setTraceData(traceData.results || []);
       setLoading(false);
       console.log(loading);
     });

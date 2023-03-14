@@ -34,7 +34,7 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = '/v1/cluster/bc57b23a-04a9-4dc7-914b-49d6af5b05b3';
+const zkCloudEndpoint = '/v1/cluster/cedf2a6b-2fd9-4783-8fa7-cd8d3973251d';
 
 // Reducer
 export default slice.reducer;
