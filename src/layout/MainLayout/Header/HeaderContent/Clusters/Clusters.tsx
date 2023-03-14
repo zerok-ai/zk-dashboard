@@ -61,7 +61,7 @@ const Clusters = () => {
             setSelectedCluster(e.target.value);
           }
 
-          const handleRefresh = () => {
+          const handleRefreshClusterList = () => {
             updateClusterList().then((clusterListParam: ClusterInfo[]) => {
               if (!loading) return;
               console.log(clusterListParam);
@@ -78,7 +78,7 @@ const Clusters = () => {
             });
           };
 
-          handleRefresh();
+          handleRefreshClusterList();
 
           return (
             <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
@@ -100,7 +100,7 @@ const Clusters = () => {
                 </FormControl>
               </Grid>
               <Grid item>
-                <Button onClick={handleRefresh} sx={{ mt: 1, mr: 1 }}>
+                <Button onClick={handleRefreshClusterList} sx={{ mt: 1, mr: 1 }}>
                   Refresh
                 </Button>
               </Grid>
