@@ -135,6 +135,9 @@ const ServicesListPage = () => {
                     handleDrawerOpen={handleDrawerOpen}
                     setFilter={setFilter}
                     handleRefreshButtonClick={refreshButtonClick}
+                    showTimeSelector={false}
+                    interval={''}
+                    handleIntervalChange={() => {}}
                   />
                 </Grid>
                 <Grid item xs={12}>
