@@ -60,6 +60,10 @@ const ServicesListPage = () => {
     });
   }
 
+  function refreshButtonClick() {
+    updateServices(selectedClusterId);
+  }
+
   const [openFilterDrawer, setOpenFilterDrawer] = useState(false);
   const handleDrawerOpen = () => {
     setOpenFilterDrawer((prevState) => !prevState);
@@ -126,7 +130,12 @@ const ServicesListPage = () => {
             <Main theme={theme} open={openFilterDrawer} container={container}>
               <Grid container spacing={2.5}>
                 <Grid item xs={12}>
-                  <ServicesHeader filter={filter} handleDrawerOpen={handleDrawerOpen} setFilter={setFilter} />
+                  <ServicesHeader
+                    filter={filter}
+                    handleDrawerOpen={handleDrawerOpen}
+                    setFilter={setFilter}
+                    handleRefreshButtonClick={refreshButtonClick}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Grid container spacing={3}>

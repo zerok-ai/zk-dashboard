@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material/styles';
-import { InputAdornment, Stack, TextField, useMediaQuery } from '@mui/material';
+import { InputAdornment, Stack, TextField, useMediaQuery, Button } from '@mui/material';
 
 // types
 import { ServicesFilter } from 'types/services';
@@ -9,15 +9,16 @@ import { ServicesFilter } from 'types/services';
 import MainCard from 'components/MainCard';
 
 // assets
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, ReloadOutlined } from '@ant-design/icons';
 
 interface ServiceHeaderProps {
   handleDrawerOpen: () => void;
   setFilter: (filter: ServicesFilter) => void;
   filter: ServicesFilter;
+  handleRefreshButtonClick: () => void;
 }
 
-const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderProps) => {
+const ServicesHeader = ({ filter, handleDrawerOpen, setFilter, handleRefreshButtonClick }: ServiceHeaderProps) => {
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -36,7 +37,7 @@ const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderPr
         sx={{ p: 2 }}
         spacing={2}
       >
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={0.5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
           <TextField
             sx={{ '& .MuiOutlinedInput-input': { pl: 0 } }}
             InputProps={{
@@ -51,6 +52,9 @@ const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderPr
             size="medium"
             onChange={handleSearch}
           />
+          <Button variant={'outlined'} color={'secondary'} size={'large'} onClick={handleRefreshButtonClick} sx={{ ml: 4, p: 1.4 }}>
+            <ReloadOutlined />
+          </Button>
         </Stack>
       </Stack>
     </MainCard>

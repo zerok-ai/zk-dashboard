@@ -74,10 +74,16 @@ const Traces = () => {
 
   function changeListener(cluster: ClusterInfo) {
     if (cluster.cluster_id !== selectedClusterId) {
+      setLoading(true);
       console.log('Updating cluster ' + cluster.cluster_name + ',' + cluster.cluster_id);
       setSelectedClusterId(cluster.cluster_id);
       updateTraceData(cluster.cluster_id);
     }
+  }
+
+  function refreshButtonClick() {
+    setLoading(true);
+    updateTraceData(selectedClusterId);
   }
 
   return (
@@ -93,7 +99,12 @@ const Traces = () => {
           <Box sx={{ display: 'block' }}>
             <Grid container spacing={2.5}>
               <Grid item xs={12}>
-                <ServicesHeader filter={filter} handleDrawerOpen={handleDrawerOpen} setFilter={setFilter} />
+                <ServicesHeader
+                  filter={filter}
+                  handleDrawerOpen={handleDrawerOpen}
+                  setFilter={setFilter}
+                  handleRefreshButtonClick={refreshButtonClick}
+                />
               </Grid>
               <Grid item xs={12}>
                 {loading ? (
