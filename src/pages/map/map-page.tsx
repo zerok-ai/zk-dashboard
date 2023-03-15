@@ -9,28 +9,37 @@ import { Box, LinearProgress } from '@mui/material';
 import ClusterInfo from 'types/models/ClusterInfo';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
+var nodeList = new Map<string, Array<string>>();
+
+const getRequestor = (service: ServiceMapEdge) => {
+  return service.requester_service || service.requester_pod || service.requester_ip || 'Kubernetes control plane';
+};
+
+const getResponder = (service: ServiceMapEdge) => {
+  return service.responder_service || service.responder_pod || service.responder_ip || 'Kubernetes control plane';
+};
+
 const prepareMap = (mapdata: ServiceMapEdge[]) => {
   let _nodes: NodeData[] = [];
   let _edges: EdgeData[] = [];
   let serviceNames: string[] = [];
   let edgeIDList = new Set();
 
-  var nodeList = new Map<string, Array<string>>();
   mapdata
-    .filter((service: any) => service.requester_service !== '')
+    .filter((service: any) => getRequestor(service) !== '')
     .forEach((service: any) => {
-      const prevArr = nodeList.get(service.requester_service) || [];
+      const prevArr = nodeList.get(getRequestor(service)) || [];
       try {
-        service.responder_service = JSON.parse(service.responder_service);
+        service.responder_service = JSON.parse(getResponder(service));
       } catch (err) {}
-      if (typeof service.responder_service === 'object') {
-        nodeList.set(service.requester_service, [...prevArr, ...service.responder_service]);
-      } else if (typeof service.responder_service === 'string') {
-        nodeList.set(service.requester_service, [...prevArr, ...[service.responder_service]]);
+      if (typeof getResponder(service) === 'object') {
+        nodeList.set(getRequestor(service), [...prevArr, ...getResponder(service)]);
+      } else if (typeof getResponder(service) === 'string') {
+        nodeList.set(getRequestor(service), [...prevArr, ...[getResponder(service)]]);
       }
 
-      serviceNames = [...serviceNames, ...[service.requester_service]];
-      serviceNames = [...serviceNames, ...(nodeList.get(service.requester_service) || [])];
+      serviceNames = [...serviceNames, ...[getRequestor(service)]];
+      serviceNames = [...serviceNames, ...(nodeList.get(getRequestor(service)) || [])];
     });
 
   serviceNames = Array.from(new Set(serviceNames));
@@ -105,7 +114,7 @@ const ServiceMap = () => {
         registerChangeListener(changeListener);
         return (
           <MainCard title="Service Map">
-            <div style={{ width: '100%', height: '60vh' }}>
+            <div style={{ width: '100%', height: '66vh' }}>
               <style>
                 {`
             .node {
@@ -128,7 +137,8 @@ const ServiceMap = () => {
                 </Box>
               ) : (
                 <Canvas
-                  pannable={false}
+                  pannable={true}
+                  fit={false}
                   nodes={nodes}
                   edges={edges}
                   defaultPosition={CanvasPosition.TOP}
