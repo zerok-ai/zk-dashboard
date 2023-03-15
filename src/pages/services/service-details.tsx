@@ -6,7 +6,7 @@ import { useState, useEffect, ReactNode } from 'react';
 import { getServiceDetails } from 'store/reducers/services';
 import { useParams } from 'react-router-dom';
 import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined, AlertOutlined, MenuOutlined } from '@ant-design/icons';
-import TimeSelector from 'components/time-selector';
+import TimeSelector from 'components/TimeSelector';
 
 interface TabPanelProps {
   children?: ReactNode;
