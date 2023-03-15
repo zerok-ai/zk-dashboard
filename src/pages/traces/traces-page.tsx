@@ -1,4 +1,4 @@
-import { Grid, Box, LinearProgress } from '@mui/material';
+import { Grid, Box, LinearProgress, SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ServicesHeader from 'sections/apps/ServicesHeader';
 import { ServicesFilter } from 'types/services';
@@ -25,18 +25,26 @@ const Traces = () => {
   const [traceData, setTraceData] = useState<traceItem[]>([]);
   const [selectedClusterId, setSelectedClusterId] = useState('');
 
-  function updateTraceData(clusterId: string) {
+  function updateTraceData(clusterId: string, intervalParam: string) {
     if (!clusterId || clusterId === '') return;
-    getTraceDetails(clusterId).then((traceData: traceDataResponse) => {
+    getTraceDetails(clusterId, intervalParam).then((traceData: traceDataResponse) => {
       setTraceData(traceData.results || []);
       setLoading(false);
       console.log(loading);
     });
   }
 
+  const [interval, setInterval] = useState('-5m');
+
+  function handleIntervalChange(e: SelectChangeEvent<string>) {
+    setInterval(e.target.value);
+    setLoading(true);
+    updateTraceData(selectedClusterId, e.target.value);
+  }
+
   useEffect(() => {
     if (!loading) return;
-    updateTraceData(selectedClusterId);
+    updateTraceData(selectedClusterId, interval);
   });
 
   const getTraceData = (results: any[]) => {
@@ -74,10 +82,16 @@ const Traces = () => {
 
   function changeListener(cluster: ClusterInfo) {
     if (cluster.cluster_id !== selectedClusterId) {
+      setLoading(true);
       console.log('Updating cluster ' + cluster.cluster_name + ',' + cluster.cluster_id);
       setSelectedClusterId(cluster.cluster_id);
-      updateTraceData(cluster.cluster_id);
+      updateTraceData(cluster.cluster_id, interval);
     }
+  }
+
+  function refreshButtonClick() {
+    setLoading(true);
+    updateTraceData(selectedClusterId, interval);
   }
 
   return (
@@ -93,7 +107,15 @@ const Traces = () => {
           <Box sx={{ display: 'block' }}>
             <Grid container spacing={2.5}>
               <Grid item xs={12}>
-                <ServicesHeader filter={filter} handleDrawerOpen={handleDrawerOpen} setFilter={setFilter} />
+                <ServicesHeader
+                  filter={filter}
+                  handleDrawerOpen={handleDrawerOpen}
+                  setFilter={setFilter}
+                  handleRefreshButtonClick={refreshButtonClick}
+                  showTimeSelector={true}
+                  interval={interval}
+                  handleIntervalChange={handleIntervalChange}
+                />
               </Grid>
               <Grid item xs={12}>
                 {loading ? (

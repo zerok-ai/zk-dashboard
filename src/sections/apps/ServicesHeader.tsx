@@ -1,5 +1,5 @@
-import { useTheme } from '@mui/material/styles';
-import { InputAdornment, Stack, TextField, useMediaQuery } from '@mui/material';
+// import { useTheme } from '@mui/material/styles';
+import { InputAdornment, TextField, Button, SelectChangeEvent, Grid } from '@mui/material';
 
 // types
 import { ServicesFilter } from 'types/services';
@@ -9,17 +9,30 @@ import { ServicesFilter } from 'types/services';
 import MainCard from 'components/MainCard';
 
 // assets
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, ReloadOutlined } from '@ant-design/icons';
+import TimeSelector from 'components/TimeSelector';
 
 interface ServiceHeaderProps {
   handleDrawerOpen: () => void;
   setFilter: (filter: ServicesFilter) => void;
   filter: ServicesFilter;
+  handleRefreshButtonClick: () => void;
+  showTimeSelector: boolean;
+  interval: string;
+  handleIntervalChange: (e: SelectChangeEvent<string>) => void;
 }
 
-const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderProps) => {
-  const theme = useTheme();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
+const ServicesHeader = ({
+  filter,
+  handleDrawerOpen,
+  setFilter,
+  handleRefreshButtonClick,
+  showTimeSelector,
+  interval,
+  handleIntervalChange
+}: ServiceHeaderProps) => {
+  // const theme = useTheme();
+  // const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   // search filter
   const handleSearch = async (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> | undefined) => {
@@ -29,14 +42,8 @@ const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderPr
 
   return (
     <MainCard content={false}>
-      <Stack
-        direction={matchDownSM ? 'column' : 'row'}
-        alignItems={matchDownSM ? 'space-between' : 'center'}
-        justifyContent={matchDownSM ? 'center' : 'space-between'}
-        sx={{ p: 2 }}
-        spacing={2}
-      >
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={0.5}>
+      <Grid container direction="row" alignItems="center" justifyContent="left" sx={{ m: 1, p: 1 }}>
+        <Grid item xs={9.5}>
           <TextField
             sx={{ '& .MuiOutlinedInput-input': { pl: 0 } }}
             InputProps={{
@@ -51,8 +58,16 @@ const ServicesHeader = ({ filter, handleDrawerOpen, setFilter }: ServiceHeaderPr
             size="medium"
             onChange={handleSearch}
           />
-        </Stack>
-      </Stack>
+        </Grid>
+        <Grid item xs={1.5} alignItems="center">
+          {showTimeSelector ? <TimeSelector interval={interval} handleIntervalChange={handleIntervalChange} /> : <></>}
+        </Grid>
+        <Grid item xs={1} alignItems="center">
+          <Button variant={'outlined'} color={'secondary'} size={'large'} onClick={handleRefreshButtonClick} sx={{ p: 1 }}>
+            <ReloadOutlined />
+          </Button>
+        </Grid>
+      </Grid>
     </MainCard>
   );
 };

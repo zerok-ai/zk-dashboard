@@ -1,11 +1,12 @@
 // material-ui
-import { Grid, Box, Typography, FormControl, Select, MenuItem, SelectChangeEvent, Tab, Tabs } from '@mui/material';
+import { Grid, Box, Typography, SelectChangeEvent, Tab, Tabs } from '@mui/material';
 import IncomeAreaChart from 'sections/charts/IncomeAreaChart';
 import MainCard from 'components/MainCard';
 import { useState, useEffect, ReactNode } from 'react';
 import { getServiceDetails } from 'store/reducers/services';
 import { useParams } from 'react-router-dom';
 import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined, AlertOutlined, MenuOutlined } from '@ant-design/icons';
+import TimeSelector from 'components/TimeSelector';
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -96,20 +97,7 @@ const ServiceDetailsPage = () => {
           </Typography>
         </Grid>
         <Grid item xs={1} sx={{ pr: 2 }}>
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <Select value={interval} onChange={handleIntervalChange} displayEmpty>
-              <MenuItem value="" disabled>
-                Select Interval
-              </MenuItem>
-              {['-5m', '-10m', '-15m'].map((time) => {
-                return (
-                  <MenuItem value={time} key={time}>
-                    {time}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
+          <TimeSelector interval={interval} handleIntervalChange={handleIntervalChange} />
         </Grid>
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
