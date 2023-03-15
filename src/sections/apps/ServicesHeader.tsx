@@ -63,7 +63,7 @@ const ServicesHeader = ({
           {showTimeSelector ? <TimeSelector interval={interval} handleIntervalChange={handleIntervalChange} /> : <></>}
         </Grid>
         <Grid item xs={1} alignItems="center">
-          <Button variant={'outlined'} color={'secondary'} size={'large'} onClick={handleRefreshButtonClick}>
+          <Button variant={'outlined'} color={'secondary'} size={'large'} onClick={handleRefreshButtonClick} sx={{ p: 1 }}>
             <ReloadOutlined />
           </Button>
         </Grid>
