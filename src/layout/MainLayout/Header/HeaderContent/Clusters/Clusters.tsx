@@ -115,7 +115,7 @@ const Clusters = () => {
           return (
             <Grid container direction="row" justifyContent="left" alignItems="center" sx={{}}>
               <Grid item>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <FormControl sx={{ mr: 1, minWidth: 120 }}>
                   <Select value={selectedCluster} onChange={handleClusterChange} displayEmpty>
                     <MenuItem value="" disabled>
                       Target Cluster
@@ -130,16 +130,8 @@ const Clusters = () => {
                     </MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
-              <Grid item>
                 <FormControl>
-                  <Button
-                    variant={'outlined'}
-                    color={'secondary'}
-                    size={'large'}
-                    onClick={handleRefreshButtonClick}
-                    sx={{ ml: -1, p: 1.4 }}
-                  >
+                  <Button variant={'outlined'} color={'secondary'} size={'large'} onClick={handleRefreshButtonClick} sx={{ p: 1.4 }}>
                     <ReloadOutlined />
                   </Button>
                 </FormControl>
