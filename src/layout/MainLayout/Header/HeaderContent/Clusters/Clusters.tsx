@@ -115,7 +115,7 @@ const Clusters = () => {
           return (
             <Grid container direction="row" justifyContent="left" alignItems="center" sx={{}}>
               <Grid item>
-                <FormControl sx={{ mr: 1, minWidth: 120 }}>
+                <FormControl sx={{ mx: 1, minWidth: 120 }}>
                   <Select value={selectedCluster} onChange={handleClusterChange} displayEmpty>
                     <MenuItem value="" disabled>
                       Target Cluster
