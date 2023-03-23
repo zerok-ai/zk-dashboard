@@ -9,7 +9,7 @@ import {
   ClockCircleOutlined,
   ReloadOutlined
 } from '@ant-design/icons';
-import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider, Box, Grid, Button } from '@mui/material';
+import { SelectChangeEvent, FormControl, Select, MenuItem, ListItemIcon, Divider, Box, Grid, Button, useTheme } from '@mui/material';
 
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
@@ -23,6 +23,7 @@ import BlockingModal from '../BlockingModal';
 // ==============================|| HEADER CONTENT - SEARCH ||============================== //
 
 const Clusters = () => {
+  const theme = useTheme();
   const [selectedCluster, setSelectedCluster] = useState('');
   const [clusterList, setClusterList] = useState([] as ClusterInfo[]);
   const [loading, setLoading] = useState(true);
@@ -135,10 +136,9 @@ const Clusters = () => {
                 <FormControl>
                   <Button
                     variant={'outlined'}
-                    color={'secondary'}
+                    sx={{ borderColor: theme.palette.grey[200], p: 1.5 }}
                     size={'large'}
                     onClick={handleRefreshButtonClick}
-                    sx={{ ml: -1, p: 1.4 }}
                   >
                     <ReloadOutlined />
                   </Button>

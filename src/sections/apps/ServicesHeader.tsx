@@ -1,5 +1,6 @@
 // import { useTheme } from '@mui/material/styles';
-import { InputAdornment, TextField, Button, SelectChangeEvent, Grid } from '@mui/material';
+import { InputAdornment, TextField, Button, SelectChangeEvent, Grid, FormControl } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // types
 import { ServicesFilter } from 'types/services';
@@ -31,7 +32,7 @@ const ServicesHeader = ({
   interval,
   handleIntervalChange
 }: ServiceHeaderProps) => {
-  // const theme = useTheme();
+  const theme = useTheme();
   // const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   // search filter
@@ -42,8 +43,8 @@ const ServicesHeader = ({
 
   return (
     <MainCard content={false}>
-      <Grid container direction="row" alignItems="center" justifyContent="left" sx={{ m: 1, p: 1 }}>
-        <Grid item xs={9.5}>
+      <Grid container direction="row" sx={{ m: 1, p: 1 }}>
+        <Grid item xs={10} alignItems="center" justifyContent="left">
           <TextField
             sx={{ '& .MuiOutlinedInput-input': { pl: 0 } }}
             InputProps={{
@@ -59,13 +60,13 @@ const ServicesHeader = ({
             onChange={handleSearch}
           />
         </Grid>
-        <Grid item xs={1.5} alignItems="center">
+        <Grid item xs={2} sx={{ pr: 2 }} display="flex" justifyContent="flex-end">
           {showTimeSelector ? <TimeSelector interval={interval} handleIntervalChange={handleIntervalChange} /> : <></>}
-        </Grid>
-        <Grid item xs={1} alignItems="center">
-          <Button variant={'outlined'} color={'secondary'} size={'large'} onClick={handleRefreshButtonClick} sx={{ p: 1 }}>
-            <ReloadOutlined />
-          </Button>
+          <FormControl>
+            <Button variant={'outlined'} sx={{ borderColor: theme.palette.grey[200], p: 1.6 }} onClick={handleRefreshButtonClick}>
+              <ReloadOutlined />
+            </Button>
+          </FormControl>
         </Grid>
       </Grid>
     </MainCard>

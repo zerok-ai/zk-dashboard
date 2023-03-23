@@ -138,6 +138,7 @@ const ServiceMap = () => {
                     `}
                   </style>
                   <Canvas
+                    layoutOptions={{}}
                     pannable={true}
                     fit={false}
                     nodes={nodes}

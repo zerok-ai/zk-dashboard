@@ -8,7 +8,7 @@ interface TimeSelectorProps {
 
 const TimeSelector = ({ interval, handleIntervalChange }: TimeSelectorProps) => {
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <FormControl sx={{ mx: 1, minWidth: 120 }}>
       <Select value={interval} onChange={handleIntervalChange} displayEmpty>
         <MenuItem value="" disabled>
           Select Interval
