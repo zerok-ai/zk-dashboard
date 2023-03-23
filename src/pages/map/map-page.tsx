@@ -159,17 +159,6 @@ const ServiceMap = () => {
                     }
                     arrow={<MarkerArrow style={{ fill: '#b1b1b7' }} />}
                     edge={<Edge className="edge" />}
-                    onNodeLink={(_event, from, to) => {
-                      const id = `${from.id}-${to.id}`;
-                      setEdges([
-                        ...edges,
-                        {
-                          id,
-                          from: from.id,
-                          to: to.id
-                        }
-                      ]);
-                    }}
                   />
                 </div>
               </Box>
