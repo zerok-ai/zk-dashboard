@@ -114,63 +114,65 @@ const ServiceMap = () => {
         registerChangeListener(changeListener);
         return (
           <MainCard title="Service Map">
-            <div style={{ width: '100%', height: '66vh' }}>
-              <style>
-                {`
-            .node {
-              max-width: none;
-            }
-            .edge {
-              stroke: #b1b1b7;
-              stroke-dasharray: 5;
-              animation: dashdraw .5s linear infinite;
-              stroke-width: 1;
-            }
-            @keyframes dashdraw {
-              0% { stroke-dashoffset: 10; }
-            }
-        `}
-              </style>
-              {loading ? (
-                <Box sx={{ m: -3 }}>
-                  <LinearProgress />
-                </Box>
-              ) : (
-                <Canvas
-                  pannable={true}
-                  fit={false}
-                  nodes={nodes}
-                  edges={edges}
-                  defaultPosition={CanvasPosition.TOP}
-                  direction="RIGHT"
-                  onNodeLinkCheck={(_event, from: NodeData, to: NodeData) => {
-                    return !hasLink(edges, from, to);
-                  }}
-                  node={
-                    <Node
-                      style={{ strokeWidth: 1, maxWidth: 'auto' }}
-                      icon={<FileOutlined />}
-                      draggable={false}
-                      label={<Label style={{ fill: 'white', fontSize: '0.85em' }} />}
-                      port={<Port style={{ fill: 'blue', stroke: 'white' }} rx={20} ry={20} />}
-                    />
-                  }
-                  arrow={<MarkerArrow style={{ fill: '#b1b1b7' }} />}
-                  edge={<Edge className="edge" />}
-                  onNodeLink={(_event, from, to) => {
-                    const id = `${from.id}-${to.id}`;
-                    setEdges([
-                      ...edges,
-                      {
-                        id,
-                        from: from.id,
-                        to: to.id
-                      }
-                    ]);
-                  }}
-                />
-              )}
-            </div>
+            {loading ? (
+              <Box sx={{ m: -3 }}>
+                <LinearProgress />
+              </Box>
+            ) : (
+              <Box sx={{ m: -2 }}>
+                <div style={{ width: '100%', height: '66vh', padding: '0px' }}>
+                  <style>
+                    {`
+                        .node {
+                          max-width: none;
+                        }
+                        .edge {
+                          stroke: #b1b1b7;
+                          stroke-dasharray: 5;
+                          animation: dashdraw .5s linear infinite;
+                          stroke-width: 1;
+                        }
+                        @keyframes dashdraw {
+                          0% { stroke-dashoffset: 10; }
+                        }
+                    `}
+                  </style>
+                  <Canvas
+                    pannable={true}
+                    fit={false}
+                    nodes={nodes}
+                    edges={edges}
+                    defaultPosition={CanvasPosition.TOP}
+                    direction="RIGHT"
+                    onNodeLinkCheck={(_event, from: NodeData, to: NodeData) => {
+                      return !hasLink(edges, from, to);
+                    }}
+                    node={
+                      <Node
+                        style={{ strokeWidth: 1, maxWidth: 'auto' }}
+                        icon={<FileOutlined />}
+                        draggable={false}
+                        label={<Label style={{ fill: 'white', fontSize: '0.85em' }} />}
+                        port={<Port style={{ fill: 'blue', stroke: 'white' }} rx={20} ry={20} />}
+                      />
+                    }
+                    arrow={<MarkerArrow style={{ fill: '#b1b1b7' }} />}
+                    edge={<Edge className="edge" />}
+                    onNodeLink={(_event, from, to) => {
+                      const id = `${from.id}-${to.id}`;
+                      setEdges([
+                        ...edges,
+                        {
+                          id,
+                          from: from.id,
+                          to: to.id
+                        }
+                      ]);
+                    }}
+                  />
+                </div>
+              </Box>
+            )}
           </MainCard>
         );
       }}
