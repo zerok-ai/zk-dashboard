@@ -74,7 +74,10 @@ const Clusters = () => {
 
   return (
     <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
-      <ClusterInstructionsModal open={clusterInstructionsOpen} handleClose={handleClusterInstructionClose} />
+      <ClusterInstructionsModal
+        open={clusterInstructionsOpen || (!loading && clusterList.length === 0)}
+        handleClose={handleClusterInstructionClose}
+      />
       <BlockingModal open={loading} handleClose={() => {}} hasFetchingFailed={fetchingClusterListFailed} />
       <ClusterContext.Consumer>
         {({ onSetSelectedCluster, updateClusterList }: any) => {
