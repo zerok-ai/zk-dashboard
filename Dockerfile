@@ -4,6 +4,6 @@ WORKDIR /app
 COPY ./build/ ./
 RUN yarn global add serve
 
-CMD ["serve"]
+CMD ["serve","-s"]
 EXPOSE 3000
 
