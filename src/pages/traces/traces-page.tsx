@@ -100,7 +100,7 @@ const Traces = () => {
     updateTraceData(selectedClusterId, interval);
   }
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState('');
 
   const style = {
