@@ -1,4 +1,4 @@
-import { Grid, Box, LinearProgress, SelectChangeEvent } from '@mui/material';
+import { Grid, Box, LinearProgress, SelectChangeEvent, Modal, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ServicesHeader from 'sections/apps/ServicesHeader';
 import { ServicesFilter } from 'types/services';
@@ -8,6 +8,8 @@ import { getTraceDetails } from './controllers/TracesAPIController';
 import { traceDataResponse, traceItem } from './models/traceDataResponse';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 import ClusterInfo from 'types/models/ClusterInfo';
+import Moment from 'moment';
+import { JsonViewer } from '@textea/json-viewer';
 
 const Traces = () => {
   const initialState: ServicesFilter = {
@@ -50,6 +52,9 @@ const Traces = () => {
   const getTraceData = (results: any[]) => {
     var nwDataMap: Map<string, any> = new Map();
     var maxLatency = 0;
+    results = results.filter((span) => {
+      return span.type === 'HTTP' && span.destination.label.includes('zerok-operator-system') ? false : true;
+    });
     results.forEach((data, idx) => {
       maxLatency = data.latency > maxLatency ? data.latency : maxLatency;
     });
@@ -66,18 +71,19 @@ const Traces = () => {
 
     console.log(nwDataMap);
     const data: any[] = [];
-    const sorter = (x: any, y: any) => x.time_ > y.time_;
+    const spanSorter = (x: any, y: any) => Moment(y.time_).diff(Moment(x.time_));
 
     nwDataMap.forEach((traces, traceId) => {
       data.push({
         trace_id: traceId,
-        traces: nwDataMap.get(traceId).sort(sorter),
+        traces: nwDataMap.get(traceId).sort(spanSorter),
         count: nwDataMap.get(traceId).length
       });
     });
 
-    console.log(data);
-    return data;
+    return data.sort((x, y) => {
+      return Moment(y.traces[0].time_).diff(Moment(x.traces[0].time_));
+    });
   };
 
   function changeListener(cluster: ClusterInfo) {
@@ -94,6 +100,28 @@ const Traces = () => {
     updateTraceData(selectedClusterId, interval);
   }
 
+  const [open, setOpen] = useState(true);
+  const [modalData, setModalData] = useState('');
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '0',
+    left: '50%',
+    width: '50%',
+    height: '100vh',
+    bgcolor: 'background.paper',
+    outline: 'none',
+    p: 4
+  };
+
+  const JSONStyle = {
+    '.data-key': {
+      color: 'rgba(255,255,255,0.8) !important'
+    }
+  };
+
+  const handleClose = () => setOpen(false);
+
   return (
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
@@ -105,6 +133,16 @@ const Traces = () => {
 
         return (
           <Box sx={{ display: 'block' }}>
+            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Trace ID:
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2, height: '90vh', overflow: 'scroll' }}>
+                  <JsonViewer value={modalData} sx={JSONStyle} />
+                </Typography>
+              </Box>
+            </Modal>
             <Grid container spacing={2.5}>
               <Grid item xs={12}>
                 <ServicesHeader
@@ -123,7 +161,7 @@ const Traces = () => {
                     <LinearProgress />
                   </Box>
                 ) : (
-                  <TracesTable data={getTraceData(traceData)}></TracesTable>
+                  <TracesTable data={getTraceData(traceData)} traceModal={{ setOpen, setModalData }}></TracesTable>
                 )}
               </Grid>
             </Grid>
