@@ -23,13 +23,14 @@ const TraceDetails = ({ data, traceModal }: any) => {
         accessor: 'span_id',
         className: 'cell-right',
         Cell: ({ value }: { value: string }) => {
+          const spanData = data.filter((x: any) => x.span_id === value)[0];
           return (
             <>
               <Button
                 variant="text"
                 color="info"
                 onClick={() => {
-                  traceModal.setModalData(data);
+                  traceModal.setModalData(spanData);
                   traceModal.setOpen(true);
                 }}
               >
