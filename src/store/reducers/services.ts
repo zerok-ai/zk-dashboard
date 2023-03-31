@@ -32,7 +32,7 @@ const slice = createSlice({
   }
 });
 
-const zkCloudEndpoint = '/v1/cluster/';
+const zkCloudEndpoint = '/v1/u/cluster/';
 
 // Reducer
 export default slice.reducer;

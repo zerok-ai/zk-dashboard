@@ -64,10 +64,10 @@ const TraceDetails = ({ data, traceModal }: any) => {
       {
         Header: 'Timing',
         accessor: 'latency',
-        Cell: ({ value }: { value: number }) => <LinearWithLabel value={value * 1000} sx={{ minWidth: 75 }} />
+        Cell: ({ value }: { value: number }) => <LinearWithLabel values={[value]} />
       }
     ],
-    []
+    [data, traceModal]
   );
 
   // const [showBody, setShowBody] = useState(false);

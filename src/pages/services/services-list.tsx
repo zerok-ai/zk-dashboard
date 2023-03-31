@@ -11,7 +11,7 @@ import ServicesHeader from 'sections/apps/ServicesHeader';
 import ServiceEmpty from 'sections/apps/ServiceEmpty';
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
-import ClusterInfo from 'types/models/ClusterInfo';
+import { ClusterInfo } from 'types/models/ClusterInfo';
 
 const Main = styled('main', { shouldForwardProp: (prop: string) => prop !== 'open' && prop !== 'container' })(
   ({ theme, open, container }: { theme: Theme; open: boolean; container: any }) => ({
@@ -109,10 +109,10 @@ const ServicesListPage = () => {
   };
 
   function changeListener(cluster: ClusterInfo) {
-    if (cluster.cluster_id !== selectedClusterId) {
-      console.log('Updating cluster ' + cluster.cluster_name + ',' + cluster.cluster_id);
-      setSelectedClusterId(cluster.cluster_id);
-      updateServices(cluster.cluster_id);
+    if (cluster.id !== selectedClusterId) {
+      console.log('Updating cluster ' + cluster.name + ',' + cluster.id);
+      setSelectedClusterId(cluster.id);
+      updateServices(cluster.id);
     }
   }
 
@@ -120,9 +120,9 @@ const ServicesListPage = () => {
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
         let selectedCluster = getSelectedCluster();
-        if (selectedCluster && selectedCluster.cluster_id !== selectedClusterId) {
-          setSelectedClusterId(selectedCluster.cluster_id);
-          updateServices(selectedCluster.cluster_id);
+        if (selectedCluster && selectedCluster.id !== selectedClusterId) {
+          setSelectedClusterId(selectedCluster.id);
+          updateServices(selectedCluster.id);
         }
         registerChangeListener(changeListener);
         return (
@@ -143,7 +143,7 @@ const ServicesListPage = () => {
                 <Grid item xs={12}>
                   <Grid container spacing={3}>
                     {isLoading
-                      ? [1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+                      ? [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
                           <Grid key={item} item xs={12} sm={6} md={4} lg={4}>
                             <SkeletonServicePlaceholder />
                           </Grid>

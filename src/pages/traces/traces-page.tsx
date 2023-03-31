@@ -7,7 +7,7 @@ import TracesTable from './components/TracesTable';
 import { getTraceDetails } from './controllers/TracesAPIController';
 import { traceDataResponse, traceItem } from './models/traceDataResponse';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
-import ClusterInfo from 'types/models/ClusterInfo';
+import { ClusterInfo } from 'types/models/ClusterInfo';
 import Moment from 'moment';
 import { JsonViewer } from '@textea/json-viewer';
 
@@ -46,6 +46,7 @@ const Traces = () => {
 
   useEffect(() => {
     if (!loading) return;
+    console.log('getting traces for', selectedClusterId);
     updateTraceData(selectedClusterId, interval);
   });
 
@@ -87,11 +88,11 @@ const Traces = () => {
   };
 
   function changeListener(cluster: ClusterInfo) {
-    if (cluster.cluster_id !== selectedClusterId) {
+    if (cluster.id !== selectedClusterId) {
       setLoading(true);
-      console.log('Updating cluster ' + cluster.cluster_name + ',' + cluster.cluster_id);
-      setSelectedClusterId(cluster.cluster_id);
-      updateTraceData(cluster.cluster_id, interval);
+      console.log('Updating cluster ' + cluster.name + ',' + cluster.id);
+      setSelectedClusterId(cluster.id);
+      updateTraceData(cluster.id, interval);
     }
   }
 
@@ -129,9 +130,7 @@ const Traces = () => {
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
         let selectedCluster = getSelectedCluster();
-        if (selectedCluster) {
-          setSelectedClusterId(selectedCluster.cluster_id);
-        }
+        setSelectedClusterId(selectedCluster?.id);
         registerChangeListener(changeListener);
 
         return (

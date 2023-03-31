@@ -15,7 +15,7 @@ import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
 // assets
 import { useState } from 'react';
-import ClusterInfo from 'types/models/ClusterInfo';
+import { ClusterInfo } from 'types/models/ClusterInfo';
 import ClusterInstructionsModal from '../ClusterInstructionsModal';
 import { ClusterHealthStatus } from './models';
 import BlockingModal from '../BlockingModal';
@@ -62,11 +62,11 @@ const Clusters = () => {
   const getDropdownItems = (clusterList: ClusterInfo[]) => {
     if (clusterList && clusterList.length > 0) {
       return clusterList.map((cluster: ClusterInfo, index: number) => (
-        <MenuItem value={cluster.cluster_id} key={cluster.cluster_id}>
+        <MenuItem value={cluster.id} key={cluster.id}>
           <ListItemIcon color="success" title={cluster.status}>
             {getClusterIcon(cluster.status)}
           </ListItemIcon>
-          {cluster.cluster_name}
+          {cluster.name}
         </MenuItem>
       ));
     }
@@ -95,8 +95,8 @@ const Clusters = () => {
                 setLoading(false);
                 setClusterList(clusterListParam);
                 if (selectedCluster === '' && clusterListParam && clusterListParam.length > 0) {
-                  setSelectedCluster(clusterListParam[0].cluster_id);
-                  onSetSelectedCluster(clusterListParam[0].cluster_id);
+                  setSelectedCluster(clusterListParam[0].id);
+                  onSetSelectedCluster(clusterListParam[0].id);
                 }
               } else {
                 setFetchingClusterListFailed(true);

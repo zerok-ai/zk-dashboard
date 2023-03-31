@@ -1,8 +1,12 @@
+type ClusterListAPIResponse = {
+  clusters: ClusterInfo[];
+};
+
 type ClusterInfo = {
-  cluster_id: string;
-  cluster_name: string;
+  id: string;
+  name: string;
   nickname: string;
   status: string;
 };
 
-export default ClusterInfo;
+export type { ClusterInfo, ClusterListAPIResponse };

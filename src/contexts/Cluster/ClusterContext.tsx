@@ -1,7 +1,7 @@
 import { createContext, ReactNode } from 'react';
 import { ClusterContextProps } from 'types/config';
-import ClusterInfo from 'types/models/ClusterInfo';
-import { fetchClusterList } from './ClusterListApiController';
+import { ClusterInfo, ClusterListAPIResponse } from 'types/models/ClusterInfo';
+import { fetchClusterList } from 'api/cluster/ClusterListApiController';
 
 const initialState: ClusterContextProps = {
   clusterList: [] as ClusterInfo[],
@@ -30,9 +30,9 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
   let changeListener: (cluster: ClusterInfo) => void = () => {};
 
   const updateClusterList = () => {
-    return fetchClusterList().then((clusterListParam: ClusterInfo[]) => {
-      if (clusterListParam) {
-        clusterList = clusterListParam;
+    return fetchClusterList().then((clusterListResponse: ClusterListAPIResponse) => {
+      clusterList = clusterListResponse.clusters;
+      if (clusterList) {
         clusterListLoaded = true;
         return clusterList;
       } else {
@@ -44,9 +44,9 @@ function ClusterConfProvider({ children }: ClusterProviderProps) {
   updateClusterList();
 
   const onSetSelectedCluster = (clusterId: string) => {
-    console.log('Clustet id in context ' + clusterId);
+    console.log('Cluster id in context ' + clusterId);
     const filteredList = clusterList.filter((cluster: ClusterInfo) => {
-      return cluster.cluster_id && cluster.cluster_id === clusterId;
+      return cluster.id && cluster.id === clusterId;
     });
     if (filteredList && filteredList.length === 1) {
       selectedCluster = filteredList[0];

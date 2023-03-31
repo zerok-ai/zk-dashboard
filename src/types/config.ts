@@ -1,4 +1,4 @@
-import ClusterInfo from './models/ClusterInfo';
+import { ClusterInfo } from './models/ClusterInfo';
 
 export type ThemeDirection = 'ltr' | 'rtl';
 export type ThemeMode = 'light' | 'dark';

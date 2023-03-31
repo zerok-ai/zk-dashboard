@@ -69,8 +69,8 @@ const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) =>
       },
       {
         Header: 'Timing',
-        accessor: 'traces[0].latency',
-        Cell: ({ value }: { value: number }) => <LinearWithLabel value={value / 1000} sx={{ minWidth: 75 }} />
+        accessor: 'traces',
+        Cell: ({ value }: { value: any[] }) => <LinearWithLabel values={value.map((x) => x.latency)} />
       }
     ],
     []

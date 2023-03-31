@@ -6,7 +6,7 @@ import { ServiceMapEdge } from './models/ServiceMapResponse';
 import MainCard from 'components/MainCard';
 import { getServiceMap } from './controllers/ServiceMapAPIController';
 import { Box, LinearProgress } from '@mui/material';
-import ClusterInfo from 'types/models/ClusterInfo';
+import { ClusterInfo } from 'types/models/ClusterInfo';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 
 var nodeList = new Map<string, Array<string>>();
@@ -78,7 +78,7 @@ const ServiceMap = () => {
 
   function updateServiceMap(clusterId: string) {
     if (!clusterId || clusterId === '') {
-      console.log('cluster ID was null');
+      console.log(`cluster ID was '${clusterId}' (${typeof clusterId})`);
       return;
     }
     getServiceMap(clusterId).then((mapData) => {
@@ -96,10 +96,10 @@ const ServiceMap = () => {
   }, []);
 
   function changeListener(cluster: ClusterInfo) {
-    if (cluster.cluster_id !== selectedClusterId) {
-      console.log('Updating cluster ' + cluster.cluster_name + ',' + cluster.cluster_id);
-      setSelectedClusterId(cluster.cluster_id);
-      updateServiceMap(cluster.cluster_id);
+    if (cluster.id !== selectedClusterId) {
+      console.log('Updating cluster ' + cluster.name + ',' + cluster.id);
+      setSelectedClusterId(cluster.id);
+      updateServiceMap(cluster.id);
     }
   }
 
@@ -107,9 +107,10 @@ const ServiceMap = () => {
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
         let selectedCluster = getSelectedCluster();
-        if (selectedCluster && selectedCluster.cluster_id !== selectedClusterId) {
-          setSelectedClusterId(selectedCluster.cluster_id);
-          updateServiceMap(selectedCluster.cluster_id);
+        console.log(selectedCluster);
+        if (selectedCluster && selectedCluster.id !== selectedClusterId) {
+          setSelectedClusterId(selectedCluster.id);
+          updateServiceMap(selectedCluster.id);
         }
         registerChangeListener(changeListener);
         return (

@@ -3,4 +3,4 @@ resources:
 - Deployment.yaml
 - Service.yaml
 - Ingress.yaml
-namespace: zk-auth
+namespace: zkcloud
