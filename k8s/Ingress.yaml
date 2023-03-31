@@ -14,12 +14,12 @@ metadata:
   name: zerok-dashboard
 spec:
   rules:
-  - host: demo.getanton.com
+  - host: dashboard.zkdev01.getanton.com
     http:
       paths:
       - backend:
           service:
-            name: api-server
+            name: zk-auth
             port:
               number: 80
         path: /v1/

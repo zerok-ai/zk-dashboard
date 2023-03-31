@@ -1,6 +1,7 @@
 // material-ui
 import { Box, LinearProgress, LinearProgressProps, Typography } from '@mui/material';
 import moment from 'moment';
+import { roundToTwoDecimals } from 'utils/math';
 
 type LinearWithLabelType = {
   values: number[];
@@ -11,13 +12,13 @@ export default function LinearWithLabel({ values, ...others }: LinearProgressPro
   const getFormattedValue = (nsValue: number): string => {
     const digits = nsValue.toString().length;
     if (digits <= 3) {
-      return Math.round(nsValue) + 'ns';
+      return roundToTwoDecimals(nsValue) + 'ns';
     } else if (digits <= 6) {
-      return Math.round(nsValue / 10 ** (digits - 3)) + 'us';
+      return roundToTwoDecimals(nsValue / 10 ** 3) + 'us';
     } else if (digits <= 9) {
-      return Math.round(nsValue / 10 ** (digits - 3)) + 'ms';
+      return roundToTwoDecimals(nsValue / 10 ** 6) + 'ms';
     } else {
-      return moment.duration(nsValue / 10 ** (digits - 9), 'seconds').humanize();
+      return moment.duration(nsValue / 10 ** 9, 'seconds').humanize();
     }
   };
 

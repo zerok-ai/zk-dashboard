@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-app
-          image: us-west1-docker.pkg.dev/zerok-dev/zerok-dashboard/zerok-dashboard:latest
+          image: us-west1-docker.pkg.dev/zerok-dev/zerok-dashboard/zerok-dashboard:dev
           imagePullPolicy: Always
           ports:
             - containerPort: 80

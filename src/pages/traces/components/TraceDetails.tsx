@@ -33,6 +33,7 @@ const TraceDetails = ({ data, traceModal }: any) => {
                   traceModal.setModalData(spanData);
                   traceModal.setOpen(true);
                 }}
+                sx={{ textTransform: 'none', fontFamily: 'monospace' }}
               >
                 {value}
               </Button>
