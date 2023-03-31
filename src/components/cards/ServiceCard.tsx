@@ -16,6 +16,7 @@ import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 
 import { convertNanoToMilliSeconds, roundToTwoDecimals } from 'utils/math';
+import { toNumber } from 'lodash';
 
 // ==============================|| SERVICE CARD ||============================== //
 
@@ -174,7 +175,7 @@ const ServiceCard = ({
                     <Grid item xs={6}>
                       <Stack direction="column" justifyContent="center" alignItems="center" spacing={{ xs: 1, sm: 1, md: 1 }}>
                         <Typography color="textPrimary" variant="h5">
-                          {roundToTwoDecimals(httpReqThroughputIn)}
+                          {roundToTwoDecimals(toNumber(httpReqThroughputIn))}
                         </Typography>
                         <Typography
                           color="textSecondary"
