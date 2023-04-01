@@ -17,14 +17,11 @@ import Moment from 'react-moment';
 
 // assets
 import { DownOutlined, RightOutlined } from '@ant-design/icons';
-import MultiProgress from 'react-multi-progress';
-import { useTheme } from '@mui/material/styles';
+import TraceSnapshot from './TraceSnapshot';
 
 // ==============================|| REACT TABLE - EXPANDING TABLE ||============================== //
 
 const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) => {
-  const theme = useTheme();
-
   function traceContainsException(traceId: string): Number {
     const traceSpans = data.filter((x) => x.trace_id === traceId)[0];
     console.log('>', traceSpans);
@@ -32,19 +29,6 @@ const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) =>
     return exceptionCount;
   }
 
-  const getTotalLatency = (spans: any): number => {
-    const sum = spans
-      .map((x: any): number => x.latency)
-      .reduce(function (a: number, b: number) {
-        return a + b;
-      }, 0);
-    return sum;
-  };
-
-  console.log(
-    'totalLatency',
-    data.map((x) => x.latency)
-  );
   const columns = useMemo(
     () => [
       {
@@ -87,34 +71,11 @@ const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) =>
       {
         Header: 'Timing',
         accessor: 'traces',
-        Cell: ({ value }: { value: any[] }) => {
-          //<LinearWithLabel values={value.map((x) => x.latency)} />
-          const totalLatency = getTotalLatency(value);
-          return (
-            <>
-              <MultiProgress
-                round={false}
-                backgroundColor={theme.palette.background.default}
-                height={12}
-                elements={value.map((span: any, idx) => {
-                  return {
-                    value: (span.latency / totalLatency) * 100,
-                    color: getColor(idx)
-                  };
-                })}
-              />
-            </>
-          );
-        }
+        Cell: ({ value }: { value: any[] }) => <TraceSnapshot spans={value} />
       }
     ],
     []
   );
-
-  const getColor = (idx: number): any => {
-    const colors = [theme.palette.success.dark, theme.palette.error.dark, theme.palette.error.light, theme.palette.success.light];
-    return colors[idx];
-  };
 
   const renderRowSubComponent = useCallback(
     ({ row: { id } }: { row: Row<{}> }) => <TraceDetails data={data[Number(id)].traces} traceModal={traceModal} />,

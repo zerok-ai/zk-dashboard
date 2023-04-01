@@ -5,9 +5,10 @@ import { alpha, useTheme } from '@mui/material/styles';
 import { Button, TableBody } from '@mui/material';
 import { Chip, TableCell, TableRow } from '@mui/material';
 
-import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
+// import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
 import ReactTable from './ReactTable';
 import Moment from 'react-moment';
+import TraceSnapshot from './TraceSnapshot';
 
 // ==============================|| EXPANDING TABLE - USER DETAILS ||============================== //
 
@@ -64,8 +65,9 @@ const TraceDetails = ({ data, traceModal }: any) => {
       },
       {
         Header: 'Timing',
-        accessor: 'latency',
-        Cell: ({ value }: { value: number }) => <LinearWithLabel values={[value]} />
+        accessor: 'span_id',
+        id: 'span_id + latency',
+        Cell: ({ value, data }: { value: string; data: any }) => <TraceSnapshot spans={data} spanId={value} />
       }
     ],
     [data, traceModal]
