@@ -5,7 +5,7 @@ import MainCard from 'components/MainCard';
 import { useState, useEffect, ReactNode } from 'react';
 import { getServiceDetails } from 'store/reducers/services';
 import { useParams } from 'react-router-dom';
-import { NodeIndexOutlined, IssuesCloseOutlined, BarChartOutlined, AlertOutlined, MenuOutlined } from '@ant-design/icons';
+import { ServiceDetailsType, getTabBarItems } from './service-details-components/service-details-tabcontents';
 import TimeSelector from 'components/TimeSelector';
 
 interface TabPanelProps {
@@ -32,13 +32,13 @@ function a11yProps(index: number) {
 }
 
 const ServiceDetailsPage = () => {
-  const { clusterId, ns, name } = useParams();
-  const [interval, setInterval] = useState('-5m');
+  const { clusterId, ns, service } = useParams<ServiceDetailsType>();
+  const [st, setST] = useState('-5m');
 
   function handleIntervalChange(e: SelectChangeEvent<string>) {
     setLatencyData([]);
     setHttpData([]);
-    setInterval(e.target.value);
+    setST(e.target.value);
   }
 
   const [latencyData, setLatencyData] = useState([
@@ -58,7 +58,7 @@ const ServiceDetailsPage = () => {
   const [timeStamps, setTimeStamps] = useState([] as string[]);
 
   useEffect(() => {
-    const data = getServiceDetails(clusterId, ns, name, interval);
+    const data = getServiceDetails(clusterId, ns, service, st);
     data.then((value) => {
       if (value) {
         setLatencyData(value.latency);
@@ -67,13 +67,15 @@ const ServiceDetailsPage = () => {
         console.log(value);
       }
     });
-  }, [name, ns, interval, clusterId]);
+  }, [service, ns, st, clusterId]);
 
   const [tabValue, setTabValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
+
+  const tabBarItems = getTabBarItems({ clusterId: clusterId || '', ns: ns || '', service: service || '', st });
 
   return (
     <Grid container rowSpacing={1} columnSpacing={3}>
@@ -93,11 +95,11 @@ const ServiceDetailsPage = () => {
               textDecoration: 'none'
             }}
           >
-            {name}
+            {service}
           </Typography>
         </Grid>
         <Grid item xs={1} sx={{ pr: 2 }}>
-          <TimeSelector interval={interval} handleIntervalChange={handleIntervalChange} />
+          <TimeSelector interval={st} handleIntervalChange={handleIntervalChange} />
         </Grid>
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
@@ -127,29 +129,17 @@ const ServiceDetailsPage = () => {
       <Grid item xs={12} md={12} lg={12} sx={{ mt: 4 }}>
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={tabValue} onChange={handleChange} aria-label="basic tabs example" variant="fullWidth">
-              <Tab label="Traces" icon={<NodeIndexOutlined />} iconPosition="start" {...a11yProps(0)} />
-              <Tab label="Issues" icon={<IssuesCloseOutlined />} iconPosition="start" {...a11yProps(1)} />
-              <Tab label="Metrics" icon={<BarChartOutlined />} iconPosition="start" {...a11yProps(2)} />
-              <Tab label="Logs & Events" icon={<MenuOutlined />} iconPosition="start" {...a11yProps(3)} />
-              <Tab label="Alers" icon={<AlertOutlined />} iconPosition="start" {...a11yProps(4)} />
+            <Tabs value={tabValue} onChange={handleChange} variant="fullWidth">
+              {tabBarItems.map((tabBarItem, idx: number) => (
+                <Tab key={idx} label={tabBarItem.label} icon={tabBarItem.icon} iconPosition="start" {...a11yProps(idx)} />
+              ))}
             </Tabs>
           </Box>
-          <TabPanel value={tabValue} index={0}>
-            <Typography variant="h6">Traces data to be shown here.</Typography>
-          </TabPanel>
-          <TabPanel value={tabValue} index={1}>
-            <Typography variant="h6">Issues to be shown here.</Typography>
-          </TabPanel>
-          <TabPanel value={tabValue} index={2}>
-            <Typography variant="h6">Metrics to be shown here.</Typography>
-          </TabPanel>
-          <TabPanel value={tabValue} index={3}>
-            <Typography variant="h6">Logs & Events to be shown here.</Typography>
-          </TabPanel>
-          <TabPanel value={tabValue} index={4}>
-            <Typography variant="h6">Alerts to be shown here.</Typography>
-          </TabPanel>
+          {tabBarItems.map((tabBarItem, idx: number) => (
+            <TabPanel value={tabValue} index={idx} key={idx}>
+              {tabBarItem.tabContents}
+            </TabPanel>
+          ))}
         </Box>
       </Grid>
     </Grid>
