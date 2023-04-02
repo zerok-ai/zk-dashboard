@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 // material-ui
-import { Chip, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 
 // third-party
 import { Column, useTable, HeaderGroup, Cell } from 'react-table';
@@ -9,7 +9,6 @@ import { Column, useTable, HeaderGroup, Cell } from 'react-table';
 // project import
 import MainCard from 'components/MainCard';
 import ScrollX from 'components/ScrollX';
-import Moment from 'react-moment';
 
 // ==============================|| REACT TABLE ||============================== //
 
@@ -49,45 +48,10 @@ function ReactTable({ columns, data, striped }: { columns: Column[]; data: {}[];
 
 // ==============================|| REACT TABLE - BASIC ||============================== //
 
-const BasicTable = ({ data, striped, title }: { data: any[]; striped?: boolean; title?: string }) => {
+const BasicTable = ({ data, cols, striped, title }: { data: any[]; cols: Column[]; striped?: boolean; title?: string }) => {
   console.log('Basic table:', data);
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: 'Service',
-        accessor: 'service'
-      },
-      {
-        Header: 'Pod Name',
-        accessor: 'pod'
-      },
-      {
-        Header: 'Containers',
-        accessor: 'containers'
-      },
-      {
-        Header: 'Age',
-        accessor: 'startTime',
-        Cell: ({ value }: { value: string }) => <Moment date={value} fromNow ago />
-      },
-      {
-        Header: 'Status',
-        accessor: 'status.phase',
-        Cell: ({ value }: { value: string }) => {
-          switch (value) {
-            case 'Stopped':
-              return <Chip color="error" label="Stopped" size="small" variant="light" />;
-            case 'Running':
-              return <Chip color="success" label="Running" size="small" variant="light" />;
-            default:
-              return <Chip color="info" label={value} size="small" variant="light" />;
-          }
-        }
-      }
-    ],
-    []
-  );
+  const columns = useMemo(() => cols, []);
 
   return (
     <MainCard content={false} title={title}>
