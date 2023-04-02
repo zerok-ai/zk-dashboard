@@ -1,4 +1,4 @@
-import { Grid, Box, LinearProgress, SelectChangeEvent, Modal, Typography } from '@mui/material';
+import { Grid, Box, LinearProgress, SelectChangeEvent, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ServicesHeader from 'sections/apps/ServicesHeader';
 import { ServicesFilter } from 'types/services';
@@ -10,6 +10,7 @@ import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 import { ClusterInfo } from 'types/models/ClusterInfo';
 import Moment from 'moment';
 import { JsonViewer } from '@textea/json-viewer';
+import RightPanelModal from 'components/modals/RightPanelModal';
 
 const Traces = () => {
   const initialState: ServicesFilter = {
@@ -104,17 +105,6 @@ const Traces = () => {
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState('');
 
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '0',
-    left: '50%',
-    width: '50%',
-    height: '100vh',
-    bgcolor: 'background.paper',
-    outline: 'none',
-    p: 4
-  };
-
   const JSONStyle = {
     span: {
       color: 'rgba(255,255,255,0.5) !important'
@@ -133,18 +123,20 @@ const Traces = () => {
         setSelectedClusterId(selectedCluster?.id);
         registerChangeListener(changeListener);
 
+        const traceBody = (
+          <>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Trace ID:
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2, height: '90vh', overflow: 'scroll' }}>
+              <JsonViewer value={modalData} sx={JSONStyle} />
+            </Typography>
+          </>
+        );
+
         return (
           <Box sx={{ display: 'block' }}>
-            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Trace ID:
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2, height: '90vh', overflow: 'scroll' }}>
-                  <JsonViewer value={modalData} sx={JSONStyle} />
-                </Typography>
-              </Box>
-            </Modal>
+            <RightPanelModal open={open} onClose={handleClose} body={traceBody}></RightPanelModal>
             <Grid container spacing={2.5}>
               <Grid item xs={12}>
                 <ServicesHeader
