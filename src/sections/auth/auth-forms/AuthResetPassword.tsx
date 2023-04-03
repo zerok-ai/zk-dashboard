@@ -1,6 +1,7 @@
 import { useEffect, useState, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { SetInviteUserPassword } from 'api/auth/ResetPassword';
 
 // material-ui
 import {
@@ -36,7 +37,12 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 // ============================|| STATIC - RESET PASSWORD ||============================ //
 
-const AuthResetPassword = () => {
+interface ResetPasswordProps {
+  flow: string | null;
+  token: string | null;
+}
+
+const AuthResetPassword = ({ flow, token }: ResetPasswordProps) => {
   const scriptedRef = useScriptRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -83,6 +89,7 @@ const AuthResetPassword = () => {
           try {
             // password reset
             if (scriptedRef.current) {
+              await SetInviteUserPassword(values.password, flow, token);
               setStatus({ success: true });
               setSubmitting(false);
 
