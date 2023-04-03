@@ -7,15 +7,30 @@ export type SetInviteUserPasswordType = {
 };
 
 export const SetInviteUserPassword = async (password: string, flow: string | null, token: string | null) => {
-  const response = await axios.post(
-    zkCloudEndpoint,
-    { password },
-    {
-      params: {
-        flow,
-        token
+  console.log(password, flow, token);
+  try {
+    const response = await axios.post(
+      zkCloudEndpoint,
+      { password },
+      {
+        params: {
+          flow,
+          token
+        }
       }
+    );
+    console.log(response);
+    if (response !== undefined && response !== null) {
+      let status = response.status;
+      console.log(status);
+      if (status !== 200) {
+        return false;
+      }
+      return true;
     }
-  );
-  console.log(response);
+    return false;
+  } catch (error) {
+    console.log('Error while resetting password ', error);
+    return false;
+  }
 };
