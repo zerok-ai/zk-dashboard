@@ -30,6 +30,7 @@ const ServiceRoutes = {
           title: '${service}',
           titleIsTemplate: true,
           breadcrumbs: true,
+          breadcrumbTitle: '${ns}',
           breadcrumbItems: [
             {
               title: 'Services',

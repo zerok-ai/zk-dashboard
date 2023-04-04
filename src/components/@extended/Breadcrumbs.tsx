@@ -146,6 +146,9 @@ const Breadcrumbs = ({
         setItem({
           breadcrumbs: routeProps.breadcrumbs,
           type: 'item',
+          elements: routeProps.titleIsTemplate
+            ? fillTemplate(routeProps.breadcrumbTitle || routeProps.title, filterMatch?.params)
+            : routeProps.title,
           title: routeProps.titleIsTemplate ? fillTemplate(routeProps.title, filterMatch?.params) : routeProps.title
         });
       }
@@ -205,7 +208,7 @@ const Breadcrumbs = ({
     itemContent = (
       <Typography variant="subtitle1" color="textPrimary">
         {icons && <ItemIcon style={iconSX} />}
-        {itemTitle}
+        {item.elements || itemTitle}
       </Typography>
     );
 
