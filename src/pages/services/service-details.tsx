@@ -80,24 +80,7 @@ const ServiceDetailsPage = () => {
   return (
     <Grid container rowSpacing={1} columnSpacing={3}>
       <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ mb: 3, ml: 3 }}>
-        <Grid item xs={11} sx={{ pr: 2 }}>
-          <Typography variant="subtitle1" color="GrayText">
-            {ns}/
-          </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h4"
-            sx={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              display: 'block',
-              textDecoration: 'none'
-            }}
-          >
-            {service}
-          </Typography>
-        </Grid>
+        <Grid item xs={11} sx={{ pr: 2 }}></Grid>
         <Grid item xs={1} sx={{ pr: 2 }}>
           <TimeSelector interval={st} handleIntervalChange={handleIntervalChange} />
         </Grid>

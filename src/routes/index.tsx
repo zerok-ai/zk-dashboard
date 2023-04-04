@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom';
+import { RouteObject, useRoutes } from 'react-router-dom';
 
 // project import
 import LoginRoutes from './LoginRoutes';
@@ -7,6 +7,7 @@ import ServiceRoutes from './ServiceRoutes';
 
 // ==============================|| ROUTING RENDER ||============================== //
 
+export const allRoutes: RouteObject[] = [LoginRoutes, MainRoutes, ServiceRoutes];
 export default function ThemeRoutes() {
-  return useRoutes([LoginRoutes, MainRoutes, ServiceRoutes]);
+  return useRoutes(allRoutes);
 }

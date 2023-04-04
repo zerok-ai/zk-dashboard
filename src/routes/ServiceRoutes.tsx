@@ -26,8 +26,17 @@ const ServiceRoutes = {
           element: <ServicesListPage />
         },
         {
-          path: 'service-details/:clusterId/:ns/:service',
-          title: 'service-details',
+          path: 'services/:clusterId/:ns/:service',
+          title: '${service}',
+          titleIsTemplate: true,
+          breadcrumbs: true,
+          breadcrumbItems: [
+            {
+              title: 'Services',
+              link: '/services',
+              icon: ''
+            }
+          ],
           element: <ServiceDetailsPage />
         }
       ]

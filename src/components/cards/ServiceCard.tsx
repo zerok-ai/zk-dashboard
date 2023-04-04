@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 // material-ui
 import { Box, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // types
 import { ServiceCardProps } from 'types/services';
@@ -42,6 +42,9 @@ const ServiceCard = ({
   outboundConns,
   httpLatencyIn
 }: ServiceCardProps) => {
+
+  const navigate = useNavigate();
+
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false);
@@ -74,6 +77,10 @@ const ServiceCard = ({
     return nameStr.split('/')[0];
   };
 
+  const onServiceClick = () => {
+    navigate(`/services/${clusterId}/${getNamespace(name)}/${getFormattedServiceName(name)}`);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -99,8 +106,7 @@ const ServiceCard = ({
                         {getNamespace(name)}/
                       </Typography>
                       <Typography
-                        component={Link}
-                        to={`/service-details/${clusterId}/${getNamespace(name)}/${getFormattedServiceName(name)}`}
+                        onClick={onServiceClick}
                         color="textPrimary"
                         variant="h4"
                         sx={{
@@ -108,7 +114,8 @@ const ServiceCard = ({
                           textOverflow: 'ellipsis',
                           whiteSpace: 'nowrap',
                           display: 'block',
-                          textDecoration: 'none'
+                          textDecoration: 'none',
+                          cursor: 'pointer'
                         }}
                       >
                         {getFormattedServiceName(name)}

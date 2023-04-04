@@ -21,6 +21,7 @@ const IssuesPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')))
 const MetricsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const LogsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const AlertsPage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+const UserPage = Loadable(lazy(() => import('pages/admin/user-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -46,6 +47,11 @@ const MainRoutes = {
         {
           path: 'traces',
           element: <TracesPage />
+        },
+        {
+          path: 'user',
+          element: <UserPage />,
+          breadcrumbs: false
         },
         {
           path: 'workloads',

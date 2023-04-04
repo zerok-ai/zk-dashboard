@@ -43,7 +43,7 @@ export const getTabBarItems = (serviceDetails: ServiceDetailsType) => {
       tabContents: <Typography variant="h6">Logs & Events to be shown here.</Typography>
     },
     {
-      label: 'Alers',
+      label: 'Alerts',
       icon: <AlertOutlined />,
       tabContents: <Typography variant="h6">Alerts to be shown here.</Typography>
     }
