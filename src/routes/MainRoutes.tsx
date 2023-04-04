@@ -51,7 +51,8 @@ const MainRoutes = {
         {
           path: 'user',
           element: <UserPage />,
-          breadcrumbs: false
+          breadcrumbs: true,
+          title: 'Users'
         },
         {
           path: 'workloads',
