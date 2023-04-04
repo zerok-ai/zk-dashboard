@@ -1,4 +1,5 @@
 import axios from 'utils/axios';
+import { maskPassword } from 'utils/auth';
 
 const zkCloudEndpoint = '/v1/p/users/invite/accept';
 
@@ -7,6 +8,7 @@ export type SetInviteUserPasswordType = {
 };
 
 export const SetInviteUserPassword = async (password: string, flow: string | null, token: string | null) => {
+  password = maskPassword(password);
   console.log(password, flow, token);
   try {
     const response = await axios.post(
