@@ -89,10 +89,12 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
 
   const addSessionListener = () => {
     axios.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        return response;
+      },
       (error) => {
-        console.error('error: ', error);
-        if (error.status === 419) {
+        console.log('error: ', error);
+        if (error.status === 419 || error.error?.kind === 'SESSION_EXPIRED') {
           logout();
         }
         Promise.reject((error.response && error.response.data) || 'Wrong Services');

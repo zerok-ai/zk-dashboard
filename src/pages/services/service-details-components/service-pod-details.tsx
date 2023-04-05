@@ -8,6 +8,9 @@ import BasicTable from 'components/tables/BasicTable';
 import LoaderTable from 'components/tables/LoaderTable';
 import { useEffect, useState } from 'react';
 import Moment from 'react-moment';
+import IncomeAreaChart from 'sections/charts/IncomeAreaChart';
+import { parseTimeseriesData } from 'utils/chart';
+import { stripNS } from 'utils/strings';
 // import IncomeAreaChart from 'sections/charts/IncomeAreaChart';
 import { ServiceDetailsType } from './service-details-tabcontents';
 
@@ -37,15 +40,46 @@ const ServicePodDetails = (params: ServiceDetailsType) => {
 
   const generatePodMetrics = (pod: string) => {
     getClusterPodMetrics(params.clusterId, params.ns, pod, params.st).then((podMetricsResponse) => {
+      const timeseriesCPUData = parseTimeseriesData(podMetricsResponse.cpuUsage?.results || []);
+      const cpuUsageData = timeseriesCPUData.cpu || [];
+      const cpuUsageTS = timeseriesCPUData.time || [];
+
+      const timeseriesHTTPData = parseTimeseriesData(podMetricsResponse.errAndReq?.results || []);
+      const httpData: any[] = timeseriesHTTPData.http || [];
+      const httpTS: any[] = timeseriesHTTPData.time || [];
+
+      const timeseriesLatencyData = parseTimeseriesData(podMetricsResponse.latency?.results || []);
+      const latencyData: any[] = timeseriesLatencyData.latency || [];
+      const latencyTS: string[] = timeseriesLatencyData.time;
       setPodMetricsBody(
-        <Grid container>
-          <Grid item xs={12} md={6} lg={6}>
+        <Grid container display={'block'} spacing={3}>
+          <Grid item>
             <Grid item>
-              <Typography variant="h4">Latency data</Typography>
+              <Typography variant="h4">Latency</Typography>
             </Grid>
             <Grid item xs={12}>
               <MainCard content={false} sx={{ mt: 1.5 }}>
-                <Box sx={{ pt: 1, pr: 2 }}>{/* <IncomeAreaChart series={latencyData} timeStamps={timeStamps} /> */}</Box>
+                <Box>{<IncomeAreaChart series={latencyData} timeStamps={latencyTS} />}</Box>
+              </MainCard>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid item>
+              <Typography variant="h4">CPU usage</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <MainCard content={false} sx={{ mt: 1.5 }}>
+                <Box>{<IncomeAreaChart series={cpuUsageData} timeStamps={cpuUsageTS} />}</Box>
+              </MainCard>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid item>
+              <Typography variant="h4">Throughput</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <MainCard content={false} sx={{ mt: 1.5 }}>
+                <Box>{<IncomeAreaChart series={httpData} timeStamps={httpTS} />}</Box>
               </MainCard>
             </Grid>
           </Grid>
@@ -59,7 +93,7 @@ const ServicePodDetails = (params: ServiceDetailsType) => {
       Header: 'Pod Name',
       accessor: 'pod',
       Cell: ({ value }: { value: string }) => (
-        <Button variant="text" component="div" color="info" onClick={() => plotPodMetrics(value)}>
+        <Button variant="text" component="div" color="info" onClick={() => plotPodMetrics(stripNS(value))}>
           {value}
         </Button>
       )

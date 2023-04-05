@@ -15,6 +15,7 @@ const style = {
   height: '100vh',
   bgcolor: 'background.paper',
   outline: 'none',
+  overflow: 'scroll',
   p: 4
 };
 

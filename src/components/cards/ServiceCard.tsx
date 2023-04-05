@@ -17,6 +17,7 @@ import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceho
 
 import { convertNanoToMilliSeconds, roundToTwoDecimals } from 'utils/math';
 import { toNumber } from 'lodash';
+import { getNamespace, getFormattedServiceName } from 'utils/strings';
 
 // ==============================|| SERVICE CARD ||============================== //
 
@@ -42,7 +43,6 @@ const ServiceCard = ({
   outboundConns,
   httpLatencyIn
 }: ServiceCardProps) => {
-
   const navigate = useNavigate();
 
   const [isLoading, setLoading] = useState(true);
@@ -55,27 +55,6 @@ const ServiceCard = ({
   if (httpErrorRateIn && httpErrorRateIn > 0) {
     isHealthy = false;
   }
-
-  const stripNS = (nameStr: string) => {
-    return nameStr.split('/')[1];
-  };
-
-  const getFormattedServiceName = (nameStr: string) => {
-    try {
-      let namesObj = JSON.parse(nameStr);
-      nameStr = namesObj.map((itemName: string) => stripNS(itemName)).join(', ');
-      return nameStr;
-    } catch (err) {}
-    return stripNS(nameStr);
-  };
-
-  const getNamespace = (nameStr: string) => {
-    try {
-      let namesObj = JSON.parse(nameStr);
-      nameStr = namesObj[0];
-    } catch (err) {}
-    return nameStr.split('/')[0];
-  };
 
   const onServiceClick = () => {
     navigate(`/services/${clusterId}/${getNamespace(name)}/${getFormattedServiceName(name)}`);

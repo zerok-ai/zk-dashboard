@@ -2,18 +2,41 @@ import axios from 'utils/axios';
 
 const zkCloudEndpoint = '/v1/u';
 
-export type PodListResultsType = {
-  pod: string;
-  service: string;
-  startTime: string;
-  containers: number;
-  status: {
-    phase: string;
-    message: string;
-    reason: string;
-    ready: boolean;
-  };
+export type CpuUsageResultsType = {
+  actual_disk_read_throughput: string;
+  actual_disk_write_throughput: string;
+  container: string;
+  cpu_usage: string;
+  rss: string;
+  time: string;
+  total_disk_read_throughput: string;
+  total_disk_write_throughput: string;
+  vsize: string;
 };
+
+export type ErrAndReqResultsType = {
+  container: string;
+  error_rate: number;
+  errors_per_ns: number;
+  request_throughput: string;
+};
+
+export type LatencyResultsType = {
+  time: string;
+  latency_p50: number;
+  latency_p90: number;
+  latency_p99: number;
+};
+
+export type MetricsResultsType = {
+  AcceptedBytes: number;
+  TotalBytes: number;
+  ExecutionTime: number;
+  CompilationTime: number;
+  BytesProcessed: number;
+  RecordsProcessed: number;
+};
+
 export type APIResponseStatsType = {
   AcceptedBytes: number;
   TotalBytes: number;
@@ -23,10 +46,16 @@ export type APIResponseStatsType = {
   RecordsProcessed: number;
 };
 
+export type MetricsResultType = {
+  results: (LatencyResultsType | ErrAndReqResultsType | CpuUsageResultsType | any)[];
+  stats: APIResponseStatsType;
+  status: number;
+};
+
 export type GetClusterPodMetricsResponseType = {
-  results?: PodListResultsType[];
-  stats?: APIResponseStatsType;
-  status?: number;
+  cpuUsage?: MetricsResultType;
+  errAndReq?: MetricsResultType;
+  latency?: MetricsResultType;
 };
 
 export async function getClusterPodMetrics(
@@ -46,8 +75,6 @@ export async function getClusterPodMetrics(
     return response.data;
   } catch (err) {
     console.error('Error caught while fetching pods list.', err);
-    return {
-      results: []
-    };
+    return {};
   }
 }
