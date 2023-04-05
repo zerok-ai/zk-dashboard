@@ -10,19 +10,19 @@ export type userDetailType = {
 };
 
 export type OrgListUsersResponseType = {
-  orgUsers: userDetailType[];
+  users: userDetailType[];
 };
 
 const ListUsers = (): Promise<OrgListUsersResponseType> => {
   return axios
-    .get(zkCloudEndpoint + '/')
+    .get(zkCloudEndpoint)
     .then((response): OrgListUsersResponseType => {
       return response.data.payload;
     })
     .catch((err) => {
       console.error('Error caught while fetching cluster list.', err);
       return {
-        orgUsers: []
+        users: []
       };
     });
 };

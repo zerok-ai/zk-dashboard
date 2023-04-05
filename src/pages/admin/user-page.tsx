@@ -65,7 +65,7 @@ const UserPage = () => {
     ListUsers()
       .then((listUserResponse: OrgListUsersResponseType) => {
         setUserList(
-          listUserResponse.orgUsers.map((user, idx) => {
+          listUserResponse.users.map((user, idx) => {
             return createData(user.name, `avatar-${(idx % 5) + 1}.png`, user.email, idx % 4, user.isApproved);
           })
         );
