@@ -4,16 +4,17 @@ import { useState } from 'react';
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 // assets
-import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
+import { EditOutlined, LogoutOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
 interface Props {
   handleLogout: () => void;
+  closeMenu: () => void;
 }
 
-const ProfileTab = ({ handleLogout }: Props) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const ProfileTab = ({ handleLogout, closeMenu }: Props) => {
+  const [selectedIndex, setSelectedIndex] = useState(3);
   const handleListItemClick = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
     setSelectedIndex(index);
   };
@@ -28,22 +29,9 @@ const ProfileTab = ({ handleLogout }: Props) => {
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 1} onClick={(event: React.MouseEvent<HTMLDivElement>) => handleListItemClick(event, 1)}>
         <ListItemIcon>
-          <UserOutlined />
+          <QuestionCircleOutlined />
         </ListItemIcon>
-        <ListItemText primary="View Profile" />
-      </ListItemButton>
-
-      <ListItemButton selected={selectedIndex === 3} onClick={(event: React.MouseEvent<HTMLDivElement>) => handleListItemClick(event, 3)}>
-        <ListItemIcon>
-          <ProfileOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Social Profile" />
-      </ListItemButton>
-      <ListItemButton selected={selectedIndex === 4} onClick={(event: React.MouseEvent<HTMLDivElement>) => handleListItemClick(event, 4)}>
-        <ListItemIcon>
-          <WalletOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Billing" />
+        <ListItemText primary="Support" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
         <ListItemIcon>

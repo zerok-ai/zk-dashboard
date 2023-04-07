@@ -77,6 +77,10 @@ const Profile = () => {
     setOpen(false);
   };
 
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -194,10 +198,10 @@ const Profile = () => {
                     </Tabs>
                   </Box>
                   <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ProfileTab handleLogout={handleLogout} />
+                    <ProfileTab handleLogout={handleLogout} closeMenu={closeMenu} />
                   </TabPanel>
                   <TabPanel value={value} index={1} dir={theme.direction}>
-                    <SettingTab />
+                    <SettingTab closeMenu={closeMenu} />
                   </TabPanel>
                 </MainCard>
               </ClickAwayListener>
