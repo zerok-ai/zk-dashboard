@@ -1,7 +1,13 @@
 // material-ui
 import {
+  Box,
   Button,
   Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Grid,
   InputLabel,
   Stack,
@@ -28,6 +34,7 @@ import { useEffect, useState } from 'react';
 import { CancelOutlined, DeleteOutline, PersonAddAltOutlined, SendOutlined } from '@mui/icons-material';
 import ListUsers, { OrgListUsersResponseType } from 'api/auth/ListUsers';
 import InviteUser from 'api/auth/InviteUser';
+import DeleteUser from 'api/auth/DeleteUser';
 import toast from 'utils/ToastNotistack';
 import LoaderTable from 'components/tables/LoaderTable';
 
@@ -38,9 +45,10 @@ type UserInfoType = {
   email: string;
   role: number;
   status: boolean;
+  id: string;
 };
-function createData(name: string, avatar: string, email: string, role: number, status: boolean) {
-  return { name, avatar, email, role, status };
+function createData(name: string, avatar: string, email: string, role: number, status: boolean, id: string) {
+  return { name, avatar, email, role, status, id };
 }
 
 const avatarImage = require.context('assets/images/users', true);
@@ -66,7 +74,7 @@ const UserPage = () => {
       .then((listUserResponse: OrgListUsersResponseType) => {
         setUserList(
           listUserResponse.users.map((user, idx) => {
-            return createData(user.name, `avatar-${(idx % 5) + 1}.png`, user.email, idx % 4, user.isApproved);
+            return createData(user.name, `avatar-${(idx % 5) + 1}.png`, user.email, idx % 4, user.isApproved, user.id);
           })
         );
       })
@@ -79,9 +87,57 @@ const UserPage = () => {
       });
   };
 
-  const deleteUser = (userId: string) => {
-    toast('Deleted user successfully.');
-    loadUserList();
+  const [deleteUserDetail, setDeleteUserDetail] = useState<UserInfoType | null>(null);
+  const handleDeleteConfirm = (deleteConfirm: boolean) => {
+    if (!deleteConfirm) {
+      setDeleteUserDetail(null);
+      return;
+    }
+
+    if (!deleteUserDetail || !deleteUserDetail.id) {
+      toast('Invalid operation.', { variant: 'warning' });
+      return;
+    }
+    DeleteUser(deleteUserDetail.id)
+      .then(
+        (response) => {
+          toast('Deleted user successfully.', { variant: 'success' });
+        },
+        (err) => {
+          toast('Error occured while deleting user.', { variant: 'error' });
+        }
+      )
+      .finally(() => {
+        loadUserList();
+        setDeleteUserDetail(null);
+      });
+  };
+
+  const deleteUser = (userDetail: UserInfoType) => {
+    setDeleteUserDetail(userDetail);
+  };
+
+  type inviteUserFormType = {
+    email: string;
+    firstname: string;
+    lastname: string;
+  };
+
+  const handleInviteUser = async (values: inviteUserFormType) => {
+    try {
+      await InviteUser(values.email, values.firstname, values.lastname).then(
+        (response: any) => {
+          toast(`Invite sent successfully to ${values.email}`, { variant: 'success' });
+          loadUserList();
+        },
+        (err: any) => {
+          toast('Failed to invite user. please try again', { variant: 'error' });
+        }
+      );
+    } catch (err: any) {
+      console.error(err);
+      toast('Failed to invite user. please try again', { variant: 'error' });
+    }
   };
 
   useEffect(() => {
@@ -91,6 +147,29 @@ const UserPage = () => {
 
   return (
     <Grid container spacing={3}>
+      <Dialog open={deleteUserDetail !== null} onClose={handleDeleteConfirm}>
+        <Box sx={{ p: 1, py: 1.5 }}>
+          <DialogTitle id="alert-dialog-title">Remove User</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to remove{' '}
+              <b title={deleteUserDetail?.email} style={{ cursor: 'pointer' }}>
+                <u>{deleteUserDetail?.name}</u>
+              </b>{' '}
+              from this org?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button color="error" onClick={() => handleDeleteConfirm(false)}>
+              Cancel
+            </Button>
+            <Button variant="contained" onClick={() => handleDeleteConfirm(true)} autoFocus>
+              Proceed
+            </Button>
+          </DialogActions>
+        </Box>
+      </Dialog>
+
       <Grid item xs={12}>
         <MainCard
           title="Team Members"
@@ -122,20 +201,7 @@ const UserPage = () => {
                   lastname: Yup.string().max(255).required('Lastname is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-                  try {
-                    await InviteUser(values.email, values.firstname, values.lastname).then(
-                      (response: any) => {
-                        toast(`Invite sent successfully to ${values.email}`, { variant: 'success' });
-                        loadUserList();
-                      },
-                      (err: any) => {
-                        toast('Failed to invite user. please try again', { variant: 'error' });
-                      }
-                    );
-                  } catch (err: any) {
-                    console.error(err);
-                    toast('Failed to invite user. please try again', { variant: 'error' });
-                  }
+                  await handleInviteUser(values);
                 }}
               >
                 {({ values, handleChange, handleBlur, handleSubmit }) => (
@@ -243,7 +309,18 @@ const UserPage = () => {
                       <TableCell align="right">
                         {!row.status && (
                           <Stack direction="row" alignItems="center" spacing={1.25} justifyContent="flex-end">
-                            <Button size="small" color="error">
+                            <Button
+                              size="small"
+                              color="error"
+                              onClick={(e) => {
+                                const nameArr = row.name.split(' ');
+                                handleInviteUser({
+                                  email: row.email,
+                                  firstname: nameArr[0],
+                                  lastname: nameArr.slice(1).join(' ')
+                                });
+                              }}
+                            >
                               Resend
                             </Button>
                             <Chip size="small" color="info" variant="outlined" label="Invited" />
@@ -256,7 +333,7 @@ const UserPage = () => {
                           size="small"
                           color="warning"
                           onClick={(e) => {
-                            deleteUser(row.email);
+                            deleteUser(row);
                           }}
                         >
                           <DeleteOutline style={{ fontSize: '1.15rem' }} />

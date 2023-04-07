@@ -1,6 +1,6 @@
 import axios from 'utils/axios';
 
-const zkCloudEndpoint = '/v1/u/users';
+const zkCloudEndpoint = '/v1/u/user';
 
 export type userDetailType = {
   email: string;

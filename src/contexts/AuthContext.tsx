@@ -8,6 +8,7 @@ import authReducer from 'store/reducers/auth';
 import Loader from 'components/Loader';
 import axios from 'utils/axios';
 import { AuthProps, UserProfile, AuthContextType } from 'types/auth';
+import { maskPassword } from 'utils/auth';
 
 // constant
 const initialState: AuthProps = {
@@ -103,7 +104,8 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
   };
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('/v1/p/auth/login', { email, password });
+    const maskedPassword = maskPassword(password);
+    const response = await axios.post('/v1/p/auth/login', { email, password: maskedPassword });
     // const { user } = response.data;
     const { token } = response.headers;
     setSession(token);
@@ -146,7 +148,16 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
     dispatch({ type: LOGOUT });
   };
 
-  const resetPassword = async (email: string) => {};
+  const resetPassword = async (email: string) => {
+    await axios.get(`/v1/p/user/password/recover/${email}`).then(
+      (response) => {
+        return response;
+      },
+      (err) => {
+        return err;
+      }
+    );
+  };
 
   const updateProfile = () => {};
 

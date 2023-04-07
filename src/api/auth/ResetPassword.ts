@@ -1,7 +1,7 @@
 import axios from 'utils/axios';
 import { maskPassword } from 'utils/auth';
 
-const zkCloudEndpoint = '/v1/p/users/invite/accept';
+const zkCloudEndpoint = '/v1/p/user/invite/accept';
 
 export type SetInviteUserPasswordType = {
   status: string;
