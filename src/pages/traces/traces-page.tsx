@@ -1,4 +1,4 @@
-import { Grid, Box, LinearProgress, SelectChangeEvent, Typography } from '@mui/material';
+import { Grid, Box, LinearProgress, SelectChangeEvent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ServicesHeader from 'sections/apps/ServicesHeader';
 import { ServicesFilter } from 'types/services';
@@ -9,8 +9,8 @@ import { traceDataResponse, traceItem } from './models/traceDataResponse';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 import { ClusterInfo } from 'types/models/ClusterInfo';
 import Moment from 'moment';
-import { JsonViewer } from '@textea/json-viewer';
 import RightPanelModal from 'components/modals/RightPanelModal';
+import TraceDetailsSidebar from './components/TraceDetailsSidebar/TraceDetailsSidebar';
 
 const Traces = () => {
   const initialState: ServicesFilter = {
@@ -103,16 +103,7 @@ const Traces = () => {
   }
 
   const [open, setOpen] = useState(false);
-  const [modalData, setModalData] = useState('');
-
-  const JSONStyle = {
-    span: {
-      color: 'rgba(255,255,255,0.5) !important'
-    },
-    '.data-key': {
-      color: 'rgba(255,255,255,0.8) !important'
-    }
-  };
+  const [modalData, setModalData] = useState<any>(undefined);
 
   const handleClose = () => setOpen(false);
 
@@ -123,16 +114,7 @@ const Traces = () => {
         setSelectedClusterId(selectedCluster?.id);
         registerChangeListener(changeListener);
 
-        const traceBody = (
-          <>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Trace ID:
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2, height: '90vh', overflow: 'scroll' }}>
-              <JsonViewer value={modalData} sx={JSONStyle} />
-            </Typography>
-          </>
-        );
+        const traceBody = <TraceDetailsSidebar modalData={modalData} />;
 
         return (
           <Box sx={{ display: 'block' }}>
