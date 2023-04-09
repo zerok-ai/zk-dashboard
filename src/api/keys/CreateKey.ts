@@ -4,7 +4,7 @@ const zkCloudEndpoint = '/v1/u/apikey';
 
 const CreateKey = (): Promise<boolean> => {
   return axios
-    .post(zkCloudEndpoint + '/create')
+    .get(zkCloudEndpoint + '/create')
     .then((response) => {
       if (response) return true;
       else return false;

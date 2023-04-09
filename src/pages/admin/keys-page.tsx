@@ -1,12 +1,31 @@
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { AddTaskOutlined, DeleteOutline } from '@mui/icons-material';
-import { Grid, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Typography, IconButton, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import {
+  Grid,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import CreateKey from 'api/keys/CreateKey';
 import DeleteKey from 'api/keys/DeleteKey';
+import GetKeysForId from 'api/keys/GetKeyForId';
 import ListKeys, { OrgListKeysResponseType, KeyDetailType } from 'api/keys/ListKeys';
 import MainCard from 'components/MainCard';
 import LoaderTable from 'components/tables/LoaderTable';
 import { useEffect, useState } from 'react';
+import { CopyBlock, monokai } from 'react-code-blocks';
 import Moment from 'react-moment';
 import toast from 'utils/ToastNotistack';
 
@@ -72,6 +91,23 @@ const ApiKeysPage = () => {
       });
   };
 
+  const [idKeyMap, setIdKeyMap] = useState({});
+  const getKey = (id: string) => {
+    GetKeysForId(id).then((response) => {
+      setIdKeyMap({
+        ...idKeyMap,
+        [id]: response.apikey?.key
+      });
+    });
+  };
+
+  const hideKey = (id: string) => {
+    setIdKeyMap({
+      ...idKeyMap,
+      [id]: null
+    });
+  };
+
   const deleteKeyHandler = (keyDetail: KeyDetailType) => {
     setDeleteKeyDetail(keyDetail);
   };
@@ -123,6 +159,8 @@ const ApiKeysPage = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ pl: 3 }}>ID</TableCell>
+                    <TableCell>Key</TableCell>
+                    <TableCell>Show/Hide</TableCell>
                     <TableCell>Created</TableCell>
                     <TableCell align="right"></TableCell>
                   </TableRow>
@@ -142,6 +180,50 @@ const ApiKeysPage = () => {
                       </TableCell>
                       <TableCell>
                         <Typography variant="body1" color="secondary">
+                          {idKeyMap[row.id as keyof typeof idKeyMap] ? (
+                            <>
+                              <CopyBlock
+                                text={idKeyMap[row.id as keyof typeof idKeyMap]}
+                                theme={monokai}
+                                showLineNumbers={false}
+                                wrapLines
+                                codeBlock
+                              />
+                            </>
+                          ) : (
+                            <Typography variant="body1" sx={{ letterSpacing: '5px' }}>
+                              ********
+                            </Typography>
+                          )}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body1" color="secondary">
+                          {idKeyMap[row.id as keyof typeof idKeyMap] ? (
+                            <>
+                              <Button
+                                size="small"
+                                onClick={() => {
+                                  hideKey(row.id);
+                                }}
+                              >
+                                <EyeInvisibleOutlined style={{ marginRight: '5px' }} /> Hide
+                              </Button>
+                            </>
+                          ) : (
+                            <Button
+                              size="small"
+                              onClick={() => {
+                                getKey(row.id);
+                              }}
+                            >
+                              <EyeOutlined style={{ marginRight: '5px' }} /> Show
+                            </Button>
+                          )}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="caption" color="secondary">
                           <Moment date={parseFloat(row.createdAtMs)} format={''} />
                         </Typography>
                       </TableCell>

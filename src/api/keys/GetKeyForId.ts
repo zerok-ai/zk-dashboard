@@ -8,23 +8,19 @@ type KeyToIDMapping = {
 };
 
 type GetKeysForIDResponseType = {
-  apikeys: KeyToIDMapping[];
+  apikey: KeyToIDMapping | null;
 };
 
 const GetKeysForId = (id: string): Promise<GetKeysForIDResponseType> => {
   return axios
-    .get(zkCloudEndpoint, {
-      params: {
-        apikey: id
-      }
-    })
+    .get(zkCloudEndpoint + '/' + id)
     .then((response): GetKeysForIDResponseType => {
       return response.data.payload;
     })
     .catch((err) => {
       console.error('Error caught while fetching cluster list.', err);
       return {
-        apikeys: []
+        apikey: null
       };
     });
 };

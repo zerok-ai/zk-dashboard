@@ -31,7 +31,7 @@ import { Formik } from 'formik';
 
 // assets
 import { useEffect, useState } from 'react';
-import { CancelOutlined, DeleteOutline, PersonAddAltOutlined, SendOutlined } from '@mui/icons-material';
+import { Close, DeleteOutline, PersonAddAltOutlined, SendOutlined } from '@mui/icons-material';
 import ListUsers, { OrgListUsersResponseType } from 'api/auth/ListUsers';
 import InviteUser from 'api/auth/InviteUser';
 import DeleteUser from 'api/auth/DeleteUser';
@@ -176,8 +176,8 @@ const UserPage = () => {
           content={false}
           secondary={
             inviteBox ? (
-              <Button variant="outlined" color="secondary" onClick={() => hideInvite()}>
-                <CancelOutlined sx={{ marginRight: '10px' }} /> Cancel
+              <Button variant="text" color="secondary" onClick={() => hideInvite()}>
+                <Close />
               </Button>
             ) : (
               <Button variant="contained" onClick={() => showInvite()}>
