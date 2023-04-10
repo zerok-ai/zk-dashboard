@@ -30,7 +30,8 @@ const TraceDetails = ({ data, traceModal }: any) => {
               <Button
                 variant="text"
                 color="info"
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   traceModal.setModalData(spanData);
                   traceModal.setOpen(true);
                 }}

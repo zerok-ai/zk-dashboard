@@ -5,6 +5,7 @@ import KeyValueTable from './Components/KeyValueTable';
 import RawSpanDetails from './Components/RawSpanDetails';
 import { a11yProps, TabPanelProps, TraceDetailsProps } from './Components/TabBarUtils';
 import TelemetryDetails from './Components/TelemetryDetails';
+import queryString from 'query-string';
 
 const HTTPDetails = (props: TraceDetailsProps) => {
   const [value, setValue] = useState(0);
@@ -23,6 +24,16 @@ const HTTPDetails = (props: TraceDetailsProps) => {
       </div>
     );
   }
+
+  const getPartsOfPath = (pathStr: string) => {
+    const pathParts = pathStr.split('?');
+    return {
+      path: pathParts[0],
+      params: JSON.stringify(queryString.parse(pathParts[1]))
+    };
+  };
+
+  const partsOfPath = getPartsOfPath(props.modalData?.req_path);
 
   return (
     <>
@@ -62,13 +73,17 @@ const HTTPDetails = (props: TraceDetailsProps) => {
                 <Chip variant="filled" color="warning" sx={{ textTransform: 'uppercase' }} label={props.modalData?.req_method}></Chip>
               </Grid>
               <Grid item sx={{ ml: 1.5, pt: 0.4 }}>
-                <Typography variant="h4">{props.modalData?.req_path}</Typography>
+                <Typography variant="h4">{partsOfPath.path}</Typography>
               </Grid>
             </Grid>
             <Divider sx={{ my: 2 }} />
 
             <Typography variant="h5">Headers</Typography>
             <KeyValueTable value={props.modalData?.req_headers} />
+            <Divider sx={{ my: 2 }} />
+
+            <Typography variant="h5">Query Params</Typography>
+            <KeyValueTable value={partsOfPath.params} />
             <Divider sx={{ my: 2 }} />
 
             <Typography variant="h5">Body</Typography>
