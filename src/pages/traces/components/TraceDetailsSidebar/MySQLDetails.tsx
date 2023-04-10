@@ -1,6 +1,7 @@
 import { Typography, Divider, Tabs, Tab, Card, CardContent, Grid, Chip, Box, Stack } from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 import { getFormattedValue } from 'utils/math';
+import { stringWithoutComments } from 'utils/strings';
 import KeyValueTable from './Components/KeyValueTable';
 import RawSpanDetails from './Components/RawSpanDetails';
 import { a11yProps, TabPanelProps, TraceDetailsProps } from './Components/TabBarUtils';
@@ -58,7 +59,7 @@ const MySQLDetails = (props: TraceDetailsProps) => {
         <Card>
           <CardContent sx={{ px: 2.5 }}>
             <Typography variant="h5">Query</Typography>
-            <KeyValueTable value={props.modalData?.req_body} />
+            <KeyValueTable value={stringWithoutComments(props.modalData?.req_body)} />
           </CardContent>
         </Card>
       </TabPanel>

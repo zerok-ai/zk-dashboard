@@ -1,5 +1,6 @@
 import { Grid, Box, Button, Modal, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
-import { useState } from 'react';
+import GetKeysForId from 'api/keys/GetKeyForId';
+import { useEffect, useState } from 'react';
 import { CopyBlock, monokai } from 'react-code-blocks';
 
 const style = {
@@ -20,7 +21,7 @@ type ClusterInstructionsModalProps = {
 };
 
 const installCommand = {
-  code: 'zkctl install ',
+  code: 'zkctl install --apikey ',
   language: 'sh',
   showLineNumbers: false,
   theme: monokai
@@ -39,57 +40,6 @@ const activateAndRestartCommand = {
   showLineNumbers: false,
   theme: monokai
 };
-
-const steps = [
-  {
-    label: <Typography variant="h5">Install ZeroK CLI on Cluster</Typography>,
-    description: (
-      <>
-        Run the following command to install zerok on the current cluster context:
-        <Box sx={{ my: 2 }}>
-          <CopyBlock
-            text={installCommand.code}
-            language={installCommand.language}
-            showLineNumbers={installCommand.showLineNumbers}
-            theme={installCommand.theme}
-            wrapLines
-            codeBlock
-          />
-        </Box>
-      </>
-    )
-  },
-  {
-    label: <Typography variant="h5">Activate zerok and do rolling restart.</Typography>,
-    description: (
-      <>
-        Each namespace in the cluster has to be marked for ZeroK. Once marked, all the new pods will get activated for zerok. I can be done
-        using the following command:
-        <Box sx={{ my: 2 }}>
-          <CopyBlock
-            text={activateCommand.code}
-            language={activateCommand.language}
-            showLineNumbers={activateCommand.showLineNumbers}
-            theme={activateCommand.theme}
-            wrapLines
-            codeBlock
-          />
-        </Box>
-        You have to restart the old pods. You can do both activation and restart using the following command:
-        <Box sx={{ my: 2 }}>
-          <CopyBlock
-            text={activateAndRestartCommand.code}
-            language={activateAndRestartCommand.language}
-            showLineNumbers={activateAndRestartCommand.showLineNumbers}
-            theme={activateAndRestartCommand.theme}
-            wrapLines
-            codeBlock
-          />
-        </Box>
-      </>
-    )
-  }
-];
 
 const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
   const { open, handleClose } = props;
@@ -116,6 +66,64 @@ const ClusterInstructionsModal = (props: ClusterInstructionsModalProps) => {
       );
     }
   };
+
+  const [apiKey, setAPIKey] = useState('');
+  useEffect(() => {
+    GetKeysForId('top').then((response) => {
+      setAPIKey(response?.apikey?.key || '');
+    });
+  }, []);
+
+  const steps = [
+    {
+      label: <Typography variant="h5">Install ZeroK CLI on Cluster</Typography>,
+      description: (
+        <>
+          Run the following command to install zerok on the current cluster context:
+          <Box sx={{ my: 2 }}>
+            <CopyBlock
+              text={installCommand.code + apiKey}
+              language={installCommand.language}
+              showLineNumbers={installCommand.showLineNumbers}
+              theme={installCommand.theme}
+              wrapLines
+              codeBlock
+            />
+          </Box>
+        </>
+      )
+    },
+    {
+      label: <Typography variant="h5">Activate zerok and do rolling restart.</Typography>,
+      description: (
+        <>
+          Each namespace in the cluster has to be marked for ZeroK. Once marked, all the new pods will get activated for zerok. I can be
+          done using the following command:
+          <Box sx={{ my: 2 }}>
+            <CopyBlock
+              text={activateCommand.code}
+              language={activateCommand.language}
+              showLineNumbers={activateCommand.showLineNumbers}
+              theme={activateCommand.theme}
+              wrapLines
+              codeBlock
+            />
+          </Box>
+          You have to restart the old pods. You can do both activation and restart using the following command:
+          <Box sx={{ my: 2 }}>
+            <CopyBlock
+              text={activateAndRestartCommand.code}
+              language={activateAndRestartCommand.language}
+              showLineNumbers={activateAndRestartCommand.showLineNumbers}
+              theme={activateAndRestartCommand.theme}
+              wrapLines
+              codeBlock
+            />
+          </Box>
+        </>
+      )
+    }
+  ];
 
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">

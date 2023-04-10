@@ -23,3 +23,7 @@ export const getNamespace = (nameStr: string) => {
   } catch (err) {}
   return nameStr.split('/')[0];
 };
+
+export const stringWithoutComments = (s: string) => {
+  return s.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
+};

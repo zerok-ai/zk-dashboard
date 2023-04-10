@@ -5,7 +5,11 @@ const KeyValueTable = ({ value }: { value: string }) => {
     const keyValuePair = JSON.parse(value);
     const keys = Object.keys(keyValuePair);
     if (keys.length === 0) {
-      return <Typography variant="body1"> {value || '-'} </Typography>;
+      return (
+        <Typography variant="body1" sx={{ textTransform: 'none', fontFamily: 'monospace' }}>
+          {value || '-'}
+        </Typography>
+      );
     }
     return (
       <>
@@ -26,7 +30,11 @@ const KeyValueTable = ({ value }: { value: string }) => {
       </>
     );
   } catch (err) {
-    return <Typography variant="body1"> {value || '-'} </Typography>;
+    return (
+      <Typography variant="body1" sx={{ textTransform: 'none', fontFamily: 'monospace' }}>
+        {value || '-'}
+      </Typography>
+    );
   }
 };
 

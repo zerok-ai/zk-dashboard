@@ -5,6 +5,7 @@ const zkCloudEndpoint = 'v1/u/apikey';
 type KeyToIDMapping = {
   id: string;
   key: string;
+  createdAt: number;
 };
 
 type GetKeysForIDResponseType = {
