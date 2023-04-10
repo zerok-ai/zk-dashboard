@@ -89,16 +89,15 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
   }, []);
 
   const addSessionListener = () => {
+    console.log('Added Session listener');
     axios.interceptors.response.use(
-      (response) => {
-        return response;
-      },
+      (response) => response,
       (error) => {
-        console.log('error: ', error);
-        if (error.status === 419 || error.error?.kind === 'SESSION_EXPIRED') {
+        const errResponse = error.response;
+        if (errResponse.status === 419 || errResponse.data.error?.kind === 'SESSION_EXPIRED') {
           logout();
         }
-        Promise.reject((error.response && error.response.data) || 'Wrong Services');
+        Promise.reject(error);
       }
     );
   };

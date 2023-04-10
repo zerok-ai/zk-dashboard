@@ -44,7 +44,7 @@ const ServicesHeader = ({
   return (
     <MainCard content={false}>
       <Grid container direction="row" sx={{ m: 1, p: 1 }}>
-        <Grid item xs={10} alignItems="center" justifyContent="left">
+        <Grid item xs={9} alignItems="center" justifyContent="left">
           <TextField
             sx={{ '& .MuiOutlinedInput-input': { pl: 0 } }}
             InputProps={{
@@ -55,12 +55,12 @@ const ServicesHeader = ({
               )
             }}
             value={filter.search}
-            placeholder="Search Service"
+            placeholder="Search"
             size="medium"
             onChange={handleSearch}
           />
         </Grid>
-        <Grid item xs={2} sx={{ pr: 2 }} display="flex" justifyContent="flex-end">
+        <Grid item xs={3} sx={{ pr: 2 }} display="flex" justifyContent="flex-end">
           {showTimeSelector ? <TimeSelector interval={interval} handleIntervalChange={handleIntervalChange} /> : <></>}
           <FormControl>
             <Button variant={'outlined'} sx={{ borderColor: theme.palette.grey[200], p: 1.6 }} onClick={handleRefreshButtonClick}>
