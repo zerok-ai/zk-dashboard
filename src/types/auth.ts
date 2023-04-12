@@ -40,6 +40,7 @@ export type AuthContextType = {
   register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updateProfile: VoidFunction;
+  logoutHandler: () => Promise<void>;
 };
 
 export type FirebaseContextType = {

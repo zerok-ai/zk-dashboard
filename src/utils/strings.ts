@@ -27,3 +27,20 @@ export const getNamespace = (nameStr: string) => {
 export const stringWithoutComments = (s: string) => {
   return s.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
 };
+
+export const JSONParseHandler = (jsonStr: string) => {
+  try {
+    return JSON.parse(jsonStr);
+  } catch (err) {
+    return jsonStr;
+  }
+};
+
+export const isJsonStr = (str: string) => {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (err) {
+    return false;
+  }
+};

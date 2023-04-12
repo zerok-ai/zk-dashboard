@@ -13,7 +13,7 @@ export type traceItem = {
   req_headers: any;
   req_method: string;
   req_path: string;
-  resp_body: any;
+  resp_body: string;
   source: {
     args: {
       pod: string;

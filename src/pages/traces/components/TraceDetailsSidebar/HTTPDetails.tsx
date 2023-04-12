@@ -3,9 +3,11 @@ import { useState, SyntheticEvent } from 'react';
 import { getFormattedValue } from 'utils/math';
 import KeyValueTable from './Components/KeyValueTable';
 import RawSpanDetails from './Components/RawSpanDetails';
-import { a11yProps, TabPanelProps, TraceDetailsProps } from './Components/TabBarUtils';
+import { a11yProps, JSONStyle, TabPanelProps, TraceDetailsProps } from './Components/TabBarUtils';
 import TelemetryDetails from './Components/TelemetryDetails';
 import queryString from 'query-string';
+import { JsonViewer } from '@textea/json-viewer';
+import { isJsonStr, JSONParseHandler } from 'utils/strings';
 
 const HTTPDetails = (props: TraceDetailsProps) => {
   const [value, setValue] = useState(0);
@@ -87,7 +89,11 @@ const HTTPDetails = (props: TraceDetailsProps) => {
             <Divider sx={{ my: 2 }} />
 
             <Typography variant="h5">Body</Typography>
-            <KeyValueTable value={props.modalData?.req_body} />
+            {isJsonStr(props.modalData?.req_body) ? (
+              <JsonViewer sx={JSONStyle} value={JSONParseHandler(props.modalData?.req_body)} />
+            ) : (
+              <KeyValueTable value={props.modalData?.req_body} />
+            )}
           </CardContent>
         </Card>
       </TabPanel>
@@ -102,7 +108,11 @@ const HTTPDetails = (props: TraceDetailsProps) => {
             <Divider sx={{ my: 2 }} />
 
             <Typography variant="h5">Body</Typography>
-            <KeyValueTable value={props.modalData?.resp_body} />
+            {isJsonStr(props.modalData?.resp_body) ? (
+              <JsonViewer sx={JSONStyle} value={JSONParseHandler(props.modalData?.resp_body)} />
+            ) : (
+              <KeyValueTable value={props.modalData?.resp_body} />
+            )}
           </CardContent>
         </Card>
       </TabPanel>

@@ -1,15 +1,22 @@
 import { Grid, Typography } from '@mui/material';
 
 const KeyValueTable = ({ value }: { value: string }) => {
+  const printAsString = () => {
+    return (
+      <Typography variant="body1" sx={{ textTransform: 'none', fontFamily: 'monospace' }}>
+        {value?.toString() || '-'}
+      </Typography>
+    );
+  };
+
   try {
     const keyValuePair = JSON.parse(value);
     const keys = Object.keys(keyValuePair);
     if (keys.length === 0) {
-      return (
-        <Typography variant="body1" sx={{ textTransform: 'none', fontFamily: 'monospace' }}>
-          {value || '-'}
-        </Typography>
-      );
+      return printAsString();
+    }
+    if (Array.isArray(keyValuePair)) {
+      return printAsString();
     }
     return (
       <>
@@ -30,11 +37,7 @@ const KeyValueTable = ({ value }: { value: string }) => {
       </>
     );
   } catch (err) {
-    return (
-      <Typography variant="body1" sx={{ textTransform: 'none', fontFamily: 'monospace' }}>
-        {value || '-'}
-      </Typography>
-    );
+    return printAsString();
   }
 };
 

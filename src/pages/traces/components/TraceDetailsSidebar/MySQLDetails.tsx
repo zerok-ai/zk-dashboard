@@ -1,4 +1,20 @@
-import { Typography, Divider, Tabs, Tab, Card, CardContent, Grid, Chip, Box, Stack } from '@mui/material';
+import {
+  Typography,
+  Divider,
+  Tabs,
+  Tab,
+  Card,
+  CardContent,
+  Grid,
+  Chip,
+  Box,
+  Stack,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer
+} from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 import { getFormattedValue } from 'utils/math';
 import { stringWithoutComments } from 'utils/strings';
@@ -13,6 +29,24 @@ const MySQLDetails = (props: TraceDetailsProps) => {
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  function decodeLengthEncodedHexString(hexStr: any): string[] {
+    const buffer = Buffer.from(hexStr, 'binary');
+    let offset = 0;
+
+    const fields = [];
+
+    while (offset < buffer.length) {
+      const fieldLength = buffer.readUInt8(offset);
+      offset += 1;
+
+      const fieldData = buffer.slice(offset, offset + fieldLength);
+      offset += fieldLength;
+
+      fields.push(fieldData.toString('utf-8'));
+    }
+    return fields;
+  }
 
   // tab panel wrapper
   function TabPanel(props: TabPanelProps) {
@@ -67,7 +101,23 @@ const MySQLDetails = (props: TraceDetailsProps) => {
         <Card>
           <CardContent sx={{ px: 2.5 }}>
             <Typography variant="h5">Result</Typography>
-            <KeyValueTable value={props.modalData?.resp_body} />
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                {props.modalData?.resp_body
+                  .substr(17)
+                  .split(' | ')
+                  .map((row: any) => {
+                    const items = decodeLengthEncodedHexString(row);
+                    return (
+                      <TableBody>
+                        {items.map((item) => {
+                          return <TableCell sx={{ fontFamily: 'monospace' }}>{item}</TableCell>;
+                        })}
+                      </TableBody>
+                    );
+                  })}
+              </Table>
+            </TableContainer>
           </CardContent>
         </Card>
       </TabPanel>

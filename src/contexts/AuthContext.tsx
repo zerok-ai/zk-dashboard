@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
       (error) => {
         const errResponse = error.response;
         if (errResponse.status === 419 || errResponse.data.error?.kind === 'SESSION_EXPIRED') {
-          logout();
+          logoutHandler();
         }
         Promise.reject(error);
       }
@@ -142,6 +142,20 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
     window.localStorage.setItem('users', JSON.stringify(users));
   };
 
+  const logoutHandler = async () => {
+    const token = window.localStorage.getItem('token');
+    if (!token) return;
+    axios.get('/v1/u/auth/logout').then(
+      (response) => {
+        console.log(response);
+        logout();
+      },
+      (error) => {
+        console.log('Error: ', error);
+      }
+    );
+  };
+
   const logout = () => {
     setSession(null);
     dispatch({ type: LOGOUT });
@@ -165,7 +179,9 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
   }
 
   return (
-    <AuthContext.Provider value={{ ...state, login, logout, register, resetPassword, updateProfile }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ ...state, login, logout, register, resetPassword, updateProfile, logoutHandler }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
