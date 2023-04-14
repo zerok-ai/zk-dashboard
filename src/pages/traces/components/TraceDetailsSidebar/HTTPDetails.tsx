@@ -5,9 +5,8 @@ import KeyValueTable from './Components/KeyValueTable';
 import RawSpanDetails from './Components/RawSpanDetails';
 import { a11yProps, JSONStyle, TabPanelProps, TraceDetailsProps } from './Components/TabBarUtils';
 import TelemetryDetails from './Components/TelemetryDetails';
-import queryString from 'query-string';
 import { JsonViewer } from '@textea/json-viewer';
-import { isJsonStr, JSONParseHandler } from 'utils/strings';
+import { getPartsOfPath, isJsonStr, JSONParseHandler } from 'utils/strings';
 
 const HTTPDetails = (props: TraceDetailsProps) => {
   const [value, setValue] = useState(0);
@@ -26,14 +25,6 @@ const HTTPDetails = (props: TraceDetailsProps) => {
       </div>
     );
   }
-
-  const getPartsOfPath = (pathStr: string) => {
-    const pathParts = pathStr.split('?');
-    return {
-      path: pathParts[0],
-      params: JSON.stringify(queryString.parse(pathParts[1]))
-    };
-  };
 
   const partsOfPath = getPartsOfPath(props.modalData?.req_path);
 

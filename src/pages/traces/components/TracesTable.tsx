@@ -18,17 +18,12 @@ import Moment from 'react-moment';
 // assets
 import { DownOutlined, RightOutlined } from '@ant-design/icons';
 import TraceSnapshot from './TraceSnapshot';
+import { getWorkloadName, getNamespace, getPartsOfPath } from 'utils/strings';
+import { getSpanChip } from 'utils/chips';
 
 // ==============================|| REACT TABLE - EXPANDING TABLE ||============================== //
 
 const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) => {
-  function traceContainsException(traceId: string): Number {
-    const traceSpans = data.filter((x) => x.trace_id === traceId)[0];
-    console.log('>', traceSpans);
-    const exceptionCount = traceSpans?.traces.filter((span: any) => span?.type === 'EXCEPTION').length;
-    return exceptionCount;
-  }
-
   const columns = useMemo(
     () => [
       {
@@ -46,20 +41,66 @@ const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) =>
         SubCell: () => null
       },
       {
-        Header: 'Trace Id',
-        accessor: 'trace_id',
-        Cell: ({ value, row }: { value: string; row: Row }) => {
-          const count = traceContainsException(value);
+        Header: 'Type',
+        accessor: 'traces[0].type',
+        id: 'traces[0].type',
+        Cell: ({ value, row }: { value: any; row: Row }) => {
+          const item: any = row.original;
+          const count = item.traces.filter((x: any) => x.type === 'EXCEPTION').length;
+          const nonExceptionSpan = item.traces.filter((x: any) => x.type !== 'EXCEPTION')[0];
           return (
-            <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }} {...row.getToggleRowExpandedProps()}>
+            <Box {...row.getToggleRowExpandedProps()}>
               <Badge color="error" badgeContent={count} invisible={count <= 0}>
-                <Typography sx={{ textTransform: 'none', fontFamily: 'monospace' }}>{value}</Typography>
+                {getSpanChip(nonExceptionSpan)}
               </Badge>
             </Box>
           );
         }
       },
-      { Header: 'Source', accessor: 'traces[0].source.label' },
+      {
+        Header: 'Source',
+        accessor: 'traces[0].source.label',
+        Cell: ({ value, row }: { value: string; row: Row }) => {
+          const item: any = row.original;
+          const nonExceptionSpan = item.traces.filter((x: any) => x.type !== 'EXCEPTION')[0];
+          return (
+            <Box {...row.getToggleRowExpandedProps()}>
+              <Typography>
+                {getNamespace(nonExceptionSpan.source.label) + ' / ' + getWorkloadName(nonExceptionSpan.source.label)}
+              </Typography>
+            </Box>
+          );
+        }
+      },
+      {
+        Header: 'Destination',
+        accessor: 'traces[0].destination.label',
+        Cell: ({ value, row }: { value: string; row: Row }) => {
+          const item: any = row.original;
+          const nonExceptionSpan = item.traces.filter((x: any) => x.type !== 'EXCEPTION')[0];
+          return (
+            <Box {...row.getToggleRowExpandedProps()}>
+              <Typography>
+                {getNamespace(nonExceptionSpan.destination.label) + ' / ' + getWorkloadName(nonExceptionSpan.destination.label)}
+              </Typography>
+            </Box>
+          );
+        }
+      },
+      {
+        Header: 'Endpoint',
+        accessor: 'traces[0].req_path',
+        Cell: ({ value, row }: { value: string; row: Row }) => {
+          const item: any = row.original;
+          const nonExceptionSpan = item.traces.filter((x: any) => x.type !== 'EXCEPTION')[0];
+          const { path } = getPartsOfPath(nonExceptionSpan.req_path);
+          return (
+            <Box {...row.getToggleRowExpandedProps()}>
+              <Typography>{path || '-'}</Typography>
+            </Box>
+          );
+        }
+      },
       { Header: 'Spans', accessor: 'count' },
       {
         Header: 'Time',

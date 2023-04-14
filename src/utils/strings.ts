@@ -1,3 +1,5 @@
+import queryString from "query-string";
+
 export const fillTemplate = function (templateString: string, templateVars: any) {
   var func = new Function(...Object.keys(templateVars), 'return `' + templateString + '`;');
   return func(...Object.values(templateVars));
@@ -5,6 +7,10 @@ export const fillTemplate = function (templateString: string, templateVars: any)
 
 export const stripNS = (nameStr: string) => {
   return nameStr.split('/')[1];
+};
+
+export const getWorkloadName = (nameStr: string) => {
+  return stripNS(nameStr)?.split('-')[0];
 };
 
 export const getFormattedServiceName = (nameStr: string) => {
@@ -43,4 +49,12 @@ export const isJsonStr = (str: string) => {
   } catch (err) {
     return false;
   }
+};
+
+export const getPartsOfPath = (pathStr: string) => {
+  const pathParts = pathStr.split('?');
+  return {
+    path: pathParts[0],
+    params: JSON.stringify(queryString.parse(pathParts[1]))
+  };
 };

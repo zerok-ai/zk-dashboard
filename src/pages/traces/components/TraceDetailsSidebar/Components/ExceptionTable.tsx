@@ -2,8 +2,12 @@ import { List, ListItem, ListItemButton, ListItemText, Typography, useTheme } fr
 
 const ExceptionTable = ({ value }: { value: string }) => {
   const theme = useTheme();
-  const traceStr = value.substring(13);
+  const messagePos = value.indexOf('], message=');
+  const traceStr = value.substring(13, messagePos);
+  const traceMsg = value.substring(messagePos + 11, value.length - 1);
   const stacktrace = traceStr.split(',');
+
+  console.log(traceMsg);
 
   const getTraceDetails = (trace: string) => {
     let regex = new RegExp(`^(.*)[(](.*)(:(.*))?[)]$`);
@@ -35,15 +39,20 @@ const ExceptionTable = ({ value }: { value: string }) => {
   };
 
   return (
-    <List>
-      {stacktrace.map((trace) => (
-        <ListItem disablePadding>
-          <ListItemButton component="a" sx={{ width: '100%', py: 0.1 }}>
-            <ListItemText>{getTraceLineItem(trace)}</ListItemText>
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      <Typography variant="body1" sx={{ pl: 2.5, pt: 1 }}>
+        {traceMsg}
+      </Typography>
+      <List sx={{ maxHeight: '40vh', overflowY: 'scroll' }}>
+        {stacktrace.map((trace) => (
+          <ListItem disablePadding>
+            <ListItemButton component="a" sx={{ width: '100%', py: 0.1, pl: 4 }}>
+              <ListItemText>{getTraceLineItem(trace)}</ListItemText>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 
