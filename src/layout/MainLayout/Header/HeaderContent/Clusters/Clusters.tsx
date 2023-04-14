@@ -35,21 +35,21 @@ const Clusters = () => {
   const getClusterIcon = (healthStatus: string) => {
     switch (healthStatus) {
       case ClusterHealthStatus.CS_UNKNOWN:
-        return <QuestionCircleOutlined />;
+        return <QuestionCircleOutlined style={{ color: theme.palette.warning.dark }} />;
       case ClusterHealthStatus.CS_HEALTHY:
-        return <CheckCircleOutlined />;
+        return <CheckCircleOutlined style={{ color: theme.palette.success.dark }} />;
       case ClusterHealthStatus.CS_UNHEALTHY:
-        return <CloseCircleOutlined />;
+        return <CloseCircleOutlined style={{ color: theme.palette.error.dark }} />;
       case ClusterHealthStatus.CS_DISCONNECTED:
-        return <PauseCircleOutlined />;
+        return <PauseCircleOutlined style={{ color: theme.palette.warning.dark }} />;
       case ClusterHealthStatus.CS_UPDATING:
-        return <ClockCircleOutlined />;
+        return <ClockCircleOutlined style={{ color: theme.palette.warning.dark }} />;
       case ClusterHealthStatus.CS_CONNECTED:
-        return <CheckCircleOutlined />;
+        return <CheckCircleOutlined style={{ color: theme.palette.success.dark }} />;
       case ClusterHealthStatus.CS_UPDATE_FAILED:
       case ClusterHealthStatus.CS_DEGRADED:
       default:
-        return <ExclamationCircleOutlined />;
+        return <ExclamationCircleOutlined style={{ color: theme.palette.error.dark }} />;
     }
   };
 
@@ -63,7 +63,7 @@ const Clusters = () => {
     if (clusterList && clusterList.length > 0) {
       return clusterList.map((cluster: ClusterInfo, index: number) => (
         <MenuItem value={cluster.id} key={cluster.id}>
-          <ListItemIcon color="success" title={cluster.status}>
+          <ListItemIcon color="success" title={cluster.status} style={{ display: 'inline', marginRight: '8px' }}>
             {getClusterIcon(cluster.status)}
           </ListItemIcon>
           {cluster.name}
