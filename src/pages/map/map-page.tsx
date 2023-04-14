@@ -8,6 +8,7 @@ import { getServiceMap } from './controllers/ServiceMapAPIController';
 import { Box, LinearProgress } from '@mui/material';
 import { ClusterInfo } from 'types/models/ClusterInfo';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
+import { isBlockedNS } from 'utils/utils';
 
 var nodeList = new Map<string, Array<string>>();
 
@@ -27,6 +28,7 @@ const prepareMap = (mapdata: ServiceMapEdge[]) => {
 
   mapdata
     .filter((service: any) => getRequestor(service) !== '')
+    .filter((service: ServiceMapEdge) => !(isBlockedNS(service.requester_service) || isBlockedNS(service.responder_service)))
     .forEach((service: any) => {
       const prevArr = nodeList.get(getRequestor(service)) || [];
       try {

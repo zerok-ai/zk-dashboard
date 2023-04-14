@@ -12,6 +12,7 @@ import ServiceEmpty from 'sections/apps/ServiceEmpty';
 import SkeletonServicePlaceholder from 'components/cards/skeleton/ServicePlaceholder';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 import { ClusterInfo } from 'types/models/ClusterInfo';
+import { isBlockedNS } from 'utils/utils';
 
 const Main = styled('main', { shouldForwardProp: (prop: string) => prop !== 'open' && prop !== 'container' })(
   ({ theme, open, container }: { theme: Theme; open: boolean; container: any }) => ({
@@ -55,7 +56,10 @@ const ServicesListPage = () => {
     setLoading(true);
     getServices(clusterId).then((results) => {
       console.log('Results ', results);
-      setServices(results);
+      const filteredServices = results.filter((serviceInfo: ServicesType) => {
+        return !isBlockedNS(serviceInfo.name);
+      });
+      setServices(filteredServices);
       setLoading(false);
     });
   }
