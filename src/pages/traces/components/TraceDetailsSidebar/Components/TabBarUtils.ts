@@ -14,6 +14,8 @@ export interface TabPanelProps {
 }
 
 export const JSONStyle = {
+  maxHeight: '50vh',
+  overflowY: 'scroll',
   span: {
     color: 'rgba(255,255,255,0.5) !important'
   },

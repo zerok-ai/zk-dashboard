@@ -4,7 +4,7 @@ import { FC, Fragment } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 
 // third-party
-import { useExpanded, useTable, Column, HeaderGroup, Cell, Row } from 'react-table';
+import { useExpanded, useTable, Column, HeaderGroup, Cell, Row, useRowSelect, useGroupBy } from 'react-table';
 
 interface TableProps {
   columns: Column[];
@@ -16,9 +16,12 @@ function ReactTable({ columns: userColumns, data, renderRowSubComponent }: Table
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, visibleColumns } = useTable(
     {
       columns: userColumns,
-      data
+      data,
+      expandSubRows: false
     },
-    useExpanded
+    useGroupBy,
+    useExpanded,
+    useRowSelect
   );
 
   return (

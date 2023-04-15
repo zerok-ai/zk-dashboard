@@ -1,5 +1,5 @@
 // material-ui
-import { ReactChild, useMemo } from 'react';
+import { MouseEvent, ReactChild, useMemo } from 'react';
 
 import { alpha, useTheme } from '@mui/material/styles';
 import { Box, Divider, TableBody, Typography } from '@mui/material';
@@ -21,7 +21,14 @@ const TraceDetails = ({ data, traceModal }: any) => {
     const spanData = data.filter((x: any) => x.span_id === row.original.span_id)[0];
     return (
       <Box
-        onClick={(event: any) => {
+        onClick={(event: MouseEvent) => {
+          event.stopPropagation();
+          event.preventDefault();
+          console.log('event.isPropagationStopped', event.isPropagationStopped());
+          event.nativeEvent.stopPropagation();
+          event.nativeEvent.preventDefault();
+          event.bubbles = false;
+          console.log('Box event', event);
           traceModal.setModalData(spanData);
           traceModal.setOpen(true);
         }}
@@ -33,7 +40,7 @@ const TraceDetails = ({ data, traceModal }: any) => {
   };
 
   const backColor = alpha(theme.palette.primary.lighter, 0.5);
-  console.log(traceModal);
+
   const columns = useMemo(
     () => [
       {
@@ -95,7 +102,17 @@ const TraceDetails = ({ data, traceModal }: any) => {
   // const [showBody, setShowBody] = useState(false);
 
   return (
-    <TableRow sx={{ bgcolor: `${backColor} !important`, '&:hover': { bgcolor: `${backColor} !important` } }}>
+    <TableRow
+      sx={{ bgcolor: `${backColor} !important`, '&:hover': { bgcolor: `${backColor} !important` } }}
+      onClick={(event) => {
+        console.log('SubTableBoundry : ', event);
+        event.stopPropagation();
+        event.preventDefault();
+        console.log('event.isPropagationStopped', event.isPropagationStopped());
+        event.nativeEvent.stopPropagation();
+        event.nativeEvent.preventDefault();
+      }}
+    >
       <TableCell colSpan={8} sx={{ pl: 0, p: 0, pr: 0, '&:first-of-type, &:last-of-type': { padding: '0px !important' } }}>
         <TableBody sx={{ pb: 0, display: 'block' }}>
           <ReactTable columns={columns} data={data} />

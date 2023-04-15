@@ -30,6 +30,7 @@ const Traces = () => {
 
   function updateTraceData(clusterId: string, intervalParam: string) {
     if (!clusterId || clusterId === '') return;
+    setLoading(true);
     getTraceDetails(clusterId, intervalParam).then((traceData: traceDataResponse) => {
       setTraceData(traceData.results || []);
       setLoading(false);
@@ -41,21 +42,36 @@ const Traces = () => {
 
   function handleIntervalChange(e: SelectChangeEvent<string>) {
     setInterval(e.target.value);
-    setLoading(true);
     updateTraceData(selectedClusterId, e.target.value);
   }
 
   useEffect(() => {
-    if (!loading) return;
+    if (loading) return;
     console.log('getting traces for', selectedClusterId);
     updateTraceData(selectedClusterId, interval);
-  });
+  }, [interval, selectedClusterId]);
+
+  function changeListener(cluster: ClusterInfo) {
+    if (cluster.id !== selectedClusterId) {
+      console.log('Updating cluster ' + cluster.name + ',' + cluster.id);
+      setSelectedClusterId(cluster.id);
+      updateTraceData(cluster.id, interval);
+    }
+  }
+
+  function refreshButtonClick() {
+    if (loading) return;
+    updateTraceData(selectedClusterId, interval);
+  }
 
   const getTraceData = (results: any[]) => {
     var nwDataMap: Map<string, any> = new Map();
     var maxLatency = 0;
     results = results.filter((span) => {
       return span.type === 'HTTP' && span.destination.label.includes('zerok-operator-system') ? false : true;
+    });
+    results = results.filter((span) => {
+      return span.destination.script === 'px/pod' && span.source.script === 'px/pod';
     });
     results.forEach((data, idx) => {
       maxLatency = data.latency > maxLatency ? data.latency : maxLatency;
@@ -87,20 +103,6 @@ const Traces = () => {
       return Moment(y.traces[0].time_).diff(Moment(x.traces[0].time_));
     });
   };
-
-  function changeListener(cluster: ClusterInfo) {
-    if (cluster.id !== selectedClusterId) {
-      setLoading(true);
-      console.log('Updating cluster ' + cluster.name + ',' + cluster.id);
-      setSelectedClusterId(cluster.id);
-      updateTraceData(cluster.id, interval);
-    }
-  }
-
-  function refreshButtonClick() {
-    setLoading(true);
-    updateTraceData(selectedClusterId, interval);
-  }
 
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState<any>(undefined);

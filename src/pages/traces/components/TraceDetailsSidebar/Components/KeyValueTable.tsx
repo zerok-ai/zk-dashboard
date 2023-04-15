@@ -20,9 +20,9 @@ const KeyValueTable = ({ value }: { value: string }) => {
     }
     return (
       <>
-        {keys.map((key) => {
+        {keys.map((key, idx) => {
           return (
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} key={idx}>
               <Grid item xs={3}>
                 <Typography variant="caption">
                   <b>{key}</b>

@@ -119,7 +119,9 @@ const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) =>
   );
 
   const renderRowSubComponent = useCallback(
-    ({ row: { id } }: { row: Row<{}> }) => <TraceDetails data={data[Number(id)].traces} traceModal={traceModal} />,
+    ({ row: { id } }: { row: Row<{}> }) => {
+      return <TraceDetails data={data[Number(id)].traces} traceModal={traceModal} />;
+    },
     [data, traceModal]
   );
 

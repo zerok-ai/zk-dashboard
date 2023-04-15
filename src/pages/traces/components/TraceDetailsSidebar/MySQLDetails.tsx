@@ -106,12 +106,16 @@ const MySQLDetails = (props: TraceDetailsProps) => {
                 {props.modalData?.resp_body
                   .substr(17)
                   .split(' | ')
-                  .map((row: any) => {
+                  .map((row: any, idx: number) => {
                     const items = decodeLengthEncodedHexString(row);
                     return (
-                      <TableBody>
-                        {items.map((item) => {
-                          return <TableCell sx={{ fontFamily: 'monospace' }}>{item}</TableCell>;
+                      <TableBody key={idx}>
+                        {items.map((item, idx) => {
+                          return (
+                            <TableCell sx={{ fontFamily: 'monospace' }} key={idx}>
+                              {item}
+                            </TableCell>
+                          );
                         })}
                       </TableBody>
                     );

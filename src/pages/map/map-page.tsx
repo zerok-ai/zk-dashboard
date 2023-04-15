@@ -109,7 +109,6 @@ const ServiceMap = () => {
     <ClusterContext.Consumer>
       {({ registerChangeListener, getSelectedCluster }: any) => {
         let selectedCluster = getSelectedCluster();
-        console.log(selectedCluster);
         if (selectedCluster && selectedCluster.id !== selectedClusterId) {
           setSelectedClusterId(selectedCluster.id);
           updateServiceMap(selectedCluster.id);
