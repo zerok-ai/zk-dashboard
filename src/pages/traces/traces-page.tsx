@@ -24,18 +24,29 @@ const Traces = () => {
     console.log(openFilterDrawer);
   };
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [traceData, setTraceData] = useState<traceItem[]>([]);
   const [selectedClusterId, setSelectedClusterId] = useState('');
 
   function updateTraceData(clusterId: string, intervalParam: string) {
     if (!clusterId || clusterId === '') return;
     setLoading(true);
-    getTraceDetails(clusterId, intervalParam).then((traceData: traceDataResponse) => {
-      setTraceData(traceData.results || []);
-      setLoading(false);
-      console.log(loading);
-    });
+    getTraceDetails(clusterId, intervalParam)
+      .then(
+        (traceData: traceDataResponse) => {
+          setTraceData(traceData.results || []);
+          setLoading(false);
+          console.log(loading);
+        },
+        (e) => {
+          console.log('failed to fetch trace', e);
+          setLoading(false);
+        }
+      )
+      .catch((e) => {
+        console.log('failed to fetch trace', e);
+        setLoading(false);
+      });
   }
 
   const [interval, setInterval] = useState('-5m');
