@@ -9,5 +9,9 @@ export function useQuery() {
 }
 
 export function isBlockedNS(serviceName: string) {
-  return ['pl', 'px-operator', 'plc'].includes(getNamespace(serviceName));
+  return ['pl', 'px-operator', 'plc'].includes(getNamespace(serviceName || ''));
+}
+
+export function isAllowedNS(serviceName: string) {
+  return ['sofa-shop'].includes(getNamespace(serviceName || ''));
 }

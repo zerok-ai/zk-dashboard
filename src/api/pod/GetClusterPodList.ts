@@ -43,7 +43,7 @@ export async function getClusterPodList(
         service_name: service
       }
     });
-    return response.data;
+    return response.data.payload;
   } catch (err) {
     console.error('Error caught while fetching pods list.', err);
     return {

@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 
 export function convertNanoToMilliSeconds(value: number) {
   if (value != null) {

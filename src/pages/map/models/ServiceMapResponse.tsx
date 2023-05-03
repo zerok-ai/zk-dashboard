@@ -15,6 +15,6 @@ export type ServiceMapEdge = {
   throughput_total: number;
 };
 
-export type ServiceMapResponse = {
+export type ServiceMapAPIResponse = {
   results: ServiceMapEdge[];
 };

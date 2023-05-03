@@ -1,7 +1,7 @@
 // import { Typography } from '@mui/material';
 import { Box, Button, Chip, Grid, Typography } from '@mui/material';
-import { getClusterPodList, PodListResultsType } from 'api/cluster/GetClusterPodList';
-import { getClusterPodMetrics } from 'api/cluster/GetClusterPodMetrics';
+import { getClusterPodList, PodListResultsType } from 'api/pod/GetClusterPodList';
+import { getClusterPodMetrics } from 'api/pod/GetClusterPodMetrics';
 import MainCard from 'components/MainCard';
 import RightPanelModal from 'components/modals/RightPanelModal';
 import BasicTable from 'components/tables/BasicTable';

@@ -51,7 +51,7 @@ export async function getServiceDetails(
           st: interval
         }
       });
-      const detailsArr = response.data.results;
+      const detailsArr = response.data.payload.results;
       console.log(detailsArr);
       return parseTimeseriesData(detailsArr);
     }
@@ -67,7 +67,7 @@ export async function getServices(clusterId: string) {
         st: '-5m'
       }
     });
-    const servicesArr = response.data.results;
+    const servicesArr = response.data.payload.results;
     let results: ServiceType[] = [];
     for (var i = 0; i < servicesArr.length; i++) {
       var obj = servicesArr[i];

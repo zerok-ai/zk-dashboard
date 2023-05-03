@@ -1,4 +1,4 @@
-import queryString from "query-string";
+import queryString from 'query-string';
 
 export const fillTemplate = function (templateString: string, templateVars: any) {
   var func = new Function(...Object.keys(templateVars), 'return `' + templateString + '`;');

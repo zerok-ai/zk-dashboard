@@ -1,4 +1,4 @@
-export type traceItem = {
+export type TraceItem = {
   destination: {
     args: {
       pod: string;
@@ -29,6 +29,6 @@ export type traceItem = {
   type: string;
 };
 
-export type traceDataResponse = {
-  results: traceItem[];
+export type TraceDataAPIResponse = {
+  results: TraceItem[];
 };

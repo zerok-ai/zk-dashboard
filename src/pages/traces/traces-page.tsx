@@ -5,7 +5,7 @@ import { ServicesFilter } from 'types/services';
 import TracesTable from './components/TracesTable';
 
 import { getTraceDetails } from './controllers/TracesAPIController';
-import { traceDataResponse, traceItem } from './models/traceDataResponse';
+import { TraceDataAPIResponse, TraceItem } from './models/traceDataResponse';
 import { ClusterContext } from 'contexts/Cluster/ClusterContext';
 import { ClusterInfo } from 'types/models/ClusterInfo';
 import Moment from 'moment';
@@ -25,7 +25,7 @@ const Traces = () => {
   };
 
   const [loading, setLoading] = useState(false);
-  const [traceData, setTraceData] = useState<traceItem[]>([]);
+  const [traceData, setTraceData] = useState<TraceItem[]>([]);
   const [selectedClusterId, setSelectedClusterId] = useState('');
 
   function updateTraceData(clusterId: string, intervalParam: string) {
@@ -33,7 +33,7 @@ const Traces = () => {
     setLoading(true);
     getTraceDetails(clusterId, intervalParam)
       .then(
-        (traceData: traceDataResponse) => {
+        (traceData: TraceDataAPIResponse) => {
           setTraceData(traceData.results || []);
           setLoading(false);
           console.log(loading);
