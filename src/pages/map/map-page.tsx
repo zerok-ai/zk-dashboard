@@ -13,7 +13,7 @@ import { isBlockedNS } from 'utils/utils';
 var nodeList = new Map<string, Array<string>>();
 
 const getRequestor = (service: ServiceMapEdge) => {
-  return service.requester_service || service.requester_pod || service.requester_ip || 'Kubernetes control plane';
+  return service.requestor_service || service.requestor_pod || service.requestor_ip || 'Kubernetes control plane';
 };
 
 const getResponder = (service: ServiceMapEdge) => {
@@ -28,7 +28,7 @@ const prepareMap = (mapdata: ServiceMapEdge[]) => {
 
   mapdata
     .filter((service: any) => getRequestor(service) !== '')
-    .filter((service: ServiceMapEdge) => !(isBlockedNS(service.requester_service) || isBlockedNS(service.responder_service)))
+    .filter((service: ServiceMapEdge) => !(isBlockedNS(service.requestor_service) || isBlockedNS(service.responder_service)))
     .forEach((service: any) => {
       const prevArr = nodeList.get(getRequestor(service)) || [];
       try {

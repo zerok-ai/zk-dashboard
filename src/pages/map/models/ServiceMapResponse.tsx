@@ -1,10 +1,10 @@
 export type ServiceMapEdge = {
   responder_pod: string;
-  requester_pod: string;
+  requestor_pod: string;
   responder_service: string;
-  requester_service: string;
+  requestor_service: string;
   responder_ip: string;
-  requester_ip: string;
+  requestor_ip: string;
   latency_p50: number;
   latency_p90: number;
   latency_p99: number;
