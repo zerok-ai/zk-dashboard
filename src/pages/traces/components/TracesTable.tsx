@@ -104,7 +104,7 @@ const TracesTable = ({ data, traceModal }: { data: any[]; traceModal?: any }) =>
       { Header: 'Spans', accessor: 'count' },
       {
         Header: 'Time',
-        accessor: 'traces[0].time_',
+        accessor: 'traces[0].time',
         Cell: ({ value }: { value: string }) => {
           return <Moment date={value} fromNow ago />;
         }

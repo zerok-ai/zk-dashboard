@@ -17,4 +17,5 @@ export type ServiceMapEdge = {
 
 export type ServiceMapAPIResponse = {
   results: ServiceMapEdge[];
+  stats?: any;
 };

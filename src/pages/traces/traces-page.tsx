@@ -100,7 +100,7 @@ const Traces = () => {
 
     console.log(nwDataMap);
     const data: any[] = [];
-    const spanSorter = (x: any, y: any) => Moment(y.time_).diff(Moment(x.time_));
+    const spanSorter = (x: any, y: any) => Moment(y.time).diff(Moment(x.time));
 
     nwDataMap.forEach((traces, traceId) => {
       data.push({
@@ -111,7 +111,7 @@ const Traces = () => {
     });
 
     return data.sort((x, y) => {
-      return Moment(y.traces[0].time_).diff(Moment(x.traces[0].time_));
+      return Moment(y.traces[0].time).diff(Moment(x.traces[0].time));
     });
   };
 

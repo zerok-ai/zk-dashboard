@@ -9,7 +9,7 @@ export function useQuery() {
 }
 
 export function isBlockedNS(serviceName: string) {
-  return ['pl', 'px-operator', 'plc'].includes(getNamespace(serviceName || ''));
+  return ['pl', 'pl, pl', 'px-operator', 'plc'].includes(getNamespace(serviceName || ''));
 }
 
 export function isAllowedNS(serviceName: string) {

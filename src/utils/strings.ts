@@ -23,11 +23,34 @@ export const getFormattedServiceName = (nameStr: string) => {
 };
 
 export const getNamespace = (nameStr: string) => {
+  function getName(str: string) {
+    return str.toString().split('/')[0];
+  }
   try {
     let namesObj = JSON.parse(nameStr);
-    nameStr = namesObj[0];
+    return getName(namesObj[0]);
   } catch (err) {}
+
+  if (Array.isArray(nameStr)) {
+    return getName(nameStr[0]);
+  }
+
   return nameStr.split('/')[0];
+};
+
+export const getNamespaceFromSvc = (svcStr: string) => {
+  try {
+    let namesObj = JSON.parse(svcStr);
+    svcStr = namesObj.map((itemName: string) => getNamespace(itemName)).join(', ');
+    return svcStr;
+  } catch (err) {}
+
+  if (Array.isArray(svcStr)) {
+    return svcStr[0].split('/')[0];
+  }
+
+  const parts = svcStr.split('/');
+  return parts[1] ? parts[0] : '';
 };
 
 export const stringWithoutComments = (s: string) => {

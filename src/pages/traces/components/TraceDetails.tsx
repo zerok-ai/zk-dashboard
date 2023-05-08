@@ -86,7 +86,7 @@ const TraceDetails = ({ data, traceModal }: any) => {
 
       {
         Header: 'Response Time',
-        accessor: 'time_',
+        accessor: 'time',
         Cell: ({ value }: { value: string }) => <Moment date={value} format="DD-MM-YY HH:mm:ss.SSS" />
       },
       {
