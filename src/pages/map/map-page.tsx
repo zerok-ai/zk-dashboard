@@ -29,6 +29,14 @@ const getAllNamespaces = (mapdata: ServiceMapEdge[]) => {
   return namespaces;
 };
 
+const getSelectText = (selectedNS: string[]) => {
+  const len = selectedNS.length;
+  if (len > 2) {
+    return selectedNS.slice(0, 2).join(', ') + ' & ' + (len - 2) + ' other  namespaces';
+  }
+  return selectedNS.join(', ');
+};
+
 const prepareMap = (mapdata: ServiceMapEdge[], filterNS: string[]) => {
   let _nodes: NodeData[] = [];
   let _edges: EdgeData[] = [];
@@ -151,15 +159,18 @@ const ServiceMap = () => {
   }
 
   function renderNSSelector() {
+    if (namespaces.length === 0) {
+      return <></>;
+    }
     return (
       <FormControl fullWidth>
         <InputLabel>Namespaces</InputLabel>
         <Select
           multiple
           value={selectedNS || []}
+          renderValue={(selected) => getSelectText(selected || [])}
           onChange={handleNSSelectionChange}
           input={<OutlinedInput placeholder="Tag" />}
-          renderValue={(selected) => selected?.join(', ')}
         >
           {namespaces.map((name) => (
             <MenuItem key={name || 'Unknown'} value={name}>
