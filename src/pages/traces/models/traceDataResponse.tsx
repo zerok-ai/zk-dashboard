@@ -23,7 +23,7 @@ export type TraceItem = {
     script: string;
   };
   span_id: string;
-  time_: string;
+  time: string;
   trace_id: string;
   tracestate: string;
   type: string;
