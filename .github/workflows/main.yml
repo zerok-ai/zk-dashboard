@@ -43,9 +43,12 @@ jobs:
         with:
           credentials_json: '${{ env.DECODED_SA }}'
           
-      - name: Docker configuration
-        run: |-
-           echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-west1-docker.pkg.dev
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v1
+        with:
+          registry: us-west1-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
 
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
