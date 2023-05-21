@@ -1,0 +1,43 @@
+name: TEST
+on:
+  workflow_dispatch:
+env:
+  PROJECT_ID: "zerok-dev"
+  GKE_SA_KEY: "ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsCiAgInByb2plY3RfaWQiOiAiemVyb2stZGV2IiwKICAicHJpdmF0ZV9rZXlfaWQiOiAiODZiY2EyYzE1MTljOGFmZTM4MjhiMTVmYTZhMzlmODIxYTIxZDhkYiIsCiAgInByaXZhdGVfa2V5IjogIi0tLS0tQkVHSU4gUFJJVkFURSBLRVktLS0tLVxuTUlJRXZnSUJBREFOQmdrcWhraUc5dzBCQVFFRkFBU0NCS2d3Z2dTa0FnRUFBb0lCQVFENTA1N0ZOSDY2UHl3dVxuZU1UZGJLZUg4dldoQnVLeUV6RUFnaG5SUlhMbnlqbFIrYzNqditaR3p3K05zKyt1bVhkcHZCMG13bW45bDJiY1xuQjlBL1Y1d1kwOEQyTGx3aW5iTmp6dGY4WXd1VDhnb3lUZHcxSmwxK1ExbktQcmZtVW1GSjVsM1JvRjYySW94ZFxueXpSWWNJbzh0YVJjL09ZNFpXT2RkaHJqdUVYWDFQeDBDWnFWc2laY01aemlObGxuRzlhU0NOV2pFZmswcVBOd1xuT0U3elQ1L0J5aFAwWng4ZFBQSUR4VlVndzlpelFlSmN2SkV2NXNPTnBMWVM3N3k0cllzdEo5LzZQWG1Hb1gxeFxueEdOVlRGY2s3amMrdEFYbnErSGp4WStKRDJjaXI3OFhMUTdkOXErbmtYelpJVWkzbnE4ZzhncTIxNjNYdUxoZFxuTzZrdlJQK3ZBZ01CQUFFQ2dnRUFGT0ZVakV2eWFaT2RHRGM4MFByalY2LzlTcHVlTjk3MXdnS2RzTWw2ckpmUVxueWFLMHpCdStYZDJ4Z1pqdjUrcG91aHdnWFp4ekttQk1sd2hLSmZrbkVVWWxndzNsNG5qR3hRbEZNUkdBSnJuY1xuazA3Qm9HbVg5OVVlUEpLWVlUWXlibkJFR0NDc3VkRlNaUVoyVmd2MTZkUU9yRHp3NnZiQ2FDYzJZU0VHS1Y4NFxuQWhva0d5VUVUUmpHNVNjVDh2NlJEOXptKzkzOWJRdzd2MlF2VXpGL0JTTVBpRmZadUZBS3NDRm0yNHg4T1RHTVxuekRTTzRPRXFtbDhnN05qTVNLai9Hc0xNUU82TzhkdVNrVkhhUVhhZ1liMTVTWG9udmJncXhvclByQ3lzcGllNVxuQm5lRVVuNHVhdkRmZ0ZqWitNM2oxczUwN01NczRqMUQxeFQwVUJjSHJRS0JnUUQrWVgySHFJUlIvR2h1RXRneFxuQjlVYmExd0ZzVWEwMDQ0cythVGN1U3JwTDlvQUJxSEs0dkNQb2grQ09uTWZoQU1YR1NKR1o5eW1ZUDRlaFRjUVxuaDZId0QzZ2I0ZWw2VE9VZ1RtaFdpdHVoYU1TamkwQ0VUSkdHUXplb1VURjh6ditlNDFKem0yMlFxbmV6UEtCYlxuMFJjZW8vSGxUU0RkeVV4N2dSMU1xcFBIeFFLQmdRRDdhclY1RGxzMm9mWVkzdGJCd2l1WkNWOXlhWERwVmFXTFxud1pGdEtYR0R6czc2K2RXWEphRG9VaFNMSTBwbXRabXllMUhNdGxNQUpqQzFVM1Ftak5LeEVmWFMxR2U1d1dOYlxuZStmbjVwckh0aVBmc25MMVp0c05xU0JkcGtvU2UwMmtxekdwMFdMVEZTZ1JlMlhIcE9UMS9ia01nL082SkE0UFxuUm9BMW9hRXM0d0tCZ0ZDS2NZSllPcnp5bStYdUZZRkFwNXFzM1UvNEZ4ajl1cEJHNG9uNEhyd0NLSlhGZzhpSFxuSGY5OEoxbkdROWtBcFRIVkJXTWhVMTFpYkZNaGZwTy9QZWlTSFVkR3VmTzlFUGF2bkoxNkRad0hYZXNpRmVWTlxua08zZnJtbWVlM3EyMTN4cElSdjFaRFZmbzlLZUtXK292aGMzZFVsU3FFdFFodVM3dHBrbGtQQzVBb0dCQUtydVxub05UZUV0dXcvODFtNitHdDd0Qk1WQTFJYk5EblB2Y21zb1hpTUdBcDRnVTJpS1lMbWp0NVdxaENaUm94aTM2U1xuWTBub0I4UkpNc0tGSzZudUFtMEt4ZlFDSDBkbW1QT2c2VWw4T20xZmcwSmFZOWcraHQzaHg3U0VFMFkvZU1sa1xuN3c0QzRzcWFUclNjRGRYUFlTOXh3amNsR3piSnZwbGFHRjdlTmVON0FvR0JBT0R2MjlOZ2NJYVcvN3JmQmtiNVxuc2FpVXprcTQrNGgxa3VNQjg3ZjBtSldlZFhRd3hLMnMzVHlDcHNHRWxKNHN6M2xqV0tERWYzTU42OG1TYk4zclxuckMxSUxzOW5qSmgvUGpGcVh4aEsySWxESTRMOHZlRVNVK0wyblh0S1JQM2RPcVM2UXJFeEhHY2ZCWjFkb21XTVxuUGNUZndGSGlYdXBDK2hwWUZETUpxYmFnXG4tLS0tLUVORCBQUklWQVRFIEtFWS0tLS0tXG4iLAogICJjbGllbnRfZW1haWwiOiAiemVyb2stZGV2QGFwcHNwb3QuZ3NlcnZpY2VhY2NvdW50LmNvbSIsCiAgImNsaWVudF9pZCI6ICIxMDk4NTUzNjU2ODIyMTUyOTcxODgiLAogICJhdXRoX3VyaSI6ICJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvYXV0aCIsCiAgInRva2VuX3VyaSI6ICJodHRwczovL29hdXRoMi5nb29nbGVhcGlzLmNvbS90b2tlbiIsCiAgImF1dGhfcHJvdmlkZXJfeDUwOV9jZXJ0X3VybCI6ICJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9vYXV0aDIvdjEvY2VydHMiLAogICJjbGllbnRfeDUwOV9jZXJ0X3VybCI6ICJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9yb2JvdC92MS9tZXRhZGF0YS94NTA5L3plcm9rLWRldiU0MGFwcHNwb3QuZ3NlcnZpY2VhY2NvdW50LmNvbSIsCiAgInVuaXZlcnNlX2RvbWFpbiI6ICJnb29nbGVhcGlzLmNvbSIKfQo="
+  GKE_CLUSTER: "zerok-c2s-poc"
+  GKE_ZONE: "us-west1-b"
+  APP_NAME: "zk-dashboard"
+  ENV: "poc"
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+          
+      - name: decode-base64-github-action
+        uses: akiojin/decode-base64-github-action@v0.1.0
+        with:
+          base64: ${{ env.GKE_SA_KEY }}
+          environment: DECODED_SA  
+          
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
+        with:
+          service_account_key: ${{ env.DECODED_SA }}
+          project_id: ${{ env.PROJECT_ID }}
+          export_default_credentials: true
+          
+      - name: docker login
+        run: |-
+           gcloud --quiet auth configure-docker
+
+      
+      - name: Docker build
+        run: |-
+            docker tag ubuntu:latest  gcr.io/$PROJECT_ID/$APP_NAME/$ENV:$GITHUB_SHA 
+      
+      - name: Docker push
+        run: |-
+            docker push "gcr.io/$PROJECT_ID/$APP_NAME/$ENV:$GITHUB_SHA"
