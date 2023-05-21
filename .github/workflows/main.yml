@@ -37,22 +37,27 @@ jobs:
           base64: ${{ env.GKE_SA_KEY }}
           environment: DECODED_SA  
           
-      - name: Setup gcloud CLI
-        uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
         with:
-          service_account_key: ${{ env.DECODED_SA }}
-          project_id: ${{ env.PROJECT_ID }}
-          export_default_credentials: true
+          credentials_json: '${{ env.DECODED_SA }}'
           
-      - name: docker login
+      - name: Docker configuration
         run: |-
-           gcloud --quiet auth configure-docker
+           echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-west1-docker.pkg.dev
+
+      - name: Set up GKE credentials
+        uses: google-github-actions/get-gke-credentials@v0
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
 
       
       - name: Docker build
         run: |-
-            docker build  --tag "gcr.io/$PROJECT_ID/$APP_NAME/$ENV:$GITHUB_SHA" .
+            docker build  --tag "us-west1-docker.pkg.dev/$PROJECT_ID/$APP_NAME/$ENV:$GITHUB_SHA" .
       
       - name: Docker push
         run: |-
-            docker push "gcr.io/$PROJECT_ID/$APP_NAME/$ENV:$GITHUB_SHA"
+            docker push "us-west1-docker.pkg.dev/$PROJECT_ID/$APP_NAME/$ENV:$GITHUB_SHA"
