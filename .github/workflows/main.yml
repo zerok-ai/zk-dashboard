@@ -30,11 +30,14 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build
-          
+      - uses: akiojin/decode-github-action@v0.1.0
+        with:
+          base64: ${{ env.GKE_SA_KEY }}
+          environment: DECODED_SA        
       - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
         with:
-          service_account_key: ${{ env.GKE_SA_KEY }}
+          service_account_key: ${{ env.DECODED_SA }}
           project_id: ${{ env.GKE_PROJECT }}
           
       - name: docker login
