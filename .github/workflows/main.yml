@@ -53,6 +53,6 @@ jobs:
       - name: Docker build
         run: |-
             docker build \
-            --tag "us.gcr.io/$PROJECT_ID/gcf/$APP/$ENV:$GITHUB_SHA"
+            --tag "us.gcr.io/$PROJECT_ID/gcf/$APP_NAME/$ENV:$GITHUB_SHA"
             docker push "us.gcr.io/$PROJECT_ID/gcf/$APP_NAME/$ENV:$GITHUB_SHA"
 
