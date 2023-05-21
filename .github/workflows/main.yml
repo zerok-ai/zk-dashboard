@@ -41,9 +41,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
         with:
           service_account_key: ${{ env.DECODED_SA }}
-          project_id: ${{ env.GKE_PROJECT }}
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
+          project_id: ${{ env.PROJECT_ID }}
           
       - name: docker login
         run: |-
