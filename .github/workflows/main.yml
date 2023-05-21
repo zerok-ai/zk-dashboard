@@ -52,7 +52,6 @@ jobs:
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
-          credentials: ${{ env.DECODED_SA }}
           project_id: ${{ env.GKE_PROJECT }}
       
       - name: Docker build
