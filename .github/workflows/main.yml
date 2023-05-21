@@ -42,17 +42,13 @@ jobs:
         with:
           service_account_key: ${{ env.DECODED_SA }}
           project_id: ${{ env.GKE_PROJECT }}
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
           
       - name: docker login
         run: |-
            gcloud --quiet auth configure-docker
 
-      - name: Setup gcloud CLI
-        uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
-        with:
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
-          project_id: ${{ env.GKE_PROJECT }}
       
       - name: Docker build
         run: |-
