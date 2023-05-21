@@ -14,8 +14,7 @@ jobs:
 
       - name: Build yarn
         run: |
-          npm install
-          npm install yarm
+          npm install yarn
           yarm build
       - name: Docker build
         run: |
