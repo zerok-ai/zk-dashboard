@@ -65,6 +65,7 @@ jobs:
         run: |-
             docker push "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA"
       - name: deploy-test
+        run: |-
             kubectl get ns
       
       - name: Deploy
