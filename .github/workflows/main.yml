@@ -7,7 +7,7 @@ env:
   GKE_CLUSTER: "zerok-c2s-poc"
   GKE_ZONE: "us-west1-b"
   APP_NAME: "zerok-dashboard"
-  ENV: "poc"
+  ENV: "c2s-poc"
   
 jobs:
   build:
@@ -54,8 +54,8 @@ jobs:
       
       - name: Docker build
         run: |-
-            docker build  --tag "us-west1-docker.pkg.dev/$PROJECT_ID/$APP_NAME/$APP_NAME:-$ENV-$GITHUB_SHA" .
+            docker build  --tag "us-west1-docker.pkg.dev/$PROJECT_ID/$ENV/$APP_NAME:$GITHUB_SHA" .
       
       - name: Docker push
         run: |-
-            docker push "us-west1-docker.pkg.dev/$PROJECT_ID/$APP_NAME/$APP_NAME:-$ENV-$GITHUB_SHA"
+            docker push "us-west1-docker.pkg.dev/$PROJECT_ID/$ENV/$APP_NAME:-$ENV-$GITHUB_SHA"
