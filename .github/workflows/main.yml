@@ -102,6 +102,7 @@ jobs:
         with:
            cluster_name: '${{ env.GKE_CLUSTER }}'
            location: '${{ env.GKE_ZONE }}'      
+      
       - name: Set up helm
         run: |-
            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -113,7 +114,6 @@ jobs:
              helm --install  \
              --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
              --set=image.tag=$GITHUB_SHA \
-             ==set=REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY \
              upgrade $APP_NAME \
               -f ./helm-charts/$ENV.yaml ./helm-charts/ \
               --namespace $NS 
