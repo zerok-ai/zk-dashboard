@@ -58,4 +58,4 @@ jobs:
       
       - name: Docker push
         run: |-
-            docker push "us-west1-docker.pkg.dev/$PROJECT_ID/$ENV/$APP_NAME:-$ENV-$GITHUB_SHA"
+            docker push "us-west1-docker.pkg.dev/$PROJECT_ID/$ENV/$APP_NAME:$GITHUB_SHA"
