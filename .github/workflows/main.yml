@@ -74,6 +74,8 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:  
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: decode-base64-github-action
         uses: akiojin/decode-base64-github-action@v0.1.0
         with:
@@ -111,6 +113,7 @@ jobs:
              helm --install  \
              --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
              --set=image.tag=$GITHUB_SHA \
+             ==set=REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY \
              upgrade $APP_NAME \
               -f ./helm-charts/$ENV.yaml ./helm-charts/ \
               --namespace $NS 
