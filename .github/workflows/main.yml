@@ -80,7 +80,7 @@ jobs:
              helm --install  \
              --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
              --set=global.image.tag=$GITHUB_SHA \
-             upgrade $AP_PNAME \
+             upgrade $APP_NAME \
               -f $ENV.yaml ./helm-charts/ \
               --namespace $NS 
  
