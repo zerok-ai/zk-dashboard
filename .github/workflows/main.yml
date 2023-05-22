@@ -7,7 +7,11 @@ env:
   GKE_CLUSTER: "zerok-c2s-poc"
   GKE_ZONE: "us-west1-b"
   APP_NAME: "zerok-dashboard"
-  ENV: "c2s-poc"
+  DOCKER_REG: "us-west1-docker.pkg.dev"
+  DOCKER_REPO: "c2s-poc"
+  NS: "apps"
+  ENV: "poc"
+
   
 jobs:
   build:
@@ -49,13 +53,23 @@ jobs:
           version: latest
       - name: login to artifact registry
         run: |
-          gcloud auth configure-docker us-west1-docker.pkg.dev --quiet
+          gcloud auth configure-docker $DOCKER_REG --quiet
 
       
       - name: Docker build
         run: |-
-            docker build  --tag "us-west1-docker.pkg.dev/$PROJECT_ID/$ENV/$APP_NAME:$GITHUB_SHA" .
+            docker build  --tag "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA" .
       
       - name: Docker push
         run: |-
-            docker push "us-west1-docker.pkg.dev/$PROJECT_ID/$ENV/$APP_NAME:$GITHUB_SHA"
+            docker push "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA"
+      
+      - name: Deploy
+        run: |-
+             helm --install  \
+             --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
+             --set=global.image.tag=$GITHUB_SHA \
+             upgrade $AP_PNAME \
+              -f $ENV.yaml ./helm-charts/ \
+              --namespace $NS 
+ 
