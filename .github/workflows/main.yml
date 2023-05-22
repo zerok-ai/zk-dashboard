@@ -56,7 +56,12 @@ jobs:
         run: |
           gcloud auth configure-docker $DOCKER_REG --quiet
 
-      
+       - id: 'get-credentials'
+         uses: 'google-github-actions/get-gke-credentials@v1'
+         with:
+           cluster_name: '${{ env.GKE_CLUSTER }}'
+           location: '${{ env.GKE_ZONE }}'
+
       - name: Docker build
         run: |-
             docker build  --tag "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA" .
@@ -64,9 +69,7 @@ jobs:
       - name: Docker push
         run: |-
             docker push "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA"
-      - name: deploy-test
-        run: |-
-            kubectl get ns
+
       
       - name: Deploy
         run: |-
