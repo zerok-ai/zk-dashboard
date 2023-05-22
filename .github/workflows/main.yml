@@ -56,9 +56,9 @@ jobs:
         run: |
           gcloud auth configure-docker $DOCKER_REG --quiet
 
-       - id: 'get-credentials'
-         uses: 'google-github-actions/get-gke-credentials@v1'
-         with:
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
            cluster_name: '${{ env.GKE_CLUSTER }}'
            location: '${{ env.GKE_ZONE }}'
 
