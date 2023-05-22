@@ -69,7 +69,7 @@ jobs:
       - name: Docker push
         run: |-
             docker push "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA"
-      - name: Set up Kustomize
+      - name: Set up helm
         run: |-
            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
            chmod 700 get_helm.sh
