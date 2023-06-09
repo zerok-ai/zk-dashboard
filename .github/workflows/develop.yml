@@ -5,8 +5,8 @@ on:
       - develop
 
 env:
-  NS: "apps"
-  ENV: "poc"
+  NS: ${{ vars.NS }}
+  ENV: develop
   DOCKER_REG: ${{ vars.DOCKER_REG }}
   PROJECT_ID:  ${{ vars.PROJECT_ID }}
   DOCKER_REPO:  ${{ vars.DOCKER_REPO }}
@@ -17,7 +17,7 @@ env:
 jobs:
   cicd:
     runs-on: self-hosted
-    environment: poc
+    environment: ${{ env.ENV }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
