@@ -1,6 +1,9 @@
 name: CICD
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - c2s-poc
+
 env:
   NS: "apps"
   ENV: "poc"
