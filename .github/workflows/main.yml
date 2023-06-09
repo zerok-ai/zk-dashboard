@@ -6,9 +6,3 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: yarn
-        run: yarn build
-
-
-      - name: docker build
-        run: docker build .
