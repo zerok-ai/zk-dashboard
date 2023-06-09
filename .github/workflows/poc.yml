@@ -1,8 +1,8 @@
-name: CICD
+name: CICD/poc
 on:
   push:
     branches:
-      - c2s-poc
+      - poc-c2s
 
 env:
   NS: ${{ vars.NS }}
