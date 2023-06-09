@@ -52,10 +52,10 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls:
+  tls: 
     - secretName: dashboard-getanton-com
-       hosts:
-       - dashboard.getanton.com
+      hosts:
+        - dashboard.getanton.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
