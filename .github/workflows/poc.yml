@@ -12,6 +12,7 @@ env:
   DOCKER_REPO:  ${{ vars.DOCKER_REPO }}
   APP_NAME:  ${{ vars.APP_NAME }}
   ZK_DOMAIN: ${{ vars.ZK_DOMAIN }}
+  CI: false
 
 jobs:
   cicd:
@@ -79,7 +80,8 @@ jobs:
              --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
              --set=image.tag=$GITHUB_SHA \
              --set ingress.hosts[0].host=dashboard.$ZK_DOMAIN \
-             --set ingress.tls.hosts[0]=dashboard.$ZK_DOMAIN \
+             --set ingress.tls[0].secretName=$APP_NAME-tls \
+             --set ingress.tls[0].hosts[0]=dashboard.$ZK_DOMAIN \
              upgrade $APP_NAME \
               -f ./helm-charts/$ENV.yaml ./helm-charts/ \
               --create-namespace \
