@@ -5,7 +5,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
   Button,
   Checkbox,
-  Divider,
   FormControlLabel,
   FormHelperText,
   Grid,
@@ -24,7 +23,6 @@ import { Formik } from 'formik';
 // project import
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
-import FirebaseSocial from './FirebaseSocial';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 
@@ -37,7 +35,9 @@ const AuthLogin = () => {
   const [checked, setChecked] = React.useState(false);
   const [capsWarning, setCapsWarning] = React.useState(false);
 
-  const { isLoggedIn, firebaseEmailPasswordSignIn } = useAuth();
+  // const { isLoggedIn, firebaseEmailPasswordSignIn } = useAuth();
+  // const { isLoggedIn, axiosEmailPasswordSignIn } = useAuth();
+  const { isLoggedIn, login } = useAuth();
   const scriptedRef = useScriptRef();
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -61,8 +61,8 @@ const AuthLogin = () => {
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          email: '',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -71,8 +71,10 @@ const AuthLogin = () => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            await firebaseEmailPasswordSignIn(values.email, values.password).then(
-              () => {
+            // await firebaseEmailPasswordSignIn(values.email, values.password).then(
+            // await axiosEmailPasswordSignIn(values.email, values.password).then(
+            await login(values.email, values.password).then(
+              (response: any) => {
                 // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
                 // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
                 // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
@@ -175,7 +177,7 @@ const AuthLogin = () => {
                         size="small"
                       />
                     }
-                    label={<Typography variant="h6">Keep me sign in</Typography>}
+                    label={<Typography variant="h6">Keep me signed in</Typography>}
                   />
                   <Link
                     variant="h6"
@@ -198,14 +200,6 @@ const AuthLogin = () => {
                     Login
                   </Button>
                 </AnimateButton>
-              </Grid>
-              <Grid item xs={12}>
-                <Divider>
-                  <Typography variant="caption"> Login with</Typography>
-                </Divider>
-              </Grid>
-              <Grid item xs={12}>
-                <FirebaseSocial />
               </Grid>
             </Grid>
           </form>

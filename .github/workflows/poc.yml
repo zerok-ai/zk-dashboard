@@ -12,9 +12,7 @@ env:
   DOCKER_REPO:  ${{ vars.DOCKER_REPO }}
   APP_NAME:  ${{ vars.APP_NAME }}
   ZK_DOMAIN: ${{ vars.ZK_DOMAIN }}
-  
 
-  
 jobs:
   cicd:
     runs-on: self-hosted
