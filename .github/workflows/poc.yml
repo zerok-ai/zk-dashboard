@@ -79,8 +79,8 @@ jobs:
              --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
              --set=image.tag=$GITHUB_SHA \
              --set ingress.hosts[0].host=dashboard.$ZK_DOMAIN \
-             --create-namespace \
              upgrade $APP_NAME \
               -f ./helm-charts/$ENV.yaml ./helm-charts/ \
+              --create-namespace \
               --namespace $NS 
  
