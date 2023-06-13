@@ -44,14 +44,6 @@ jobs:
         with:
            cluster_name: '${{ vars.GKE_CLUSTER }}'
            location: '${{ vars.GKE_ZONE }}'
-
-      - name: Docker build
-        run: |-
-            docker build  --tag "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA" .
-      
-      - name: Docker push
-        run: |-
-            docker push "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA"
    
       
       - name: Set up helm
