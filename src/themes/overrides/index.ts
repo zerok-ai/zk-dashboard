@@ -35,6 +35,7 @@ import Pagination from './Pagination';
 import PaginationItem from './PaginationItem';
 import Popover from './Popover';
 import Radio from './Radio';
+import ScrollBar from './ScrollBar';
 import Slider from './Slider';
 import Switch from './Switch';
 import Tab from './Tab';
@@ -84,6 +85,7 @@ export default function ComponentsOverrides(theme: Theme) {
     PaginationItem(theme),
     Popover(theme),
     Radio(theme),
+    ScrollBar(theme),
     Slider(theme),
     Switch(theme),
     Tab(theme),

@@ -1,6 +1,7 @@
 import { useEffect, useState, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { SetInviteUserPassword } from 'api/auth/ResetPassword';
 
 // material-ui
 import {
@@ -36,7 +37,12 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 // ============================|| STATIC - RESET PASSWORD ||============================ //
 
-const AuthResetPassword = () => {
+interface ResetPasswordProps {
+  flow: string | null;
+  token: string | null;
+}
+
+const AuthResetPassword = ({ flow, token }: ResetPasswordProps) => {
   const scriptedRef = useScriptRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,34 +86,57 @@ const AuthResetPassword = () => {
             })
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+          const authResetSuccess = () => {
+            setStatus({ success: true });
+            setSubmitting(false);
+            dispatch(
+              openSnackbar({
+                open: true,
+                message: 'Successfuly reset password.',
+                variant: 'alert',
+                alert: {
+                  color: 'success'
+                },
+                close: false
+              })
+            );
+            setTimeout(() => {
+              navigate(isLoggedIn ? '/auth/login' : '/login', { replace: true });
+            }, 1500);
+          };
+
+          const authResetFailure = () => {
+            setStatus({ success: false });
+            setSubmitting(false);
+            dispatch(
+              openSnackbar({
+                open: true,
+                message: 'There was a problem in resetting the password.',
+                variant: 'alert',
+                alert: {
+                  color: 'error'
+                },
+                close: false
+              })
+            );
+          };
           try {
             // password reset
             if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-
-              dispatch(
-                openSnackbar({
-                  open: true,
-                  message: 'Successfuly reset password.',
-                  variant: 'alert',
-                  alert: {
-                    color: 'success'
-                  },
-                  close: false
-                })
-              );
-
-              setTimeout(() => {
-                navigate(isLoggedIn ? '/auth/login' : '/login', { replace: true });
-              }, 1500);
+              const data = SetInviteUserPassword(values.password, flow, token);
+              data.then((value) => {
+                console.log(value);
+                if (value) {
+                  authResetSuccess();
+                } else {
+                  authResetFailure();
+                }
+              });
             }
           } catch (err: any) {
             console.error(err);
             if (scriptedRef.current) {
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
+              authResetFailure();
             }
           }
         }}

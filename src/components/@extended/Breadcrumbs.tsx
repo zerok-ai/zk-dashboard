@@ -1,5 +1,5 @@
 import { CSSProperties, ReactElement, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, matchRoutes } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -15,6 +15,8 @@ import { ApartmentOutlined, HomeOutlined, HomeFilled } from '@ant-design/icons';
 // types
 import { OverrideIcon } from 'types/root';
 import { NavItemType } from 'types/menu';
+import { allRoutes } from 'routes';
+import { fillTemplate } from 'utils/strings';
 
 // ==============================|| BREADCRUMBS ||============================== //
 
@@ -55,6 +57,7 @@ const Breadcrumbs = ({
   const location = useLocation();
   const [main, setMain] = useState<NavItemType | undefined>();
   const [item, setItem] = useState<NavItemType>();
+  const [routeProps, setRouteProps] = useState(null);
 
   const iconSX = {
     marginRight: theme.spacing(0.75),
@@ -74,21 +77,6 @@ const Breadcrumbs = ({
   });
 
   let customLocation = location.pathname;
-
-  // only used for component demo breadcrumbs
-  if (customLocation.includes('/components-overview/breadcrumbs')) {
-    customLocation = '/apps/kanban/board';
-  }
-
-  if (customLocation.includes('/apps/kanban/backlogs')) {
-    customLocation = '/apps/kanban/board';
-  }
-
-  useEffect(() => {
-    if (customLocation.includes('/apps/profiles/user/payment')) {
-      setItem(undefined);
-    }
-  }, [item, customLocation]);
 
   // set active item state
   const getCollapse = (menu: NavItemType) => {
@@ -121,6 +109,51 @@ const Breadcrumbs = ({
   let itemTitle: NavItemType['title'] = '';
   let CollapseIcon;
   let ItemIcon;
+
+  const populateBreadcrumbItems = (routeProps: any) => {
+    let breadcrumbContent: JSX.Element[] = [];
+    if (routeProps && 'breadcrumbs' in routeProps) {
+      if (routeProps.breadcrumbs === true) {
+        routeProps?.breadcrumbItems?.forEach((item: any, idx: number) => {
+          ItemIcon = item.icon ? item.icon : ApartmentOutlined;
+          breadcrumbContent.push(
+            <Typography component={Link} to={item.link || '/'} key={idx} color="textSecondary" variant="h6" sx={{ textDecoration: 'none' }}>
+              {icons && <ApartmentOutlined style={iconSX} />}
+              {icon && !icons && <ApartmentOutlined style={{ ...iconSX, marginRight: 0 }} />}
+              {(!icon || icons) && item.title}
+            </Typography>
+          );
+        });
+        return breadcrumbContent;
+      }
+    }
+    return breadcrumbContent;
+  };
+
+  useEffect(() => {
+    const match = matchRoutes(allRoutes, customLocation);
+    const filterMatch = match?.filter((routeItem) => routeItem.pathname === customLocation)[0];
+    const routeProps: any = filterMatch?.route;
+    console.log(filterMatch);
+    setRouteProps(null);
+    if ('breadcrumbs' in routeProps) {
+      if (routeProps.breadcrumbs === false) {
+        setItem(undefined);
+        return;
+      }
+      if (routeProps.breadcrumbs === true) {
+        setRouteProps(routeProps);
+        setItem({
+          breadcrumbs: routeProps.breadcrumbs,
+          type: 'item',
+          elements: routeProps.titleIsTemplate
+            ? fillTemplate(routeProps.breadcrumbTitle || routeProps.title, filterMatch?.params)
+            : routeProps.title,
+          title: routeProps.titleIsTemplate ? fillTemplate(routeProps.title, filterMatch?.params) : routeProps.title
+        });
+      }
+    }
+  }, [customLocation]);
 
   // collapse item
   if (main && main.type === 'collapse' && main.breadcrumbs === true) {
@@ -175,12 +208,13 @@ const Breadcrumbs = ({
     itemContent = (
       <Typography variant="subtitle1" color="textPrimary">
         {icons && <ItemIcon style={iconSX} />}
-        {itemTitle}
+        {item.elements || itemTitle}
       </Typography>
     );
 
     // main
     if (item.breadcrumbs !== false) {
+      mainContent = populateBreadcrumbItems(routeProps);
       breadcrumbContent = (
         <MainCard
           border={card}

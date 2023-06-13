@@ -20,7 +20,7 @@ const Search = () => (
         inputProps={{
           'aria-label': 'weight'
         }}
-        placeholder="Ctrl + K"
+        placeholder="⌘ + K"
       />
     </FormControl>
   </Box>
