@@ -63,6 +63,13 @@ const other: NavItemType = {
       icon: icons.DeploymentUnitOutlined
     },
     {
+      id: 'traces',
+      title: <FormattedMessage id="traces" />,
+      type: 'item',
+      url: '/traces',
+      icon: icons.NodeIndexOutlined
+    },
+    {
       id: 'workloads',
       title: <FormattedMessage id="workloads" />,
       type: 'item',
@@ -89,13 +96,6 @@ const other: NavItemType = {
       type: 'item',
       url: '/logs-and-events',
       icon: icons.MenuOutlined
-    },
-    {
-      id: 'traces',
-      title: <FormattedMessage id="traces" />,
-      type: 'item',
-      url: '/traces',
-      icon: icons.NodeIndexOutlined
     },
     {
       id: 'alerts',
