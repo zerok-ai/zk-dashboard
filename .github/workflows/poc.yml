@@ -11,6 +11,7 @@ env:
   PROJECT_ID:  ${{ vars.PROJECT_ID }}
   DOCKER_REPO:  ${{ vars.DOCKER_REPO }}
   APP_NAME:  ${{ vars.APP_NAME }}
+  ZK_DOMAIN: ${{ vars.ZK_DOMAIN }}
   
 
   
@@ -79,6 +80,7 @@ jobs:
              helm --install  \
              --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
              --set=image.tag=$GITHUB_SHA \
+             --set ingress.hosts[0].host=dashboard.$ZK_DOMAIN \
              upgrade $APP_NAME \
               -f ./helm-charts/$ENV.yaml ./helm-charts/ \
               --namespace $NS 
