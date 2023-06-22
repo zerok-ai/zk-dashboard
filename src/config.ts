@@ -20,7 +20,7 @@ const config: DefaultConfigProps = {
   miniDrawer: false,
   container: true,
   mode: 'dark',
-  presetColor: 'default',
+  presetColor: 'ZeroKTheme',
   themeDirection: 'ltr'
 };
 

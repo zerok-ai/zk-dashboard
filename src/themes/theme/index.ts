@@ -8,6 +8,7 @@ import Theme5 from './theme5';
 import Theme6 from './theme6';
 import Theme7 from './theme7';
 import Theme8 from './theme8';
+import ZeroKTheme from './zerok-theme';
 
 // types
 import { PaletteThemeProps } from 'types/theme';
@@ -34,6 +35,8 @@ const Theme = (colors: PalettesProps, presetColor: PresetColor, mode: ThemeMode)
       return Theme7(colors, mode);
     case 'theme8':
       return Theme8(colors, mode);
+    case 'ZeroKTheme':
+      return ZeroKTheme(colors, mode);
     default:
       return Default(colors);
   }
