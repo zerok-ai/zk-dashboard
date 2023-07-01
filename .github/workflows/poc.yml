@@ -36,7 +36,10 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
-      - name: Deploy
+      - name: install-aws-cli
+        id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@master
+      - name: s3 sync
         run: aws s3 sync build/. $s3_BUCKET_NAME  --exact-timestamps
       - name: Clear CF Cache
         run: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
