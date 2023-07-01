@@ -5,8 +5,6 @@ on:
 env:
   ENV: poc
   CI: false
-  CF_DIST_ID: ${{ vars.CF_DIST_ID }}
-  S3_BUCKET_NAME: ${{ vars.S3_BUCKET_NAME }}
 
 jobs:
   cicd:
@@ -40,8 +38,8 @@ jobs:
         id: install-aws-cli
         uses: unfor19/install-aws-cli-action@master
       - name: s3 sync
-        run: aws s3 sync build/. $s3_BUCKET_NAME  --exact-timestamps
+        run: aws s3 sync build/. ${{ vars.S3_BUCKET_NAME }}/  --exact-timestamps
       - name: Clear CF Cache
-        run: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CF_DIST_ID }} --paths "/*"
           
      
