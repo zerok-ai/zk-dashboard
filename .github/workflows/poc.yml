@@ -1,19 +1,13 @@
 name: CICD/poc
 on:
-  push:
-    branches:
-      - c2s-poc
+  workflow_dispatch:
 
 env:
-  NS: ${{ vars.NS }}
   ENV: poc
-  DOCKER_REG: ${{ vars.DOCKER_REG }}
-  PROJECT_ID:  ${{ vars.PROJECT_ID }}
-  DOCKER_REPO:  ${{ vars.DOCKER_REPO }}
-  APP_NAME:  ${{ vars.APP_NAME }}
-  
+  CI: false
+  CF_DIST_ID: ${{ vars.CF_DIST_ID }}
+  S3_BUCKET_NAME: ${{ vars.S3_BUCKET_NAME }}
 
-  
 jobs:
   cicd:
     runs-on: self-hosted
@@ -36,50 +30,15 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build
-           
-          
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          credentials_json: '${{ secrets.GKE_SA_KEY }}'
-        
-
-      - uses: google-github-actions/setup-gcloud@v0
-        with:
-          version: latest
-          export_default_credentials: true
-      - name: login to docker registry
-        run: |
-          gcloud auth configure-docker $DOCKER_REG --quiet
-
-      - id: 'get-credentials'
-        uses: 'google-github-actions/get-gke-credentials@v1'
-        with:
-           cluster_name: '${{ vars.GKE_CLUSTER }}'
-           location: '${{ vars.GKE_ZONE }}'
-
-      - name: Docker build
-        run: |-
-            docker build  --tag "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA" .
-      
-      - name: Docker push
-        run: |-
-            docker push "$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME:$GITHUB_SHA"
-   
-      
-      - name: Set up helm
-        run: |-
-           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-           chmod 700 get_helm.sh
-           ./get_helm.sh
-      
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
       - name: Deploy
-        run: |-
-             helm --install  \
-             --set=image.repository=$DOCKER_REG/$PROJECT_ID/$DOCKER_REPO/$APP_NAME \
-             --set=image.tag=$GITHUB_SHA \
-             upgrade $APP_NAME \
-              -f ./helm-charts/$ENV.yaml ./helm-charts/ \
-              --namespace $NS 
- 
+        run: aws s3 sync build/. $s3_BUCKET_NAME  --exact-timestamps
+      - name: Clear CF Cache
+        run: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+          
+     
