@@ -7,7 +7,7 @@ env:
   CI: false
 
 jobs:
-  cicd:
+  build:
     runs-on: self-hosted
     environment: poc
     steps:
@@ -28,6 +28,16 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            build
+          
+  deploy:
+    runs-on: self-hosted
+    environment: poc
+    steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -37,6 +47,10 @@ jobs:
       - name: install-aws-cli
         id: install-aws-cli
         uses: unfor19/install-aws-cli-action@master
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: build
       - name: s3 sync
         run: aws s3 sync build/. ${{ vars.S3_BUCKET_NAME }}/  --exact-timestamps
       - name: Clear CF Cache
